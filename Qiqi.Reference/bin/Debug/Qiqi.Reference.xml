@@ -6,31 +6,7 @@ Qiqi.Reference
 </name>
 </assembly>
 <members>
-<member name="M:Qiqi.Reference._BibTeX.DataBase.#ctor(System.String)">
-	<summary>
- The constructor with parameter
- </summary>
-	<param name="FileFullName">The full name of BibTeX file</param>
-	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._BibTeX.DataBase.DataBaseLoading(Qiqi.Reference._BibTeX.ErrorMessage@)">
-	<summary>
- Read the BibTeX File, load the information into the paper list
- </summary>
-	<returns>If successful, return True, else, return False</returns>
-	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._BibTeX.DataBase.ExistWholeLiterature(System.String@)">
-	<summary>
- Judge the existance of whole literature
- </summary>
-	<param name="BibTeXBuffer">BibTeX buffer</param>
-	<returns>If there is a whole literature, return True, else, return False</returns>
-	<remarks></remarks>
-</member><member name="T:Qiqi.Reference._BibTeX.DataBase">
-	<summary>
- Class DataBase represents a BibTeX database 
- </summary>
-	<remarks></remarks>
-</member><member name="M:Qiqi.Reference.FormMain.InitializeMenuStrip">
+<member name="M:Qiqi.Reference.FormMain.InitializeMenuStrip">
 	<summary>
  Initialize main menu
  </summary>
@@ -67,53 +43,29 @@ Qiqi.Reference
  </summary>
 	<param name="DataTableColumnConfiguration"></param>
 	<remarks></remarks>
-</member><member name="T:Qiqi.Reference._BibTeX.LiteratureError">
+</member><member name="M:Qiqi.Reference._BibTeX.DataBase.#ctor(System.String)">
 	<summary>
- This modele is used to contain error message of LiteratureBuffer
+ The constructor with parameter
  </summary>
+	<param name="FileFullName">The full name of BibTeX file</param>
 	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._BibTeX.Literature.#ctor">
+</member><member name="M:Qiqi.Reference._BibTeX.DataBase.DataBaseLoading(Qiqi.Reference._BibTeX.ErrorMessage@)">
 	<summary>
- The constructor without parameter
+ Read the BibTeX File, load the information into the paper list
  </summary>
+	<returns>If successful, return True, else, return False</returns>
 	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._BibTeX.Literature.#ctor(System.String,System.String,System.String,Qiqi.Reference._BibTeX.ErrorMessage@)">
+</member><member name="M:Qiqi.Reference._BibTeX.DataBase.ExistWholeLiterature(System.String@)">
 	<summary>
- The constructor with parameters
+ Judge the existance of whole literature
  </summary>
-	<param name="Type">Type of </param>
-	<param name="ID"></param>
+	<param name="BibTeXBuffer">BibTeX buffer</param>
+	<returns>If there is a whole literature, return True, else, return False</returns>
 	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._BibTeX.Literature.LexicalAnalysis(System.String,Qiqi.Reference._BibTeX.ErrorMessage@)">
+</member><member name="T:Qiqi.Reference._BibTeX.DataBase">
 	<summary>
- Lexical analysis of literature buffer
+ Class DataBase represents a BibTeX database 
  </summary>
-	<param name="LiteratureBuffer">BibTeX of literature</param>
-	<param name="ErrorMessage">If there exist error in LiteratureBuffer, write the error message in ErrorMessage</param>
-	<returns>If there is no error, return True, else, return False</returns>
-	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._BibTeX.Literature.GetPropertyValue(System.String)">
-	<summary>
- Get the value according to the name
- </summary>
-	<param name="Name">Property name</param>
-	<returns>If there exist the name, return corresponding value, else, return empty string</returns>
-	<remarks></remarks>
-</member><member name="T:Qiqi.Reference._BibTeX.Literature">
-	<summary>
- Class Literature represents a literature and its information about type, bibtexkey, etc.
- </summary>
-	<remarks></remarks>
-</member><member name="T:Qiqi.Reference._BibTeX.LiteratureProperty">
-	<summary>
- Class PaperProperty represents class Literature's property 
- </summary>
-	<remarks></remarks>
-</member><member name="M:Qiqi.Reference._FormMain.DataBaseTabPage.#ctor(System.String,Qiqi.Reference._FormConfiguration.Configuration)">
-	<summary>
- Constructor with parameter
- </summary>
-	<param name="BibTeXFullName">The full name of BibTeX file</param>
 	<remarks></remarks>
 </member><member name="M:Qiqi.Reference._FormConfiguration.DataBaseColumnDisplay.MainPanel.#ctor(Qiqi.Reference._FormConfiguration.Configuration)">
 	<summary>
@@ -185,6 +137,54 @@ Qiqi.Reference
 	<summary>
   一个强类型的资源类，用于查找本地化的字符串等。
 </summary>
+</member><member name="T:Qiqi.Reference._BibTeX.LiteratureError">
+	<summary>
+ This modele is used to contain error message of LiteratureBuffer
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Qiqi.Reference._BibTeX.Literature.#ctor">
+	<summary>
+ The constructor without parameter
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Qiqi.Reference._BibTeX.Literature.#ctor(System.String,System.String,System.String,Qiqi.Reference._BibTeX.ErrorMessage@)">
+	<summary>
+ The constructor with parameters
+ </summary>
+	<param name="Type">Type of </param>
+	<param name="ID"></param>
+	<remarks></remarks>
+</member><member name="M:Qiqi.Reference._BibTeX.Literature.LexicalAnalysis(System.String,Qiqi.Reference._BibTeX.ErrorMessage@)">
+	<summary>
+ Lexical analysis of literature buffer
+ </summary>
+	<param name="LiteratureBuffer">BibTeX of literature</param>
+	<param name="ErrorMessage">If there exist error in LiteratureBuffer, write the error message in ErrorMessage</param>
+	<returns>If there is no error, return True, else, return False</returns>
+	<remarks></remarks>
+</member><member name="M:Qiqi.Reference._BibTeX.Literature.GetPropertyValue(System.String)">
+	<summary>
+ Get the value according to the name
+ </summary>
+	<param name="Name">Property name</param>
+	<returns>If there exist the name, return corresponding value, else, return empty string</returns>
+	<remarks></remarks>
+</member><member name="T:Qiqi.Reference._BibTeX.Literature">
+	<summary>
+ Class Literature represents a literature and its information about type, bibtexkey, etc.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Qiqi.Reference._BibTeX.LiteratureProperty">
+	<summary>
+ Class PaperProperty represents class Literature's property 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Qiqi.Reference._FormMain.DataBaseTabPage.#ctor(System.String,Qiqi.Reference._FormConfiguration.Configuration)">
+	<summary>
+ Constructor with parameter
+ </summary>
+	<param name="BibTeXFullName">The full name of BibTeX file</param>
+	<remarks></remarks>
 </member><member name="M:Qiqi.Reference._FormConfiguration.LiteratureDetailDisplay.MainPanel.GetConfiguration">
 	<summary>
  Get the DataTable of this panel
