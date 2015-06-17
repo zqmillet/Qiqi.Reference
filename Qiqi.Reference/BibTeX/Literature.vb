@@ -17,6 +17,7 @@
     End Module
 
     Public Enum LexicalAnalysisStatus
+        ' Literature LexicalAnalysisStatus
         BeginAnalysis
         ReadName
         WaitEqualSign
@@ -25,6 +26,8 @@
         EndReadValue
         QuotationMode
         WaitComma
+
+        ' DataBase LexicalAnalysisStatus
         IdleMode
         CommentModel
         ReadType
@@ -111,7 +114,7 @@
 
             ' Read the LiteratureBuffer char-by-char
             For i As Integer = 0 To LiteratureBuffer.Length - 1
-                If (vbCr & vbCrLf & Chr(10)).Contains(LiteratureBuffer(i)) Then
+                If (vbCr).Contains(LiteratureBuffer(i)) Then
                     ErrorMessage.LineNumber += 1
                 End If
 
@@ -125,16 +128,16 @@
                             Case " "
                                 ' Do nothing
                             Case "="
-                                ErrorMessage.Message = LiteratureError.BeginAnalysis
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginAnalysis)
                                 Return False
                             Case "{"
-                                ErrorMessage.Message = LiteratureError.BeginAnalysis
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginAnalysis)
                                 Return False
                             Case "}"
-                                ErrorMessage.Message = LiteratureError.BeginAnalysis
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginAnalysis)
                                 Return False
                             Case """"
-                                ErrorMessage.Message = LiteratureError.BeginAnalysis
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginAnalysis)
                                 Return False
                             Case vbCr
                                 ' Do nothing
@@ -151,13 +154,13 @@
                             Case "="
                                 State = LexicalAnalysisStatus.BeginReadValue
                             Case "{"
-                                ErrorMessage.Message = LiteratureError.ReadName
+                                ErrorMessage.SetErrorMessage(LiteratureError.ReadName)
                                 Return False
                             Case "}"
-                                ErrorMessage.Message = LiteratureError.ReadName
+                                ErrorMessage.SetErrorMessage(LiteratureError.ReadName)
                                 Return False
                             Case """"
-                                ErrorMessage.Message = LiteratureError.ReadName
+                                ErrorMessage.SetErrorMessage(LiteratureError.ReadName)
                                 Return False
                             Case vbCr
                                 State = LexicalAnalysisStatus.WaitEqualSign
@@ -173,20 +176,20 @@
                             Case "="
                                 State = LexicalAnalysisStatus.BeginReadValue
                             Case "{"
-                                ErrorMessage.Message = LiteratureError.WaitEqualSign
+                                ErrorMessage.SetErrorMessage(LiteratureError.WaitEqualSign)
                                 Return False
                             Case "}"
-                                ErrorMessage.Message = LiteratureError.WaitEqualSign
+                                ErrorMessage.SetErrorMessage(LiteratureError.WaitEqualSign)
                                 Return False
                             Case """"
-                                ErrorMessage.Message = LiteratureError.WaitEqualSign
+                                ErrorMessage.SetErrorMessage(LiteratureError.WaitEqualSign)
                                 Return False
                             Case vbCr
                                 ' Do nothing
                             Case Chr(10)
                                 ' Do nothing
                             Case Else
-                                ErrorMessage.Message = LiteratureError.WaitEqualSign
+                                ErrorMessage.SetErrorMessage(LiteratureError.WaitEqualSign)
                                 Return False
                         End Select
                     Case LexicalAnalysisStatus.BeginReadValue
@@ -194,14 +197,14 @@
                             Case " "
                                 ' Do nothing
                             Case "="
-                                ErrorMessage.Message = LiteratureError.BeginReadValue
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginReadValue)
                                 Return False
                             Case "{"
                                 State = LexicalAnalysisStatus.BracketMode
                                 BracketNumber = 1
                                 Value = ""
                             Case "}"
-                                ErrorMessage.Message = LiteratureError.BeginReadValue
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginReadValue)
                                 Return False
                             Case """"
                                 State = LexicalAnalysisStatus.QuotationMode
@@ -211,7 +214,7 @@
                             Case Chr(10)
                                 ' Do nothing
                             Case Else
-                                ErrorMessage.Message = LiteratureError.BeginReadValue
+                                ErrorMessage.SetErrorMessage(LiteratureError.BeginReadValue)
                                 Return False
                         End Select
                     Case LexicalAnalysisStatus.BracketMode
@@ -277,7 +280,7 @@
                             Case ","
                                 State = LexicalAnalysisStatus.BeginAnalysis
                             Case Else
-                                ErrorMessage.Message = LiteratureError.EndReadValue
+                                ErrorMessage.SetErrorMessage(LiteratureError.EndReadValue)
                                 Return False
                         End Select
                     Case Else

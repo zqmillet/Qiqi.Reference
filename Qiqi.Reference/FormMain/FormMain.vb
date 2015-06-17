@@ -185,14 +185,13 @@
     Public Sub ThreadOpenDataBase()
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
             If Not TabPage.Loaded Then
-                ' Me.Invoke(New DelegateDataBaseLoading(AddressOf TabPage.DataBaseLoading))
                 Dim ErrorMessage As New _BibTeX.ErrorMessage
                 If Not TabPage.DataBaseLoading(ErrorMessage) Then
                     Me.Invoke(New DelegateRemoveTabPage(AddressOf RemoveTabPage), TabPage)
-                    StatusStrip.ShowErrorMessage(TabPage.Name & " : " & ErrorMessage.Message)
+                    StatusStrip.ShowErrorMessage(TabPage.Name & " : " & ErrorMessage.GetErrorMessage)
 
                     MsgBox("There is an error in file """ & TabPage.Name & """ line : " & ErrorMessage.LineNumber & vbCr & _
-                           "Error message is """ & ErrorMessage.Message & """" & vbCr & vbCr & _
+                           "Error message is """ & ErrorMessage.GetErrorMessage & """" & vbCr & vbCr & _
                            "Click OK to continue.", _
                            MsgBoxStyle.OkOnly, "Load Error")
                 End If

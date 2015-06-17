@@ -73,10 +73,12 @@ Namespace _BibTeX
 
             Dim RaiseEventInterval As Double = (BibTeXBuffer.Length - 1) / 10
 
+            Dim LineNumber As Integer = 0
+
             ' Lexical analysis of BibTeXBuffer
             For i As Integer = 0 To BibTeXBuffer.Length - 1
-                If (vbCr & vbCrLf & Chr(10)).Contains(BibTeXBuffer(i)) Then
-                    ErrorMessage.LineNumber += 1
+                If (vbCr).Contains(BibTeXBuffer(i)) Then
+                    LineNumber += 1
                 End If
 
                 If i = BibTeXBuffer.Length - 1 Then
@@ -99,6 +101,7 @@ Namespace _BibTeX
                                 LiteratureBuffer = ""
                                 BracketNumber = 0
                                 State = LexicalAnalysisStatus.ReadType
+                                ErrorMessage.LineNumber = LineNumber
                             Case " "
                                 ' Do nothing
                             Case vbCr
@@ -109,7 +112,7 @@ Namespace _BibTeX
                                 ' Do nothing
                             Case Else
                                 ' DEBUG
-                                ErrorMessage.Message = DataBaseError.IdleMode
+                                ErrorMessage.SetErrorMessage(DataBaseError.IdleMode)
                                 Return False
                         End Select
                     Case LexicalAnalysisStatus.CommentModel
@@ -120,19 +123,19 @@ Namespace _BibTeX
                     Case LexicalAnalysisStatus.ReadType
                         Select Case BibTeXBuffer(i)
                             Case " "
-                                ErrorMessage.Message = DataBaseError.ReadType
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadType)
                                 Return False
                             Case ","
-                                ErrorMessage.Message = DataBaseError.ReadType
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadType)
                                 Return False
                             Case vbCr
-                                ErrorMessage.Message = DataBaseError.ReadType
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadType)
                                 Return False
                             Case "}"
-                                ErrorMessage.Message = DataBaseError.ReadType
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadType)
                                 Return False
                             Case "@"
-                                ErrorMessage.Message = DataBaseError.ReadType
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadType)
                                 Return False
                             Case "{"
                                 BracketNumber += 1
@@ -148,21 +151,21 @@ Namespace _BibTeX
                     Case LexicalAnalysisStatus.ReadBibTeXKey
                         Select Case BibTeXBuffer(i)
                             Case " "
-                                ErrorMessage.Message = DataBaseError.ReadBibTeXKey
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadBibTeXKey)
                                 Return False
                             Case ","
                                 State = LexicalAnalysisStatus.ReadBuffer
                             Case vbCr
-                                ErrorMessage.Message = DataBaseError.ReadBibTeXKey
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadBibTeXKey)
                                 Return False
                             Case "}"
-                                ErrorMessage.Message = DataBaseError.ReadBibTeXKey
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadBibTeXKey)
                                 Return False
                             Case "@"
-                                ErrorMessage.Message = DataBaseError.ReadBibTeXKey
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadBibTeXKey)
                                 Return False
                             Case "{"
-                                ErrorMessage.Message = DataBaseError.ReadBibTeXKey
+                                ErrorMessage.SetErrorMessage(DataBaseError.ReadBibTeXKey)
                                 Return False
                             Case Else
                                 LiteratureID &= BibTeXBuffer(i)
@@ -176,7 +179,8 @@ Namespace _BibTeX
                                 BracketNumber -= 1
                                 If BracketNumber = 0 Then
                                     Dim Literature As New _BibTeX.Literature(LiteratureType, LiteratureID, LiteratureBuffer, ErrorMessage)
-                                    If ErrorMessage.ExistError Then
+                                    If ErrorMessage.HasError Then
+                                        ErrorMessage.SetErrorMessage(DataBaseError.ReadBuffer)
                                         Return False
                                     End If
 
@@ -208,6 +212,7 @@ Namespace _BibTeX
             If State = LexicalAnalysisStatus.IdleMode Then
                 Return True
             Else
+                ErrorMessage.SetErrorMessage(DataBaseError.IdleMode)
                 Return False
             End If
         End Function
