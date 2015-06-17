@@ -39,6 +39,7 @@
         ' Initialize current database
         InitializeCurrentDataBase()
 
+        MsgBox("Github Test")
     End Sub
 
     Private Sub InitializeCurrentDataBase()
