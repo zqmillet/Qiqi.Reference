@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{08512300-6BFE-4640-ACE2-C323E08335CC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Qiqi.Reference.My.MyApplication</StartupObject>
+    <RootNamespace>Qiqi.Reference</RootNamespace>
+    <AssemblyName>Qiqi.Reference</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Qiqi.Reference.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Qiqi.Reference.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BibTeX\ErrorMessage.vb" />
+    <Compile Include="Const\TableName.vb" />
+    <Compile Include="FormConfiguration\CommonClass\Configuration.vb" />
+    <Compile Include="FormConfiguration\CommonClass\DisableCheckBoxCell.vb" />
+    <Compile Include="FormConfiguration\CommonClass\TextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\DataBaseColumnDisplay\MainPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\LiteratureDetialDisplay\Configuration.vb" />
+    <Compile Include="FormConfiguration\LiteratureDetialDisplay\DataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\LiteratureDetialDisplay\LiteratureTypeItem.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\LiteratureDetialDisplay\MainPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\LiteratureTabControl\MultiLineTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\LiteratureTabControl\SingleLineTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\LiteratureTabControl\LiteratureTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\DataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BibTeX\DataBase.vb" />
+    <Compile Include="FormMain\Controls\ListView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\LiteratureDetialDisplay\TabPageItem.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\LiteratureTabControl\SourceCodeTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\MenuStrip.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\DataBaseTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\CommonClass\ToolStripTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\ToolStrip.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\FormConfiguration.Designer.vb">
+      <DependentUpon>FormConfiguration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormConfiguration\FormConfiguration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Const\Resource.vb" />
+    <Compile Include="FormMain\Controls\StatusStrip.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\FormMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain\FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="BibTeX\Literature.vb" />
+    <Compile Include="FormMain\Controls\DataBaseTabPage.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Test\Test.Designer.vb">
+      <DependentUpon>Test.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Test.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormMain\FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\Test.resx">
+      <DependentUpon>Test.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
