@@ -119,15 +119,6 @@
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <OpenFileHistoryList>
-    <FileFullName>D:\iPaper\Qiqi2.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iPaper\Decision.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iPaper\Qiqi.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
     <FileFullName>D:\iPaper\science.bib</FileFullName>
   </OpenFileHistoryList>
   <OpenFileHistoryList>
@@ -151,8 +142,25 @@
   <OpenFileHistoryList>
     <FileFullName>D:\iCloud\iPaper\Wrong.bib</FileFullName>
   </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Wrong.bib</FileFullName>
+  </OpenFileHistoryList>
   <CurrentOpenFileList>
-    <FileName>D:\iCloud\iPaper\Qiqi.bib</FileName>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
     <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Wrong.bib</FileName>
+    <Selected>True</Selected>
   </CurrentOpenFileList>
 </NewDataSet>
