@@ -1,0 +1,158 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="LiteratureDetailDisplayConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="LiteratureDisplayBuffer" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="DataBaseGridViewColunmConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Display" type="xs:string" minOccurs="0" />
+                <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="OpenFileHistoryList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="CurrentOpenFileList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileName" type="xs:string" minOccurs="0" />
+                <xs:element name="Selected" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>Default{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>Article{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>InProceedings{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>Book{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>EntryType</Property_x0020_Name>
+    <Display_x0020_Name>Type</Display_x0020_Name>
+    <Column_x0020_Width>111</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Title</Property_x0020_Name>
+    <Display_x0020_Name>Title</Display_x0020_Name>
+    <Column_x0020_Width>337</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Url</Property_x0020_Name>
+    <Display_x0020_Name>Url</Display_x0020_Name>
+    <Column_x0020_Width>183</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Year</Property_x0020_Name>
+    <Display_x0020_Name>Year</Display_x0020_Name>
+    <Column_x0020_Width>37</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Author</Property_x0020_Name>
+    <Display_x0020_Name>Author</Display_x0020_Name>
+    <Column_x0020_Width>130</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>BibTeXKey</Property_x0020_Name>
+    <Display_x0020_Name>BibTeXKey</Display_x0020_Name>
+    <Column_x0020_Width>134</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Pages</Property_x0020_Name>
+    <Display_x0020_Name>Pages</Display_x0020_Name>
+    <Column_x0020_Width>82</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Review</Property_x0020_Name>
+    <Display_x0020_Name>Review</Display_x0020_Name>
+    <Column_x0020_Width>232</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Doi</Property_x0020_Name>
+    <Display_x0020_Name>Doi</Display_x0020_Name>
+    <Column_x0020_Width>359</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Keywords</Property_x0020_Name>
+    <Display_x0020_Name>Keywords</Display_x0020_Name>
+    <Column_x0020_Width>282</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Abstract</Property_x0020_Name>
+    <Display_x0020_Name>Abstract</Display_x0020_Name>
+    <Column_x0020_Width>200</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iPaper\Qiqi2.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iPaper\Decision.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iPaper\Qiqi.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iPaper\science.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\science.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\Test.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\特殊字符.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\qq.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\Decision.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\Qiqi.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iCloud\iPaper\Wrong.bib</FileFullName>
+  </OpenFileHistoryList>
+  <CurrentOpenFileList>
+    <FileName>D:\iCloud\iPaper\Qiqi.bib</FileName>
+    <Selected>True</Selected>
+  </CurrentOpenFileList>
+</NewDataSet>
