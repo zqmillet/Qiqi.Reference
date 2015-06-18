@@ -3,10 +3,24 @@
 This namespace provides three classes `DataBase`, `Literature` and `ErrorMessage`.
 
 ## Analysis of BibTeX Format
-There are two sorts of formats of BibTeX. 
+There are two sorts of formats of BibTeX.
 
-	int i;
-	int a;
+The values of properties are marked with `{` and `}`, which is shown as following code.
+
+	@Article{BibTeXKey, 
+		Author = {Author1, Author2 and Author3},  
+		Title  = {This is the title of literature}, 
+		Year   = {2015}
+	}
+
+The values of properties are marked with `"`, which is shown as following code.
+
+	@Article{BibTeXKey, 
+		Author = "Author1, Author2 and Author3",  
+		Title  = "This is the title of literature", 
+		Year   = "2015"
+	}
+
 
 
 ## DataBase
