@@ -31,8 +31,8 @@ The second format exist ambiguity sometimes. For instance:
 
 There are four quotations in the third line, we can interpret this line in two different ways:
 
-1. Title is "This is the"
-2. Title is "This is the "title" of literatue"
+1. Title is **This is the**
+2. Title is **This is the "title" of literatue**
 
 Which is correct is decided by the rest of the code. If we interpret this line in the first way, the rest of the code has syntax error. So the second way is correct. In an other words, we must analyse all the code to decide how to interpret the quotations.
 
