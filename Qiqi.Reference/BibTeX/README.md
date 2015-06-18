@@ -21,7 +21,20 @@ The values of properties are marked with `"`, which is shown as following code.
 		Year   = "2015"
 	}
 
+The second format exist ambiguity sometimes. For instance:
+	
+	@Article{BibTeXKey, 
+		Author = "Author1, Author2 and Author3",  
+		Title  = "This is the "title" of literature", 
+		Year   = "2015"
+	}
 
+There are four quotations in the third line, we can interpret this line in two different ways:
+
+1. Title is "This is the"
+2. Title is "This is the "title" of literatue"
+
+Which is correct is decided by the rest of the code. If we interpret this line in the first way, the rest of the code has syntax error. So the second way is correct. In an other words, we must analyse all the code to decide how to interpret the quotations.
 
 ## DataBase
 Class `DataBase` consists of three member variables.
@@ -31,7 +44,8 @@ Class `DataBase` consists of three member variables.
 * `Progress` (Double) is used to save the progress of loading database.
 
 
-
 ## Literature
+
+
 
 ## ErrorMessage
