@@ -1,1 +1,3 @@
-# Qiqi.Reference
+# Qiqi Reference
+
+A software for references management based on BibTeX
