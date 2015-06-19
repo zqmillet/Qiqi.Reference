@@ -36,7 +36,7 @@ There are four quotations in the third line, we can interpret this line in two d
 
 Which is correct is decided by the rest of the code. If we interpret this line in the first way, the rest of the code has syntax error. So the second way is correct. In another words, we must analyse all the code to decide how to interpret the quotations.
 
-There is another problem. The BibTeX from [ScienceDirect](ScienceDirect.com) 
+There is another problem. The BibTeX from [ScienceDirect](http://www.sciencedirect.com/) 
 
 ## DataBase
 Class `DataBase` consists of three member variables.
