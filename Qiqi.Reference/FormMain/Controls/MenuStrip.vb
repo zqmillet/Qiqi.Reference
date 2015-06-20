@@ -130,36 +130,80 @@
 
         Private Sub ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
             Select Case CType(sender, ToolStripMenuItem).Name
-                Case "MenuFileNewDataBase"
+                Case MenuFileNewDataBase.Name
                     RaiseEvent MenuFileNewDataBaseClick()
-                Case "MenuFileOpenDataBase"
+                Case MenuFileOpenDataBase.Name
                     RaiseEvent MenuFileOpenDataBaseClick()
-                Case "MenuFileCloseDataBase"
+                Case MenuFileCloseDataBase.Name
                     RaiseEvent MenuFileCloseDataBaseClick()
-                Case "MenuFileExit"
+                Case MenuFileExit.Name
                     RaiseEvent MenuFileExitClick()
                 Case "MenuFileRecentDataBaseItem"
-                    RecentDataBaseOrderUpdate(CType(sender, ToolStripMenuItem))
+                    ' RecentDataBaseOrderUpdate(CType(sender, ToolStripMenuItem))
                     RaiseEvent MenuFileRecentDataBaseItemClick(CType(sender, ToolStripMenuItem).Tag.ToString)
-                Case "MenuOptionPreferences"
+                Case MenuOptionPreferences.Name
                     RaiseEvent MenuOptionPreferencesClick()
             End Select
         End Sub
 
-        Public Sub RecentDataBaseOrderUpdate(ByVal LastDataBaseItem As ToolStripMenuItem)
+        Public Sub RecentDataBaseOrderUpdate(ByVal RecentDataBaseFullName As String)
             Dim ToolStripMenuItemList As New ArrayList
 
-            ToolStripMenuItemList.Add(LastDataBaseItem)
             For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
-                If Not ToolStripMenuItem.Equals(LastDataBaseItem) Then
+                If ToolStripMenuItem.Tag.ToString.Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
+                    ToolStripMenuItemList.Add(ToolStripMenuItem)
+                    Exit For
+                End If
+            Next
+
+            For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
+                If Not ToolStripMenuItem.Tag.ToString.Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
                     ToolStripMenuItemList.Add(ToolStripMenuItem)
                 End If
             Next
 
             MenuFileRecentDataBase.DropDownItems.Clear()
+            Dim Index As Integer = 0
             For Each ToolStripMenuItem As ToolStripMenuItem In ToolStripMenuItemList
+                Index += 1
+                ToolStripMenuItem.Text = Index & ". " & ToolStripMenuItem.Tag.ToString
                 MenuFileRecentDataBase.DropDownItems.Add(ToolStripMenuItem)
             Next
+
+            SaveConfiguration()
+        End Sub
+
+        Public Sub RecentDataBaseOrderDelete(ByVal RecentDataBaseFullName As String)
+            For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
+                If ToolStripMenuItem.Tag.ToString.Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
+                    MenuFileRecentDataBase.DropDownItems.Remove(ToolStripMenuItem)
+                    Exit For
+                End If
+            Next
+
+            Dim Index As Integer = 0
+            For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
+                Index += 1
+                ToolStripMenuItem.Text = Index & ". " & ToolStripMenuItem.Tag.ToString
+            Next
+
+            SaveConfiguration()
+        End Sub
+
+        Private Sub SaveConfiguration()
+            Dim DataTable As New DataTable
+
+            With DataTable
+                .TableName = TableName.OpenFileHistoryList
+                .Columns.Add("FileFullName")
+            End With
+
+            For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
+                DataTable.Rows.Add(ToolStripMenuItem.Tag.ToString)
+            Next
+
+            Configuration.SetConfig(DataTable)
+            Configuration.Save()
         End Sub
     End Class
 End Namespace

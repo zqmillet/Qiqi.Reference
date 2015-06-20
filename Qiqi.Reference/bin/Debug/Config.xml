@@ -119,40 +119,37 @@
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <OpenFileHistoryList>
-    <FileFullName>D:\iCloud\iPaper\science.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
     <FileFullName>D:\iCloud\iPaper\Test.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iCloud\iPaper\特殊字符.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iCloud\iPaper\qq.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iCloud\iPaper\Decision.bib</FileFullName>
   </OpenFileHistoryList>
   <OpenFileHistoryList>
     <FileFullName>D:\iCloud\iPaper\Qiqi.bib</FileFullName>
   </OpenFileHistoryList>
   <OpenFileHistoryList>
-    <FileFullName>D:\iCloud\iPaper\Wrong.bib</FileFullName>
+    <FileFullName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
   </OpenFileHistoryList>
   <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Wrong.bib</FileFullName>
+    <FileFullName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileFullName>
   </OpenFileHistoryList>
   <OpenFileHistoryList>
     <FileFullName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Wrong.bib</FileFullName>
   </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
+  <CurrentOpenFileList>
+    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
+    <Selected>True</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
   <CurrentOpenFileList>
     <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iCloud\iPaper\Test.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
 </NewDataSet>

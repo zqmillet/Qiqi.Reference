@@ -135,33 +135,50 @@
         Configuration.SetConfig(DataTable)
     End Sub
 
+    ''' <summary>
+    ''' MenuFileRecentDataBaseItem is clicked
+    ''' </summary>
+    ''' <param name="RecentDataBaseFullName">The full name of recent database which is clicked</param>
+    ''' <remarks></remarks>
     Private Sub OpenRecentDataBase(ByVal RecentDataBaseFullName As String)
+        ' If the file do not exist, show the error message and exit sub
         If Not My.Computer.FileSystem.FileExists(RecentDataBaseFullName) Then
             MsgBox("There is no database" & vbCr & vbCr & RecentDataBaseFullName, MsgBoxStyle.OkOnly, "Error")
+            MenuStrip.RecentDataBaseOrderDelete(RecentDataBaseFullName)
             Exit Sub
         End If
 
+        ' If the file has been opened, exit sub
         If DataBaseTabControl.Exist(RecentDataBaseFullName) Then
+            MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
+            For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
+                If TabPage.Name.Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
+                    DataBaseTabControl.SelectedTab = TabPage
+                    Exit For
+                End If
+            Next
             Exit Sub
         End If
 
+        ' Create a new TabPage for the database
         Dim NewTabPage As New _FormMain.DataBaseTabPage(RecentDataBaseFullName, Configuration)
         AddHandler NewTabPage.ProgressUpdate, AddressOf TabPage_ProgressUpdate
         DataBaseTabControl.TabPages.Add(NewTabPage)
 
-
+        ' Start a thread to load the database
         Dim OpenDataBase As New Threading.Thread(AddressOf ThreadOpenDataBase)
         OpenDataBase.Start()
 
-        ' Add this file into the history list
+        ' Create a new DataTable
         Dim DataTable As New DataTable
 
+        ' Read the DataTable from the Configuration, if there is no this table in the Cofniguration, setup the name and column
         If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
             DataTable.TableName = TableName.OpenFileHistoryList
             DataTable.Columns.Add("FileFullName")
         End If
 
-
+        ' Delete the full name frome the DataTable
         For Each Row As DataRow In DataTable.Rows
             If CType(Row.Item(0), String).Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
                 Row.Delete()
@@ -169,12 +186,18 @@
             End If
         Next
 
-        If DataTable.Rows.Count > 10 Then
+        ' If the number of recent file is larger than 10, delete the first one
+        While DataTable.Rows.Count > 9
             DataTable.Rows(0).Delete()
-        End If
+        End While
+
+        ' Add this full name at last
         DataTable.Rows.Add(RecentDataBaseFullName)
 
+        ' Save the DataTable
         Configuration.SetConfig(DataTable)
+
+        MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
     End Sub
 
     Private Sub ExitProgram() ' Handles MenuStrip.MenuFile_Exit_Click
