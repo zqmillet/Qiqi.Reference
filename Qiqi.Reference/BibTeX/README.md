@@ -31,8 +31,8 @@ The second format exist ambiguity sometimes. For instance:
 
 There are four quotations in the third line, we can interpret this line in two different ways:
 
-1. Title is **This is the**
-2. Title is **This is the "title" of literatue**
+1. Title is **This is the**.
+2. Title is **This is the "title" of literatue**.
 
 Which is correct is decided by the rest of the code. If we interpret this line in the first way, the rest of the code has syntax error. So the second way is correct. In another words, we must analyse all the code to decide how to interpret the quotations.
 
@@ -82,7 +82,7 @@ Class `Literature` has a constructor with parameter.
 				   ByVal LiteratureBuffer As String, _
 				   ByRef ErrorMessage As _BibTeX.ErrorMessage)
          
-If the class `DataBase` have the type and the ID of a literature, it will create a new literature with this constructor. The `Type` is the type of the literature, the `ID` is the BibTeXKey of the literature, the `LiteratureBuffer` is used to save the rest of the literature. For example, the whole code of a literature is shown as following code.
+If the class `DataBase` have the type and the BibTeXKey of a literature, it will create a new literature with this constructor. The `Type` is the type of the literature, the `ID` is the BibTeXKey of the literature, the `LiteratureBuffer` is used to save the rest of the literature. For example, the whole code of a literature is shown as following code.
 
 	@Article{BibTeXKey, 
 		Author = "Author1, Author2 and Author3",  
@@ -100,4 +100,23 @@ The `ErrorMessage` is used to record the error message of lexical analysis.
 
 At last, the constructor calls the function `LexicalAnalysis` to analyse and add the properties of the literature into `PropertyList`.
 
+The definition of function `LexicalAnalysis` is shown in following code.
+
+	 Private Function LexicalAnalysis(ByVal LiteratureBuffer As String, _
+									  ByRef ErrorMessage As _BibTeX.ErrorMessage) _
+									  As Boolean
+
+This function anaylses the `LiteratureBuffer`, then add the properties into the `PropertyList`. If there is no error in `LiteratureBuffer`, the returned value is `True`, else `False`. The error message is stored in the `ErrorMessage` if there is error in `LiteratureBuffer`.
+
+When this function read a quotation, it will enter the `QuotationMode`. In the `QuotationMode`, if it read another quotation, it firstly assumes that this quotation is the end char of the value. Then the function will continue to process the rest code. If there is syntax error in the rest code, the function knows the assumption is wrong, so it regards that quotation is a char of the value, and find another quotation. Recursion is used to realize this process.
+
 ## Class `ErrorMessage`
+Class `ErrorMessage` consists of three member variables.
+
+* `ExistError` (Boolean) represent whether there exist error.
+* `Message` (String) is used to save the message of the error.
+* `LineNumber` (Integer) is used to save the line number of the error.
+
+To avoid that user make mistakes, the menber variables `ExistError` and `Message` are private. Therefore, class provide four public functions/subs to operate these two member variables.
+
+ 
