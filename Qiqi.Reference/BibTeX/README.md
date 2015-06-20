@@ -2,15 +2,12 @@
 
 This namespace provides three classes `DataBase`, `Literature` and `ErrorMessage`.
 
-[1. Analysis of BibTeX Format](#1)
+* [1. Analysis of BibTeX Format](#1)
+* [2. Class `DataBase`](#2)
+* [3. Class `Literature`](#3)
+* [4. Class `ErrorMessage`](#4)
 
-[2. Class `DataBase`](#2)
-
-[3. Class `Literature`](#3)
-
-[4. Class `ErrorMessage`](#4)
-
-## Analysis of BibTeX Format
+<h2 id="1">Analysis of BibTeX Format</h2>
 There are two sorts of formats of BibTeX.
 
 The values of properties are marked with `{` and `}`, which is shown as following code.
@@ -59,7 +56,7 @@ There is another problem. The BibTeX from [ScienceDirect](http://www.sciencedire
 
 Therefore, I wrote the following three classes `DataBase`, `Literature` and `ErrorMessage`.
 
-## Class `DataBase`
+<h2 id="2">Class `DataBase`</h2>
 Class `DataBase` consists of three member variables.
 
 * `FileFullName` (String) is used to save the full name of BibTeX file.
@@ -76,7 +73,7 @@ If the sub `DataBaseLoading` find the char `@`, it begins to read the type of th
 
 When the progress is 10%, 20%, ... , 100%, the class `DataBase` will raise a event `ProgressUpdate`. This event is used to show the progress of database loading.
 
-## Class `Literature`
+<h2 id="3">Class `Literature`</h2>
 Class `Literature` consists of three member variables.
 
 * `Type` (String) is used to save the type of the literature.
@@ -118,7 +115,7 @@ This function anaylses the `LiteratureBuffer`, then add the properties into the 
 
 When this function read a quotation, it will enter the `QuotationMode`. In the `QuotationMode`, if it read another quotation, it firstly assumes that this quotation is the end char of the value. Then the function will continue to process the rest code. If there is syntax error in the rest code, the function knows the assumption is wrong, so it regards that quotation is a char of the value, and find another quotation. Recursion is used to realize this process.
 
-## Class `ErrorMessage`
+<h2 id="4">Class `ErrorMessage`</h2>
 Class `ErrorMessage` consists of three member variables.
 
 * `ExistError` (Boolean) represent whether there exist error.
