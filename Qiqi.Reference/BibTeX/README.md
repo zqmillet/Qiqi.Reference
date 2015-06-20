@@ -21,7 +21,7 @@ The values of properties are marked with `"`, which is shown as following code.
 		Year   = "2015"
 	}
 
-The second format exist ambiguity sometimes. For instance:
+The second format exists ambiguity sometimes. For instance:
 	
 	@Article{BibTeXKey, 
 		Author = "Author1, Author2 and Author3",  
