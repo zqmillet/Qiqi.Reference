@@ -118,5 +118,3 @@ Class `ErrorMessage` consists of three member variables.
 * `LineNumber` (Integer) is used to save the line number of the error.
 
 To avoid that user make mistakes, the menber variables `ExistError` and `Message` are private. Therefore, class provide four public functions/subs to operate these two member variables.
-
- 
