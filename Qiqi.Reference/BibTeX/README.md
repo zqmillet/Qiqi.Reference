@@ -2,6 +2,14 @@
 
 This namespace provides three classes `DataBase`, `Literature` and `ErrorMessage`.
 
+[1. Analysis of BibTeX Format](#1)
+
+[2. Class `DataBase`](#2)
+
+[3. Class `Literature`](#3)
+
+[4. Class `ErrorMessage`](#4)
+
 ## Analysis of BibTeX Format
 There are two sorts of formats of BibTeX.
 
