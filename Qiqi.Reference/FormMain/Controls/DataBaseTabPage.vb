@@ -8,6 +8,7 @@
 
         Public SplitContainerPrimary As SplitContainer
         Public SplitContainerSecondary As SplitContainer
+
         Dim DataBaseGridView As _FormMain.DataGridView
         Dim StructureTreeView As TreeView
         Dim LiteratureTabControl As _FormMain.LiteratureTabControl
@@ -18,6 +19,7 @@
         Public Event ProgressUpdate(ByVal Progress As Double)
         Public Event ColumnDisplayChanged(ByVal sender As Object)
         Public Event SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs)
+        Public Event DataBaseGridViewDoubleClick(ByVal sender As Object)
 
         ''' <summary>
         ''' Constructor with parameter
@@ -158,13 +160,14 @@
         End Sub
 
         Private Sub DataBaseGridView_CellDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+            RaiseEvent DataBaseGridViewDoubleClick(Me)
+
             If DataBaseGridView.SelectedRows.Count = 0 Then
                 Exit Sub
             End If
 
             LiteratureTabControl.Load(CType(DataBaseGridView.SelectedRows(0).Tag, _BibTeX.Literature))
             SplitContainerSecondary.Panel2Collapsed = False
-
         End Sub
 
         Private Sub LiteratureToolStrip_ToolStripButtonHideClick()

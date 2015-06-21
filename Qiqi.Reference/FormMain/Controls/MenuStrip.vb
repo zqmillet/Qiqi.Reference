@@ -10,6 +10,12 @@
         Public MenuFileRecentDataBase As ToolStripMenuItem
         Public MenuFileCloseDataBase As ToolStripMenuItem
 
+        Public MenuView As ToolStripMenuItem
+        Public MenuViewNextDataBase As ToolStripMenuItem
+        Public MenuViewPreviousDataBase As ToolStripMenuItem
+        Public MenuViewShowGroupTreeView As ToolStripMenuItem
+        Public MenuViewShowDetailTabControl As ToolStripMenuItem
+
         Public MenuOption As ToolStripMenuItem
         Public MenuOptionPreferences As ToolStripMenuItem
 
@@ -19,6 +25,8 @@
         Public Event MenuFileExitClick()
         Public Event MenuFileRecentDataBaseItemClick(ByVal RecentDataBaseFullName As String)
         Public Event MenuOptionPreferencesClick()
+        Public Event MenuViewNextDataBaseClick()
+        Public Event MenuViewPreviousDataBaseClick()
 
         Dim Configuration As _FormConfiguration.Configuration
 
@@ -108,6 +116,41 @@
                 .DropDownItems.Add(MenuFileExit)
             End With
 
+
+            'Public MenuView As ToolStripMenuItem
+            'Public MenuViewNextDataBase As ToolStripMenuItem
+            'Public MenuViewPreviousDataBase As ToolStripMenuItem
+            'Public MenuViewShowGroupTreeView As ToolStripMenuItem
+            'Public MenuViewShowDetailTabControl As ToolStripMenuItem
+
+            MenuViewNextDataBase = New ToolStripMenuItem
+            With MenuViewNextDataBase
+                .Name = "MenuViewNextDataBase"
+                .Text = "&Next Database"
+                .Enabled = False
+                .Image = Resource.Icon.MenuViewNextDataBase
+                .ShortcutKeys = Keys.Control Or Keys.Right
+                AddHandler .Click, AddressOf ToolStripMenuItem_Click
+            End With
+
+            MenuViewPreviousDataBase = New ToolStripMenuItem
+            With MenuViewPreviousDataBase
+                .Name = "MenuViewPreviousDataBase"
+                .Text = "&Previous Database"
+                .Enabled = False
+                .Image = Resource.Icon.MenuViewPreviousDataBase
+                .ShortcutKeys = Keys.Control Or Keys.Left
+                AddHandler .Click, AddressOf ToolStripMenuItem_Click
+            End With
+
+            MenuView = New ToolStripMenuItem
+            With MenuView
+                .Text = "&View"
+                .DropDownItems.Add(MenuViewNextDataBase)
+                .DropDownItems.Add(MenuViewPreviousDataBase)
+            End With
+
+
             MenuOptionPreferences = New ToolStripMenuItem
             With MenuOptionPreferences
                 .Name = "MenuOptionPreferences"
@@ -125,6 +168,7 @@
 
             Me.Items.Clear()
             Me.Items.Add(MenuFile)
+            Me.Items.Add(MenuView)
             Me.Items.Add(MenuOption)
         End Sub
 
@@ -143,6 +187,10 @@
                     RaiseEvent MenuFileRecentDataBaseItemClick(CType(sender, ToolStripMenuItem).Tag.ToString)
                 Case MenuOptionPreferences.Name
                     RaiseEvent MenuOptionPreferencesClick()
+                Case MenuViewNextDataBase.Name
+                    RaiseEvent MenuViewNextDataBaseClick()
+                Case MenuViewPreviousDataBase.Name
+                    RaiseEvent MenuViewPreviousDataBaseClick()
             End Select
         End Sub
 
@@ -222,6 +270,11 @@
 
             Configuration.SetConfig(DataTable)
             Configuration.Save()
+        End Sub
+
+        Public Sub SetNextPreviousDataBaseEnable(ByVal Enable As Boolean)
+            MenuViewNextDataBase.Enabled = Enable
+            MenuViewPreviousDataBase.Enabled = Enable
         End Sub
     End Class
 End Namespace

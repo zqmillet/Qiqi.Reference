@@ -29,6 +29,7 @@
         Public Function Exist(ByVal BibTeXFullName As String) As Boolean
             For Each TabPage As _FormMain.DataBaseTabPage In Me.TabPages
                 If TabPage.Name.ToLower.Trim = BibTeXFullName.Trim.ToLower Then
+                    Me.SelectedTab = TabPage
                     Return True
                 End If
             Next

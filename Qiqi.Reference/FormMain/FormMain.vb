@@ -57,6 +57,7 @@
                 AddHandler NewTabPage.ProgressUpdate, AddressOf TabPage_ProgressUpdate
                 AddHandler NewTabPage.ColumnDisplayChanged, AddressOf TabPage_ColumnDisplayChanged
                 AddHandler NewTabPage.SplitterMoved, AddressOf TabPage_SplitterMoved
+                AddHandler NewTabPage.DataBaseGridViewDoubleClick, AddressOf NewTabPage_DataBaseGridViewDoubleClick
                 DataBaseTabControl.TabPages.Add(NewTabPage)
                 MenuStrip.RecentDataBaseOrderDelete(Row("FileName"))
 
@@ -106,6 +107,7 @@
             AddHandler NewTabPage.ProgressUpdate, AddressOf TabPage_ProgressUpdate
             AddHandler NewTabPage.ColumnDisplayChanged, AddressOf TabPage_ColumnDisplayChanged
             AddHandler NewTabPage.SplitterMoved, AddressOf TabPage_SplitterMoved
+            AddHandler NewTabPage.DataBaseGridViewDoubleClick, AddressOf NewTabPage_DataBaseGridViewDoubleClick
             DataBaseTabControl.TabPages.Add(NewTabPage)
             DataBaseTabControl.SelectedTab = NewTabPage
             MenuStrip.RecentDataBaseOrderDelete(FileName)
@@ -113,33 +115,6 @@
 
         Dim OpenDataBase As New Threading.Thread(AddressOf ThreadOpenDataBase)
         OpenDataBase.Start()
-
-
-
-        ' Add this file into the history list
-        'Dim DataTable As New DataTable
-
-
-        'If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
-        '    DataTable.TableName = TableName.OpenFileHistoryList
-        '    DataTable.Columns.Add("FileFullName")
-        'End If
-
-        'For Each FileName As String In OpenFileDialog.FileNames
-        '    For Each Row As DataRow In DataTable.Rows
-        '        If CType(Row.Item(0), String).Trim.ToLower = FileName.Trim.ToLower Then
-        '            Row.Delete()
-        '            Exit For
-        '        End If
-        '    Next
-
-        '    If DataTable.Rows.Count > 10 Then
-        '        DataTable.Rows(0).Delete()
-        '    End If
-        '    DataTable.Rows.Add(FileName)
-        'Next
-
-        'Configuration.SetConfig(DataTable)
     End Sub
 
     ''' <summary>
@@ -172,14 +147,30 @@
         ' Create a new TabPage for the database
         Dim NewTabPage As New _FormMain.DataBaseTabPage(RecentDataBaseFullName, Configuration)
         AddHandler NewTabPage.ProgressUpdate, AddressOf TabPage_ProgressUpdate
+        AddHandler NewTabPage.ColumnDisplayChanged, AddressOf TabPage_ColumnDisplayChanged
+        AddHandler NewTabPage.SplitterMoved, AddressOf TabPage_SplitterMoved
+        AddHandler NewTabPage.DataBaseGridViewDoubleClick, AddressOf NewTabPage_DataBaseGridViewDoubleClick
+
         DataBaseTabControl.TabPages.Add(NewTabPage)
         DataBaseTabControl.SelectedTab = NewTabPage
 
         ' Start a thread to load the database
         Dim OpenDataBase As New Threading.Thread(AddressOf ThreadOpenDataBase)
         OpenDataBase.Start()
+    End Sub
 
-        ' MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
+    Private Sub NewTabPage_DataBaseGridViewDoubleClick(ByVal sender As Object)
+        For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
+            If CType(sender, _FormMain.DataBaseTabPage).Equals(TabPage) Then
+                Continue For
+            End If
+
+            If Not TabPage.SplitContainerSecondary.Panel2Collapsed Then
+                CType(sender, _FormMain.DataBaseTabPage).SplitContainerSecondary.SplitterDistance = _
+                    TabPage.SplitContainerSecondary.SplitterDistance
+                Exit Sub
+            End If
+        Next
     End Sub
 
     Private Sub ExitProgram() ' Handles MenuStrip.MenuFile_Exit_Click
@@ -189,17 +180,19 @@
 
     Public Sub ThreadOpenDataBase()
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
-            If Not TabPage.Loaded Then
-                Dim ErrorMessage As New _BibTeX.ErrorMessage
-                If Not TabPage.DataBaseLoading(ErrorMessage) Then
-                    Me.Invoke(New DelegateRemoveTabPage(AddressOf RemoveTabPage), TabPage)
-                    Me.Invoke(New DelegateRecentDataBaseListRemove(AddressOf RemoveDataBaseListItem), TabPage.Name)
-                    StatusStrip.ShowErrorMessage(TabPage.Name & " : " & ErrorMessage.GetErrorMessage)
-                    MsgBox("There is an error in file """ & TabPage.Name & """ line : " & ErrorMessage.LineNumber & vbCr & _
-                           "Error message is """ & ErrorMessage.GetErrorMessage & """" & vbCr & vbCr & _
-                           "Click OK to continue.", _
-                           MsgBoxStyle.OkOnly, "Load Error")
-                End If
+            If TabPage.Loaded Then
+                Continue For
+            End If
+
+            Dim ErrorMessage As New _BibTeX.ErrorMessage
+            If Not TabPage.DataBaseLoading(ErrorMessage) Then
+                Me.Invoke(New DelegateRemoveTabPage(AddressOf RemoveTabPage), TabPage)
+                Me.Invoke(New DelegateRecentDataBaseListRemove(AddressOf RemoveDataBaseListItem), TabPage.Name)
+                StatusStrip.ShowErrorMessage(TabPage.Name & " : " & ErrorMessage.GetErrorMessage)
+                MsgBox("There is an error in file """ & TabPage.Name & """ line : " & ErrorMessage.LineNumber & vbCr & _
+                       "Error message is """ & ErrorMessage.GetErrorMessage & """" & vbCr & vbCr & _
+                       "Click OK to continue.", _
+                       MsgBoxStyle.OkOnly, "Load Error")
             End If
         Next
     End Sub
@@ -231,7 +224,7 @@
 
     Private Sub TabPage_ColumnDisplayChanged(ByVal sender As Object)
         Configuration.Reload()
-   
+
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
             TabPage.SetDataBaseGridViewEventEnable(False)
             TabPage.DataBaseGridViewRefresh(Configuration)
@@ -284,6 +277,8 @@
         AddHandler MenuStrip.MenuFileRecentDataBaseItemClick, AddressOf OpenRecentDataBase
         AddHandler MenuStrip.MenuFileCloseDataBaseClick, AddressOf CloseDataBase
         AddHandler MenuStrip.MenuOptionPreferencesClick, AddressOf ShowFormConfiguration
+        AddHandler MenuStrip.MenuViewNextDataBaseClick, AddressOf ShowNextDataBase
+        AddHandler MenuStrip.MenuViewPreviousDataBaseClick, AddressOf ShowPreviousDataBase
     End Sub
 
     ''' <summary>
@@ -338,27 +333,51 @@
         Next
         Configuration.SetConfig(DataTable)
         Configuration.Save()
+
+
+        MenuStrip.SetNextPreviousDataBaseEnable(DataBaseTabControl.TabPages.Count > 1)
+
     End Sub
 
     Private Sub TabPage_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs)
-        'For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
-        '    TabPage.SetSplitContainerEventEnable(False)
+        Dim Height As Integer = CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).SplitContainerSecondary.SplitterDistance
 
-        '    With CType(sender, SplitContainer)
-        '        Select Case .Name
-        '            Case TabPage.SplitContainerPrimary.Name
-        '                TabPage.SplitContainerPrimary.SplitterDistance = .SplitterDistance
-
-        '            Case TabPage.SplitContainerSecondary.Name
-        '                TabPage.SplitContainerSecondary.SplitterDistance = .SplitterDistance
-        '                TabPage.SplitContainerSecondary.Panel2Collapsed = .Panel2Collapsed
-        '        End Select
-        '    End With
-
-        '    TabPage.SetSplitContainerEventEnable(True)
-        'Next
+        For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
+            TabPage.SetSplitContainerEventEnable(False)
+            If Not TabPage.SplitContainerSecondary.Panel2Collapsed Then
+                TabPage.SplitContainerSecondary.SplitterDistance = Height
+            End If
+            TabPage.SetSplitContainerEventEnable(True)
+        Next
     End Sub
 
+    Private Sub ShowPreviousDataBase()
+        If DataBaseTabControl.TabPages.Count = 0 Then
+            Exit Sub
+        End If
 
+        Dim Index As Integer = DataBaseTabControl.SelectedIndex
+        If Index > 0 Then
+            Index -= 1
+        Else
+            Index = DataBaseTabControl.TabPages.Count - 1
+        End If
 
+        DataBaseTabControl.SelectedIndex = Index
+    End Sub
+
+    Private Sub ShowNextDataBase()
+        If DataBaseTabControl.TabPages.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim Index As Integer = DataBaseTabControl.SelectedIndex
+        If Index < DataBaseTabControl.TabPages.Count - 1 Then
+            Index += 1
+        Else
+            Index = 0
+        End If
+
+        DataBaseTabControl.SelectedIndex = Index
+    End Sub
 End Class

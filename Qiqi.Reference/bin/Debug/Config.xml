@@ -56,7 +56,7 @@
     <Display>True</Display>
     <Property_x0020_Name>EntryType</Property_x0020_Name>
     <Display_x0020_Name>Type</Display_x0020_Name>
-    <Column_x0020_Width>111</Column_x0020_Width>
+    <Column_x0020_Width>94</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <DataBaseGridViewColunmConfiguration>
     <Display>True</Display>
@@ -89,7 +89,7 @@
     <Column_x0020_Width>134</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <DataBaseGridViewColunmConfiguration>
-    <Display>False</Display>
+    <Display>True</Display>
     <Property_x0020_Name>Pages</Property_x0020_Name>
     <Display_x0020_Name>Pages</Display_x0020_Name>
     <Column_x0020_Width>82</Column_x0020_Width>
@@ -120,14 +120,14 @@
   </DataBaseGridViewColunmConfiguration>
   <CurrentOpenFileList>
     <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
+    <Selected>True</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
   <CurrentOpenFileList>
     <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
     <Selected>False</Selected>
-  </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
-    <Selected>True</Selected>
   </CurrentOpenFileList>
 </NewDataSet>
