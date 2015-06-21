@@ -57,6 +57,7 @@
                 AddHandler NewTabPage.ColumnDisplayChanged, AddressOf TabPage_ColumnDisplayChanged
                 AddHandler NewTabPage.SplitterMoved, AddressOf TabPage_SplitterMoved
                 DataBaseTabControl.TabPages.Add(NewTabPage)
+                MenuStrip.RecentDataBaseOrderDelete(Row("FileName"))
 
                 Dim Selected As Boolean = Row("Selected")
                 If Selected Then
@@ -78,6 +79,7 @@
 
     Private Sub CloseDataBase() ' Handles MenuStrip.MenuFileCloseDataBaseClick
         If Not DataBaseTabControl.SelectedTab Is Nothing Then
+            MenuStrip.RecentDataBaseOrderUpdate(DataBaseTabControl.SelectedTab.Name.ToString)
             DataBaseTabControl.TabPages.Remove(DataBaseTabControl.SelectedTab)
         End If
     End Sub
@@ -105,34 +107,38 @@
             AddHandler NewTabPage.SplitterMoved, AddressOf TabPage_SplitterMoved
             DataBaseTabControl.TabPages.Add(NewTabPage)
             DataBaseTabControl.SelectedTab = NewTabPage
+            MenuStrip.RecentDataBaseOrderDelete(FileName)
         Next
 
         Dim OpenDataBase As New Threading.Thread(AddressOf ThreadOpenDataBase)
         OpenDataBase.Start()
 
+
+
         ' Add this file into the history list
-        Dim DataTable As New DataTable
+        'Dim DataTable As New DataTable
 
-        If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
-            DataTable.TableName = TableName.OpenFileHistoryList
-            DataTable.Columns.Add("FileFullName")
-        End If
 
-        For Each FileName As String In OpenFileDialog.FileNames
-            For Each Row As DataRow In DataTable.Rows
-                If CType(Row.Item(0), String).Trim.ToLower = FileName.Trim.ToLower Then
-                    Row.Delete()
-                    Exit For
-                End If
-            Next
+        'If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
+        '    DataTable.TableName = TableName.OpenFileHistoryList
+        '    DataTable.Columns.Add("FileFullName")
+        'End If
 
-            If DataTable.Rows.Count > 10 Then
-                DataTable.Rows(0).Delete()
-            End If
-            DataTable.Rows.Add(FileName)
-        Next
+        'For Each FileName As String In OpenFileDialog.FileNames
+        '    For Each Row As DataRow In DataTable.Rows
+        '        If CType(Row.Item(0), String).Trim.ToLower = FileName.Trim.ToLower Then
+        '            Row.Delete()
+        '            Exit For
+        '        End If
+        '    Next
 
-        Configuration.SetConfig(DataTable)
+        '    If DataTable.Rows.Count > 10 Then
+        '        DataTable.Rows(0).Delete()
+        '    End If
+        '    DataTable.Rows.Add(FileName)
+        'Next
+
+        'Configuration.SetConfig(DataTable)
     End Sub
 
     ''' <summary>
@@ -141,6 +147,8 @@
     ''' <param name="RecentDataBaseFullName">The full name of recent database which is clicked</param>
     ''' <remarks></remarks>
     Private Sub OpenRecentDataBase(ByVal RecentDataBaseFullName As String)
+        MenuStrip.RecentDataBaseOrderDelete(RecentDataBaseFullName)
+
         ' If the file do not exist, show the error message and exit sub
         If Not My.Computer.FileSystem.FileExists(RecentDataBaseFullName) Then
             MsgBox("There is no database" & vbCr & vbCr & RecentDataBaseFullName, MsgBoxStyle.OkOnly, "Error")
@@ -169,33 +177,35 @@
         Dim OpenDataBase As New Threading.Thread(AddressOf ThreadOpenDataBase)
         OpenDataBase.Start()
 
-        ' Create a new DataTable
-        Dim DataTable As New DataTable
+        ' MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
 
-        ' Read the DataTable from the Configuration, if there is no this table in the Cofniguration, setup the name and column
-        If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
-            DataTable.TableName = TableName.OpenFileHistoryList
-            DataTable.Columns.Add("FileFullName")
-        End If
+        '' Create a new DataTable
+        'Dim DataTable As New DataTable
 
-        ' Delete the full name frome the DataTable
-        For Each Row As DataRow In DataTable.Rows
-            If CType(Row.Item(0), String).Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
-                Row.Delete()
-                Exit For
-            End If
-        Next
+        '' Read the DataTable from the Configuration, if there is no this table in the Cofniguration, setup the name and column
+        'If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
+        '    DataTable.TableName = TableName.OpenFileHistoryList
+        '    DataTable.Columns.Add("FileFullName")
+        'End If
 
-        ' If the number of recent file is larger than 10, delete the first one
-        While DataTable.Rows.Count > 9
-            DataTable.Rows(0).Delete()
-        End While
+        '' Delete the full name frome the DataTable
+        'For Each Row As DataRow In DataTable.Rows
+        '    If CType(Row.Item(0), String).Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
+        '        Row.Delete()
+        '        Exit For
+        '    End If
+        'Next
 
-        ' Add this full name at last
-        DataTable.Rows.Add(RecentDataBaseFullName)
+        '' If the number of recent file is larger than 10, delete the first one
+        'While DataTable.Rows.Count > 9
+        '    DataTable.Rows(0).Delete()
+        'End While
 
-        ' Save the DataTable
-        Configuration.SetConfig(DataTable)
+        '' Add this full name at last
+        'DataTable.Rows.Add(RecentDataBaseFullName)
+
+        '' Save the DataTable
+        'Configuration.SetConfig(DataTable)
 
         MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
     End Sub
@@ -212,7 +222,7 @@
                 If Not TabPage.DataBaseLoading(ErrorMessage) Then
                     Me.Invoke(New DelegateRemoveTabPage(AddressOf RemoveTabPage), TabPage)
                     StatusStrip.ShowErrorMessage(TabPage.Name & " : " & ErrorMessage.GetErrorMessage)
-
+                    DataBaseTabControl_TabPageChanged(Nothing)
                     MsgBox("There is an error in file """ & TabPage.Name & """ line : " & ErrorMessage.LineNumber & vbCr & _
                            "Error message is """ & ErrorMessage.GetErrorMessage & """" & vbCr & vbCr & _
                            "Click OK to continue.", _
@@ -259,7 +269,13 @@
     End Sub
 
     Private Sub TabPage_ProgressUpdate(ByVal Progress As Double)
-        Me.Invoke(New DelegateProgressUpdate(AddressOf ProgressUpdate), Progress)
+        If Me.InvokeRequired Then
+            Me.Invoke(New DelegateProgressUpdate(AddressOf ProgressUpdate), Progress)
+        Else
+            ProgressUpdate(Progress)
+        End If
+
+
     End Sub
 
     Private Sub ProgressUpdate(ByVal Progress As Double)

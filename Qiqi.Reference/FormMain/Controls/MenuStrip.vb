@@ -156,6 +156,16 @@
                 End If
             Next
 
+            If ToolStripMenuItemList.Count = 0 Then
+                Dim ToolStripMenuItem As New ToolStripMenuItem
+                With ToolStripMenuItem
+                    .Name = "MenuFileRecentDataBaseItem"
+                    .Tag = RecentDataBaseFullName
+                    AddHandler .Click, AddressOf ToolStripMenuItem_Click
+                End With
+                ToolStripMenuItemList.Add(ToolStripMenuItem)
+            End If
+
             For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
                 If Not ToolStripMenuItem.Tag.ToString.Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
                     ToolStripMenuItemList.Add(ToolStripMenuItem)
@@ -198,8 +208,8 @@
                 .Columns.Add("FileFullName")
             End With
 
-            For Each ToolStripMenuItem As ToolStripMenuItem In MenuFileRecentDataBase.DropDownItems
-                DataTable.Rows.Add(ToolStripMenuItem.Tag.ToString)
+            For Index As Integer = MenuFileRecentDataBase.DropDownItems.Count - 1 To 0 Step -1
+                DataTable.Rows.Add(MenuFileRecentDataBase.DropDownItems(Index).Tag.ToString)
             Next
 
             Configuration.SetConfig(DataTable)
