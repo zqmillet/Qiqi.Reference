@@ -119,11 +119,15 @@
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
-    <Selected>True</Selected>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
+    <Selected>False</Selected>
   </CurrentOpenFileList>
   <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Wrong.bib</FileName>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
     <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
+    <Selected>True</Selected>
   </CurrentOpenFileList>
 </NewDataSet>

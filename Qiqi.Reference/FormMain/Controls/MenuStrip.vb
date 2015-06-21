@@ -181,6 +181,10 @@
             Next
 
             SaveConfiguration()
+
+            If MenuFileRecentDataBase.DropDownItems.Count > 0 Then
+                MenuFileRecentDataBase.Enabled = True
+            End If
         End Sub
 
         Public Sub RecentDataBaseOrderDelete(ByVal RecentDataBaseFullName As String)
@@ -198,6 +202,10 @@
             Next
 
             SaveConfiguration()
+
+            If MenuFileRecentDataBase.DropDownItems.Count = 0 Then
+                MenuFileRecentDataBase.Enabled = False
+            End If
         End Sub
 
         Private Sub SaveConfiguration()

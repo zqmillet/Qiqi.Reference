@@ -16,6 +16,7 @@
     Private Delegate Sub DelegateAddTabPage(ByVal TabPage As _FormMain.DataBaseTabPage)
     Private Delegate Sub DelegateRemoveTabPage(ByVal TabPage As _FormMain.DataBaseTabPage)
     Private Delegate Sub DelegateDataBaseLoading()
+    Private Delegate Sub DelegateRecentDataBaseListRemove(ByVal DataBaseFullName As String)
 
     Public Sub New()
         ' Initialize component
@@ -172,42 +173,13 @@
         Dim NewTabPage As New _FormMain.DataBaseTabPage(RecentDataBaseFullName, Configuration)
         AddHandler NewTabPage.ProgressUpdate, AddressOf TabPage_ProgressUpdate
         DataBaseTabControl.TabPages.Add(NewTabPage)
+        DataBaseTabControl.SelectedTab = NewTabPage
 
         ' Start a thread to load the database
         Dim OpenDataBase As New Threading.Thread(AddressOf ThreadOpenDataBase)
         OpenDataBase.Start()
 
         ' MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
-
-        '' Create a new DataTable
-        'Dim DataTable As New DataTable
-
-        '' Read the DataTable from the Configuration, if there is no this table in the Cofniguration, setup the name and column
-        'If Not Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) Then
-        '    DataTable.TableName = TableName.OpenFileHistoryList
-        '    DataTable.Columns.Add("FileFullName")
-        'End If
-
-        '' Delete the full name frome the DataTable
-        'For Each Row As DataRow In DataTable.Rows
-        '    If CType(Row.Item(0), String).Trim.ToLower = RecentDataBaseFullName.Trim.ToLower Then
-        '        Row.Delete()
-        '        Exit For
-        '    End If
-        'Next
-
-        '' If the number of recent file is larger than 10, delete the first one
-        'While DataTable.Rows.Count > 9
-        '    DataTable.Rows(0).Delete()
-        'End While
-
-        '' Add this full name at last
-        'DataTable.Rows.Add(RecentDataBaseFullName)
-
-        '' Save the DataTable
-        'Configuration.SetConfig(DataTable)
-
-        MenuStrip.RecentDataBaseOrderUpdate(RecentDataBaseFullName)
     End Sub
 
     Private Sub ExitProgram() ' Handles MenuStrip.MenuFile_Exit_Click
@@ -221,8 +193,8 @@
                 Dim ErrorMessage As New _BibTeX.ErrorMessage
                 If Not TabPage.DataBaseLoading(ErrorMessage) Then
                     Me.Invoke(New DelegateRemoveTabPage(AddressOf RemoveTabPage), TabPage)
+                    Me.Invoke(New DelegateRecentDataBaseListRemove(AddressOf RemoveDataBaseListItem), TabPage.Name)
                     StatusStrip.ShowErrorMessage(TabPage.Name & " : " & ErrorMessage.GetErrorMessage)
-                    DataBaseTabControl_TabPageChanged(Nothing)
                     MsgBox("There is an error in file """ & TabPage.Name & """ line : " & ErrorMessage.LineNumber & vbCr & _
                            "Error message is """ & ErrorMessage.GetErrorMessage & """" & vbCr & vbCr & _
                            "Click OK to continue.", _
@@ -289,6 +261,10 @@
 
     Private Sub AddTabPage(ByVal TabPage As _FormMain.DataBaseTabPage)
         DataBaseTabControl.TabPages.Add(TabPage)
+    End Sub
+
+    Private Sub RemoveDataBaseListItem(ByVal DataBaseFullName As String)
+        MenuStrip.RecentDataBaseOrderDelete(DataBaseFullName)
     End Sub
 
     Private Sub RemoveTabPage(ByVal TabPage As _FormMain.DataBaseTabPage)
