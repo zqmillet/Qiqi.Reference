@@ -14,7 +14,8 @@
         Public MenuViewNextDataBase As ToolStripMenuItem
         Public MenuViewPreviousDataBase As ToolStripMenuItem
         Public MenuViewShowGroupTreeView As ToolStripMenuItem
-        Public MenuViewShowDetailTabControl As ToolStripMenuItem
+        Public MenuViewShowToolStrip As ToolStripMenuItem
+        Public MenuViewShowStatusStrip As ToolStripMenuItem
 
         Public MenuOption As ToolStripMenuItem
         Public MenuOptionPreferences As ToolStripMenuItem
@@ -27,6 +28,9 @@
         Public Event MenuOptionPreferencesClick()
         Public Event MenuViewNextDataBaseClick()
         Public Event MenuViewPreviousDataBaseClick()
+        Public Event MenuViewShowGroupTreeViewClick()
+        Public Event MenuViewShowToolStripClick()
+        Public Event MenuViewShowStatusStripClick()
 
         Dim Configuration As _FormConfiguration.Configuration
 
@@ -81,6 +85,7 @@
             With MenuFileRecentDataBase
                 .Name = "MenuFileRecentDataBase"
                 .Text = "&Recent Database"
+                .Enabled = False
 
                 Dim DataTable As New DataTable
                 If Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) = True Then
@@ -117,12 +122,6 @@
             End With
 
 
-            'Public MenuView As ToolStripMenuItem
-            'Public MenuViewNextDataBase As ToolStripMenuItem
-            'Public MenuViewPreviousDataBase As ToolStripMenuItem
-            'Public MenuViewShowGroupTreeView As ToolStripMenuItem
-            'Public MenuViewShowDetailTabControl As ToolStripMenuItem
-
             MenuViewNextDataBase = New ToolStripMenuItem
             With MenuViewNextDataBase
                 .Name = "MenuViewNextDataBase"
@@ -143,11 +142,39 @@
                 AddHandler .Click, AddressOf ToolStripMenuItem_Click
             End With
 
+            MenuViewShowGroupTreeView = New ToolStripMenuItem
+            With MenuViewShowGroupTreeView
+                .Name = "MenuViewShowGroupTreeView"
+                .Text = "Show &Group"
+                .ShortcutKeys = Keys.Control Or Keys.G
+                AddHandler .Click, AddressOf ToolStripMenuItem_Click
+            End With
+
+            MenuViewShowToolStrip = New ToolStripMenuItem
+            With MenuViewShowToolStrip
+                .Name = "MenuViewShowToolStrip"
+                .Text = "Show &Toolbar"
+                .ShortcutKeys = Keys.Control Or Keys.T
+                AddHandler .Click, AddressOf ToolStripMenuItem_Click
+            End With
+
+            MenuViewShowStatusStrip = New ToolStripMenuItem
+            With MenuViewShowStatusStrip
+                .Name = "MenuViewShowStatusStrip"
+                .Text = "Show &Statusbar"
+                .ShortcutKeys = Keys.Control Or Keys.Shift Or Keys.S
+                AddHandler .Click, AddressOf ToolStripMenuItem_Click
+            End With
+
             MenuView = New ToolStripMenuItem
             With MenuView
                 .Text = "&View"
                 .DropDownItems.Add(MenuViewNextDataBase)
                 .DropDownItems.Add(MenuViewPreviousDataBase)
+                .DropDownItems.Add(New ToolStripSeparator)
+                .DropDownItems.Add(MenuViewShowGroupTreeView)
+                .DropDownItems.Add(MenuViewShowToolStrip)
+                .DropDownItems.Add(MenuViewShowStatusStrip)
             End With
 
 
@@ -191,6 +218,15 @@
                     RaiseEvent MenuViewNextDataBaseClick()
                 Case MenuViewPreviousDataBase.Name
                     RaiseEvent MenuViewPreviousDataBaseClick()
+                Case MenuViewShowGroupTreeView.Name
+                    MenuViewShowGroupTreeView.Checked = Not MenuViewShowGroupTreeView.Checked
+                    RaiseEvent MenuViewShowGroupTreeViewClick()
+                Case MenuViewShowToolStrip.Name
+                    MenuViewShowToolStrip.Checked = Not MenuViewShowToolStrip.Checked
+                    RaiseEvent MenuViewShowToolStripClick()
+                Case MenuViewShowStatusStrip.Name
+                    MenuViewShowStatusStrip.Checked = Not MenuViewShowStatusStrip.Checked
+                    RaiseEvent MenuViewShowStatusStripClick()
             End Select
         End Sub
 

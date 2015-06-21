@@ -21,18 +21,18 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="OpenFileHistoryList">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="CurrentOpenFileList">
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="FileName" type="xs:string" minOccurs="0" />
                 <xs:element name="Selected" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="OpenFileHistoryList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -119,15 +119,15 @@
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
+    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
     <Selected>True</Selected>
   </CurrentOpenFileList>
   <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
+    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
   <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
+    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
 </NewDataSet>
