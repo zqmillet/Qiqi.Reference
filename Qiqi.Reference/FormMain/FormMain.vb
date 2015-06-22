@@ -31,14 +31,38 @@
         ' Initialize tool bar
         InitializeToolStrip()
 
-        ' Initialize main menu
-        InitializeMenuStrip()
-
         ' Initialize status bar
         InitializeStatusStrip()
 
+        ' Initialize main menu
+        InitializeMenuStrip()
+
         ' Initialize current database
         InitializeCurrentDataBase()
+
+        ' Initialize view of FormMain
+        InitializeView()
+
+    End Sub
+
+    Private Sub InitializeView()
+        Dim DataTable As New DataTable
+        If Not Configuration.GetConfig(TableName.FormMainViewConfiguration, DataTable) Then
+            Exit Sub
+        End If
+
+        For Each Row As DataRow In DataTable.Rows
+            Select Case Row("Control")
+                Case MenuStrip.MenuViewShowGroupTreeView.Name
+                    For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
+                        TabPage.SplitContainerPrimary.Panel1Collapsed = Not CType(Row("Parameter"), Boolean)
+                    Next
+                Case MenuStrip.MenuViewShowStatusStrip.Name
+                    StatusStrip.Visible = Row("Parameter")
+                Case MenuStrip.MenuViewShowToolStrip.Name
+                    ToolStrip.Visible = Row("Parameter")
+            End Select
+        Next
     End Sub
 
     Private Sub InitializeCurrentDataBase()
@@ -343,6 +367,10 @@
     End Sub
 
     Private Sub TabPage_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs)
+        If DataBaseTabControl.SelectedTab Is Nothing Then
+            Exit Sub
+        End If
+
         Dim Height As Integer = CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).SplitContainerSecondary.SplitterDistance
 
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
@@ -395,6 +423,9 @@
     End Sub
 
     Private Sub ShowGroupTreeView(ByVal Visible As Boolean)
+        For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
+            TabPage.SplitContainerPrimary.Panel1Collapsed = Not Visible
+        Next
         ViewConfigurationSave()
     End Sub
 

@@ -146,7 +146,6 @@
             With MenuViewShowGroupTreeView
                 .Name = "MenuViewShowGroupTreeView"
                 .Text = "Show &Group"
-                .Checked =
                 .ShortcutKeys = Keys.Control Or Keys.G
                 AddHandler .Click, AddressOf ToolStripMenuItem_Click
             End With
@@ -172,11 +171,11 @@
                 For Each Row As DataRow In FormMainViewConfiguration.Rows
                     Select Case Row("Control")
                         Case MenuViewShowGroupTreeView.Name
-                            MenuViewShowGroupTreeView.Checked = Row("Visible")
+                            MenuViewShowGroupTreeView.Checked = Row("Parameter")
                         Case MenuViewShowStatusStrip.Name
-                            MenuViewShowStatusStrip.Checked = Row("Visible")
+                            MenuViewShowStatusStrip.Checked = Row("Parameter")
                         Case MenuViewShowToolStrip.Name
-                            MenuViewShowToolStrip.Checked = Row("Visible")
+                            MenuViewShowToolStrip.Checked = Row("Parameter")
                     End Select
                 Next
             Else
@@ -337,7 +336,7 @@
             With DataTable
                 .TableName = TableName.FormMainViewConfiguration
                 .Columns.Add("Control")
-                .Columns.Add("Visible")
+                .Columns.Add("Parameter")
 
                 .Rows.Add({MenuViewShowGroupTreeView.Name, MenuViewShowGroupTreeView.Checked})
                 .Rows.Add({MenuViewShowStatusStrip.Name, MenuViewShowStatusStrip.Checked})
