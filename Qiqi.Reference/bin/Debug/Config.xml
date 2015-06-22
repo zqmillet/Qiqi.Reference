@@ -21,6 +21,54 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
+          <xs:element name="Table1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Visible" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Table2">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Visible" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Table3">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Visible" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Table4">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Visible" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Table5">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Visible" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="FormMainViewConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Visible" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="CurrentOpenFileList">
             <xs:complexType>
               <xs:sequence>
@@ -118,6 +166,18 @@
     <Display_x0020_Name>Abstract</Display_x0020_Name>
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowGroupTreeView</Control>
+    <Visible>False</Visible>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowStatusStrip</Control>
+    <Visible>True</Visible>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowToolStrip</Control>
+    <Visible>True</Visible>
+  </FormMainViewConfiguration>
   <CurrentOpenFileList>
     <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
     <Selected>True</Selected>
@@ -126,8 +186,7 @@
     <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
+  <OpenFileHistoryList>
+    <FileFullName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
+  </OpenFileHistoryList>
 </NewDataSet>

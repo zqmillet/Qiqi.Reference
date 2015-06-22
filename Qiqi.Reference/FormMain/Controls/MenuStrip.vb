@@ -28,9 +28,9 @@
         Public Event MenuOptionPreferencesClick()
         Public Event MenuViewNextDataBaseClick()
         Public Event MenuViewPreviousDataBaseClick()
-        Public Event MenuViewShowGroupTreeViewClick()
-        Public Event MenuViewShowToolStripClick()
-        Public Event MenuViewShowStatusStripClick()
+        Public Event MenuViewShowGroupTreeViewClick(ByVal Visible As Boolean)
+        Public Event MenuViewShowToolStripClick(ByVal Visible As Boolean)
+        Public Event MenuViewShowStatusStripClick(ByVal Visible As Boolean)
 
         Dim Configuration As _FormConfiguration.Configuration
 
@@ -87,17 +87,17 @@
                 .Text = "&Recent Database"
                 .Enabled = False
 
-                Dim DataTable As New DataTable
-                If Configuration.GetConfig(TableName.OpenFileHistoryList, DataTable) = True Then
+                Dim OpenFileHistoryListDataTable As New DataTable
+                If Configuration.GetConfig(TableName.OpenFileHistoryList, OpenFileHistoryListDataTable) = True Then
                     .Enabled = True
 
-                    For Index As Integer = DataTable.Rows.Count - 1 To 0 Step -1
+                    For Index As Integer = OpenFileHistoryListDataTable.Rows.Count - 1 To 0 Step -1
                         Dim MenuFileRecentDataBaseItem As New ToolStripMenuItem
 
                         With MenuFileRecentDataBaseItem
                             .Name = "MenuFileRecentDataBaseItem"
-                            .Tag = DataTable.Rows(Index).Item(0)
-                            .Text = DataTable.Rows.Count - Index & ". " & DataTable.Rows(Index).Item(0)
+                            .Tag = OpenFileHistoryListDataTable.Rows(Index).Item(0)
+                            .Text = OpenFileHistoryListDataTable.Rows.Count - Index & ". " & OpenFileHistoryListDataTable.Rows(Index).Item(0)
                             AddHandler .Click, AddressOf ToolStripMenuItem_Click
                             MenuFileRecentDataBase.DropDownItems.Add(MenuFileRecentDataBaseItem)
                         End With
@@ -146,6 +146,7 @@
             With MenuViewShowGroupTreeView
                 .Name = "MenuViewShowGroupTreeView"
                 .Text = "Show &Group"
+                .Checked =
                 .ShortcutKeys = Keys.Control Or Keys.G
                 AddHandler .Click, AddressOf ToolStripMenuItem_Click
             End With
@@ -165,6 +166,24 @@
                 .ShortcutKeys = Keys.Control Or Keys.Shift Or Keys.S
                 AddHandler .Click, AddressOf ToolStripMenuItem_Click
             End With
+
+            Dim FormMainViewConfiguration As New DataTable
+            If Configuration.GetConfig(TableName.FormMainViewConfiguration, FormMainViewConfiguration) Then
+                For Each Row As DataRow In FormMainViewConfiguration.Rows
+                    Select Case Row("Control")
+                        Case MenuViewShowGroupTreeView.Name
+                            MenuViewShowGroupTreeView.Checked = Row("Visible")
+                        Case MenuViewShowStatusStrip.Name
+                            MenuViewShowStatusStrip.Checked = Row("Visible")
+                        Case MenuViewShowToolStrip.Name
+                            MenuViewShowToolStrip.Checked = Row("Visible")
+                    End Select
+                Next
+            Else
+                MenuViewShowGroupTreeView.Checked = True
+                MenuViewShowStatusStrip.Checked = True
+                MenuViewShowToolStrip.Checked = True
+            End If
 
             MenuView = New ToolStripMenuItem
             With MenuView
@@ -220,13 +239,13 @@
                     RaiseEvent MenuViewPreviousDataBaseClick()
                 Case MenuViewShowGroupTreeView.Name
                     MenuViewShowGroupTreeView.Checked = Not MenuViewShowGroupTreeView.Checked
-                    RaiseEvent MenuViewShowGroupTreeViewClick()
+                    RaiseEvent MenuViewShowGroupTreeViewClick(MenuViewShowGroupTreeView.Checked)
                 Case MenuViewShowToolStrip.Name
                     MenuViewShowToolStrip.Checked = Not MenuViewShowToolStrip.Checked
-                    RaiseEvent MenuViewShowToolStripClick()
+                    RaiseEvent MenuViewShowToolStripClick(MenuViewShowToolStrip.Checked)
                 Case MenuViewShowStatusStrip.Name
                     MenuViewShowStatusStrip.Checked = Not MenuViewShowStatusStrip.Checked
-                    RaiseEvent MenuViewShowStatusStripClick()
+                    RaiseEvent MenuViewShowStatusStripClick(MenuViewShowStatusStrip.Checked)
             End Select
         End Sub
 
@@ -312,6 +331,21 @@
             MenuViewNextDataBase.Enabled = Enable
             MenuViewPreviousDataBase.Enabled = Enable
         End Sub
+
+        Public Function GetFormMainViewConfiguration() As DataTable
+            Dim DataTable As New DataTable
+            With DataTable
+                .TableName = TableName.FormMainViewConfiguration
+                .Columns.Add("Control")
+                .Columns.Add("Visible")
+
+                .Rows.Add({MenuViewShowGroupTreeView.Name, MenuViewShowGroupTreeView.Checked})
+                .Rows.Add({MenuViewShowStatusStrip.Name, MenuViewShowStatusStrip.Checked})
+                .Rows.Add({MenuViewShowToolStrip.Name, MenuViewShowToolStrip.Checked})
+            End With
+
+            Return DataTable
+        End Function
     End Class
 End Namespace
 

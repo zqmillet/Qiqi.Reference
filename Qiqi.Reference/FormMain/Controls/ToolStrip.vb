@@ -7,6 +7,7 @@
 
             With Me
                 .Anchor = AnchorStyles.Left Or AnchorStyles.Top
+                .Visible = False
             End With
         End Sub
     End Class

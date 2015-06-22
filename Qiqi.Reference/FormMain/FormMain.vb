@@ -279,6 +279,9 @@
         AddHandler MenuStrip.MenuOptionPreferencesClick, AddressOf ShowFormConfiguration
         AddHandler MenuStrip.MenuViewNextDataBaseClick, AddressOf ShowNextDataBase
         AddHandler MenuStrip.MenuViewPreviousDataBaseClick, AddressOf ShowPreviousDataBase
+        AddHandler MenuStrip.MenuViewShowToolStripClick, AddressOf ShowToolStrip
+        AddHandler MenuStrip.MenuViewShowStatusStripClick, AddressOf ShowStatusStrip
+        AddHandler MenuStrip.MenuViewShowGroupTreeViewClick, AddressOf ShowGroupTreeView
     End Sub
 
     ''' <summary>
@@ -379,5 +382,24 @@
         End If
 
         DataBaseTabControl.SelectedIndex = Index
+    End Sub
+
+    Private Sub ShowToolStrip(ByVal Visible As Boolean)
+        ToolStrip.Visible = Visible
+        ViewConfigurationSave()
+    End Sub
+
+    Private Sub ShowStatusStrip(ByVal Visible As Boolean)
+        StatusStrip.Visible = Visible
+        ViewConfigurationSave()
+    End Sub
+
+    Private Sub ShowGroupTreeView(ByVal Visible As Boolean)
+        ViewConfigurationSave()
+    End Sub
+
+    Private Sub ViewConfigurationSave()
+        Configuration.SetConfig(MenuStrip.GetFormMainViewConfiguration)
+        Configuration.Save()
     End Sub
 End Class

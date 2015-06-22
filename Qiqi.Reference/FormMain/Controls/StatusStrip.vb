@@ -12,6 +12,10 @@
         Public Sub New()
             StatusLabel = New ToolStripStatusLabel
 
+            With Me
+                .Visible = False
+            End With
+
             With StatusLabel
                 .Text = ""
             End With
