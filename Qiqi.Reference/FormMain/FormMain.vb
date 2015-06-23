@@ -430,7 +430,35 @@
     End Sub
 
     Private Sub ViewConfigurationSave()
-        Configuration.SetConfig(MenuStrip.GetFormMainViewConfiguration)
+        Dim OldDataTable As New DataTable
+        If Not Configuration.GetConfig(TableName.FormMainViewConfiguration, OldDataTable) Then
+            Exit Sub
+        End If
+
+        Dim GroupTreeWidth As Integer = 0
+        Dim DetailTabControlHeight As Integer = 0
+        For Each Row As DataRow In OldDataTable.Rows
+            Select Case Row("Control")
+                Case "GroupTreeWidth"
+                    GroupTreeWidth = Row("Parameter")
+                Case "DetailTabControlHeight"
+                    DetailTabControlHeight = Row("Parameter")
+            End Select
+        Next
+
+        Dim NewDataTable As DataTable = MenuStrip.GetFormMainViewConfiguration
+
+        NewDataTable.Rows.Add("GroupTreeWidth", GroupTreeWidth)
+        NewDataTable.Rows.Add("DetailTabControlHeight", DetailTabControlHeight)
+        NewDataTable.Rows.Add("FormMainHeight", Me.Size.Height)
+        NewDataTable.Rows.Add("FormMainWidth", Me.Size.Width)
+        NewDataTable.Rows.Add("FormMainWindowState", Me.WindowState)
+
+        Configuration.SetConfig(NewDataTable)
         Configuration.Save()
+
+        MsgBox(CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).GroupTreeViewWidth)
     End Sub
+
+
 End Class

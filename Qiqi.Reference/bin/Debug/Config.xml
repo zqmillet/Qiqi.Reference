@@ -21,10 +21,11 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="OpenFileHistoryList">
+          <xs:element name="FormMainViewConfiguration">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -36,11 +37,10 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="FormMainViewConfiguration">
+          <xs:element name="OpenFileHistoryList">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="Control" type="xs:string" minOccurs="0" />
-                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
+                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -109,7 +109,7 @@
     <Column_x0020_Width>232</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
+    <Display>False</Display>
     <Property_x0020_Name>Doi</Property_x0020_Name>
     <Display_x0020_Name>Doi</Display_x0020_Name>
     <Column_x0020_Width>359</Column_x0020_Width>
@@ -126,17 +126,6 @@
     <Display_x0020_Name>Abstract</Display_x0020_Name>
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
-  <OpenFileHistoryList>
-    <FileFullName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
-  </OpenFileHistoryList>
-  <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
-    <Selected>True</Selected>
-  </CurrentOpenFileList>
   <FormMainViewConfiguration>
     <Control>MenuViewShowGroupTreeView</Control>
     <Parameter>True</Parameter>
@@ -147,6 +136,30 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>MenuViewShowToolStrip</Control>
-    <Parameter>False</Parameter>
+    <Parameter>True</Parameter>
   </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>GroupTreeWidth</Control>
+    <Parameter>0</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>DetailTabControlHeight</Control>
+    <Parameter>0</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainSize</Control>
+    <Parameter>{Width=1456, Height=876}</Parameter>
+  </FormMainViewConfiguration>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
+    <Selected>True</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
 </NewDataSet>

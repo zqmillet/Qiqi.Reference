@@ -9,6 +9,9 @@
         Public SplitContainerPrimary As SplitContainer
         Public SplitContainerSecondary As SplitContainer
 
+        Public GroupTreeViewWidth As Integer
+        Public DetailTabControlHeight As Integer
+
         Dim DataBaseGridView As _FormMain.DataGridView
         Dim StructureTreeView As TreeView
         Dim LiteratureTabControl As _FormMain.LiteratureTabControl
@@ -40,6 +43,8 @@
                 .Name = BibTeXFullName
                 .Text = BibTeXFullName.Remove(0, BibTeXFullName.LastIndexOf("\") + 1)
                 .ToolTipText = BibTeXFullName
+                .GroupTreeViewWidth = 0
+                .DetailTabControlHeight = 0
             End With
 
             ' Initialize primary split container 
@@ -77,6 +82,10 @@
                 .Dock = DockStyle.Fill
                 .Orientation = Orientation.Vertical
                 .Panel1Collapsed = True
+
+                .IsSplitterFixed = False
+                .FixedPanel = FixedPanel.Panel1
+
                 AddHandler .SplitterMoved, AddressOf SplitContainer_SplitterMoved
 
             End With
@@ -95,6 +104,10 @@
                 .Dock = DockStyle.Fill
                 .Orientation = Orientation.Horizontal
                 .Panel2Collapsed = True
+
+                .IsSplitterFixed = False
+                .FixedPanel = FixedPanel.Panel2
+
                 AddHandler .SplitterMoved, AddressOf SplitContainer_SplitterMoved
             End With
 
@@ -103,6 +116,14 @@
         End Sub
 
         Private Sub SplitContainer_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs)
+            If SplitContainerPrimary.Panel1.Width > 0 Then
+                GroupTreeViewWidth = SplitContainerPrimary.Panel1.Width
+            End If
+
+            If SplitContainerSecondary.Panel2.Height > 0 Then
+                DetailTabControlHeight = SplitContainerSecondary.Panel2.Height
+            End If
+
             RaiseEvent SplitterMoved(sender, e)
         End Sub
 
