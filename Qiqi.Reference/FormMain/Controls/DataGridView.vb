@@ -37,7 +37,7 @@
             ' Column configuration
             ColumnConfiguration()
 
-            AddHandler Me.RowPostPaint, AddressOf Me_RowPostPaint
+            'AddHandler Me.RowPostPaint, AddressOf Me_RowPostPaint
             AddHandler Me.MouseMove, AddressOf Me_MouseMove
             AddHandler Me.ColumnWidthChanged, AddressOf Me_ColumnWidthChanged
             AddHandler Me.ColumnDisplayIndexChanged, AddressOf Me_ColumnDisplayIndexChanged
@@ -67,6 +67,8 @@
                 Return False
             End If
 
+            While Not Me.IsHandleCreated
+            End While
             Me.Invoke(New DelegateShowDataBase(AddressOf ShowDataBase))
             Return True
         End Function

@@ -61,6 +61,12 @@
                     StatusStrip.Visible = Row("Parameter")
                 Case MenuStrip.MenuViewShowToolStrip.Name
                     ToolStrip.Visible = Row("Parameter")
+                Case "FormMainWidth"
+                    Me.Width = Row("Parameter")
+                Case "FormMainHeight"
+                    Me.Height = Row("Parameter")
+                Case "FormMainWindowState"
+                    Me.WindowState = Row("Parameter")
             End Select
         Next
     End Sub
@@ -372,14 +378,20 @@
         End If
 
         Dim Height As Integer = CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).SplitContainerSecondary.SplitterDistance
+        Dim Width As Integer = CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).SplitContainerPrimary.SplitterDistance
 
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
             TabPage.SetSplitContainerEventEnable(False)
             If Not TabPage.SplitContainerSecondary.Panel2Collapsed Then
                 TabPage.SplitContainerSecondary.SplitterDistance = Height
+
             End If
+            TabPage.SplitContainerPrimary.SplitterDistance = Width
+
             TabPage.SetSplitContainerEventEnable(True)
         Next
+
+        ViewConfigurationSave()
     End Sub
 
     Private Sub ShowPreviousDataBase()
@@ -430,6 +442,10 @@
     End Sub
 
     Private Sub ViewConfigurationSave()
+        If Configuration Is Nothing Then
+            Exit Sub
+        End If
+
         Dim OldDataTable As New DataTable
         If Not Configuration.GetConfig(TableName.FormMainViewConfiguration, OldDataTable) Then
             Exit Sub
@@ -448,16 +464,30 @@
 
         Dim NewDataTable As DataTable = MenuStrip.GetFormMainViewConfiguration
 
-        NewDataTable.Rows.Add("GroupTreeWidth", GroupTreeWidth)
-        NewDataTable.Rows.Add("DetailTabControlHeight", DetailTabControlHeight)
+        If DataBaseTabControl.SelectedTab Is Nothing Then
+            NewDataTable.Rows.Add("GroupTreeWidth", GroupTreeWidth)
+            NewDataTable.Rows.Add("DetailTabControlHeight", DetailTabControlHeight)
+        Else
+            NewDataTable.Rows.Add("GroupTreeWidth", CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).GroupTreeViewWidth)
+            NewDataTable.Rows.Add("DetailTabControlHeight", CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).DetailTabControlHeight)
+        End If
+
         NewDataTable.Rows.Add("FormMainHeight", Me.Size.Height)
         NewDataTable.Rows.Add("FormMainWidth", Me.Size.Width)
-        NewDataTable.Rows.Add("FormMainWindowState", Me.WindowState)
+        NewDataTable.Rows.Add("FormMainWindowState", Convert.ToInt16(Me.WindowState, 10))
 
         Configuration.SetConfig(NewDataTable)
         Configuration.Save()
 
-        MsgBox(CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).GroupTreeViewWidth)
+        ' MsgBox(CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).GroupTreeViewWidth)
+    End Sub
+
+    Private Sub FormMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        ViewConfigurationSave()
+    End Sub
+
+    Private Sub Me_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        ViewConfigurationSave()
     End Sub
 
 

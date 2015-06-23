@@ -61,6 +61,9 @@
 
             ' Initialize literature tab control
             InitializeLiteratureTabControl()
+
+            ' Initialize View
+            InitializeView()
         End Sub
 
         Public Sub DataBaseGridView_ProgressUpdate(ByVal Progress As Double)
@@ -113,6 +116,26 @@
 
             ' Add this split container in the tab page
             SplitContainerPrimary.Panel2.Controls.Add(SplitContainerSecondary)
+        End Sub
+
+        Private Sub InitializeView()
+            If Configuration Is Nothing Then
+                Exit Sub
+            End If
+
+            Dim DataTable As New DataTable
+            If Not Configuration.GetConfig(TableName.FormMainViewConfiguration, DataTable) Then
+                Exit Sub
+            End If
+
+            For Each Row As DataRow In DataTable.Rows
+                Select Case Row("Control")
+                    Case "MenuViewShowGroupTreeView"
+                        SplitContainerPrimary.Panel1Collapsed = Not CType(Row("Parameter"), Boolean)
+                    Case "GroupTreeWidth"
+                        SplitContainerPrimary.SplitterDistance = Row("Parameter")
+                End Select
+            Next
         End Sub
 
         Private Sub SplitContainer_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs)
