@@ -51,6 +51,7 @@
             Exit Sub
         End If
 
+        RemoveHandler Me.Resize, AddressOf Me_Resize
         For Each Row As DataRow In DataTable.Rows
             Select Case Row("Control")
                 Case MenuStrip.MenuViewShowGroupTreeView.Name
@@ -67,8 +68,16 @@
                     Me.Height = Row("Parameter")
                 Case "FormMainWindowState"
                     Me.WindowState = Row("Parameter")
+                    'Case "GroupTreeWidth"
+                    '    For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
+                    '        TabPage.SetSplitContainerEventEnable(False)
+                    '        TabPage.SplitContainerPrimary.SplitterDistance = Row("Parameter")
+                    '        TabPage.SetSplitContainerEventEnable(True)
+                    '    Next
+                    'Case ""
             End Select
         Next
+        AddHandler Me.Resize, AddressOf Me_Resize
     End Sub
 
     Private Sub InitializeCurrentDataBase()
@@ -384,7 +393,6 @@
             TabPage.SetSplitContainerEventEnable(False)
             If Not TabPage.SplitContainerSecondary.Panel2Collapsed Then
                 TabPage.SplitContainerSecondary.SplitterDistance = Height
-
             End If
             TabPage.SplitContainerPrimary.SplitterDistance = Width
 
@@ -482,9 +490,9 @@
         ' MsgBox(CType(DataBaseTabControl.SelectedTab, _FormMain.DataBaseTabPage).GroupTreeViewWidth)
     End Sub
 
-    Private Sub FormMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        ViewConfigurationSave()
-    End Sub
+    'Private Sub FormMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    '    ViewConfigurationSave()
+    'End Sub
 
     Private Sub Me_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         ViewConfigurationSave()

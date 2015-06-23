@@ -22,6 +22,10 @@
         End Sub
 
         Public Sub Load(ByVal Literature As _BibTeX.Literature)
+            If Literature Is Nothing Then
+                Exit Sub
+            End If
+
             Me.Literature = Literature
 
             Dim ErrorMessage As String = "There exist an error when find the configuration of literature type " & Literature.Type

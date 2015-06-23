@@ -24,6 +24,9 @@ Namespace _BibTeX
 
         Public Event ProgressUpdate(ByVal Progress As Double)
 
+        Private ExistGroup As Boolean
+        Private GroupBuffer As String
+        Private GroupVersion As Integer
 
 
         ''' <summary>
@@ -35,6 +38,8 @@ Namespace _BibTeX
             With Me
                 .FileFullName = FileFullName
                 .LiteratureList = New ArrayList
+                .ExistGroup = False
+                .GroupBuffer = ""
             End With
         End Sub
 

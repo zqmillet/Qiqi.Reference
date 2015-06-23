@@ -82,15 +82,12 @@
             ' Configuration
             With SplitContainerPrimary
                 .Name = "SplitContainerPrimary"
-                .Dock = DockStyle.Fill
                 .Orientation = Orientation.Vertical
-                .Panel1Collapsed = True
-
                 .IsSplitterFixed = False
                 .FixedPanel = FixedPanel.Panel1
+                .Dock = DockStyle.Fill
 
                 AddHandler .SplitterMoved, AddressOf SplitContainer_SplitterMoved
-
             End With
 
             ' Add this split container in the tab page
@@ -104,13 +101,11 @@
             ' Configuration
             With SplitContainerSecondary
                 .Name = "SplitContainerSecondary"
-                .Dock = DockStyle.Fill
                 .Orientation = Orientation.Horizontal
-                .Panel2Collapsed = True
-
                 .IsSplitterFixed = False
                 .FixedPanel = FixedPanel.Panel2
-
+                .Dock = DockStyle.Fill
+                .Panel2Collapsed = True
                 AddHandler .SplitterMoved, AddressOf SplitContainer_SplitterMoved
             End With
 
@@ -128,14 +123,20 @@
                 Exit Sub
             End If
 
+            Me.Size = New Size(9999, 9999)
+
+            Me.SetSplitContainerEventEnable(False)
             For Each Row As DataRow In DataTable.Rows
                 Select Case Row("Control")
                     Case "MenuViewShowGroupTreeView"
                         SplitContainerPrimary.Panel1Collapsed = Not CType(Row("Parameter"), Boolean)
                     Case "GroupTreeWidth"
                         SplitContainerPrimary.SplitterDistance = Row("Parameter")
+                    Case "DetailTabControlHeight"
+                        SplitContainerSecondary.SplitterDistance = SplitContainerSecondary.Height - Row("Parameter")
                 End Select
             Next
+            Me.SetSplitContainerEventEnable(True)
         End Sub
 
         Private Sub SplitContainer_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs)

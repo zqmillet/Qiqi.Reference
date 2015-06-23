@@ -21,18 +21,18 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="OpenFileHistoryList">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="FormMainViewConfiguration">
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="Control" type="xs:string" minOccurs="0" />
                 <xs:element name="Parameter" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="OpenFileHistoryList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -91,7 +91,7 @@
     <Column_x0020_Width>130</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <DataBaseGridViewColunmConfiguration>
-    <Display>False</Display>
+    <Display>True</Display>
     <Property_x0020_Name>BibTeXKey</Property_x0020_Name>
     <Display_x0020_Name>BibTeXKey</Display_x0020_Name>
     <Column_x0020_Width>134</Column_x0020_Width>
@@ -109,13 +109,13 @@
     <Column_x0020_Width>232</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <DataBaseGridViewColunmConfiguration>
-    <Display>False</Display>
+    <Display>True</Display>
     <Property_x0020_Name>Doi</Property_x0020_Name>
     <Display_x0020_Name>Doi</Display_x0020_Name>
     <Column_x0020_Width>359</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
+    <Display>False</Display>
     <Property_x0020_Name>Keywords</Property_x0020_Name>
     <Display_x0020_Name>Keywords</Display_x0020_Name>
     <Column_x0020_Width>282</Column_x0020_Width>
@@ -140,34 +140,32 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>GroupTreeWidth</Control>
-    <Parameter>0</Parameter>
+    <Parameter>197</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>DetailTabControlHeight</Control>
-    <Parameter>0</Parameter>
+    <Parameter>321</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>
-    <Parameter>776</Parameter>
+    <Parameter>876</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWidth</Control>
-    <Parameter>1296</Parameter>
+    <Parameter>1456</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWindowState</Control>
     <Parameter>2</Parameter>
   </FormMainViewConfiguration>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileFullName>
+  </OpenFileHistoryList>
   <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
     <Selected>True</Selected>
-  </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
-    <Selected>False</Selected>
   </CurrentOpenFileList>
 </NewDataSet>
