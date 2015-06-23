@@ -206,6 +206,7 @@ Namespace _BibTeX
                                 If BracketNumber = 0 Then
                                     ' Do nothing
                                     State = LexicalAnalysisStatus.IdleMode
+                                    CommentAnalysis(CommentBuffer)
                                 End If
                             Case Else
                                 CommentBuffer &= BibTeXBuffer(i)
@@ -221,6 +222,32 @@ Namespace _BibTeX
                 Return False
             End If
         End Function
+
+        Private Sub CommentAnalysis(ByRef CommentBuffer As String)
+            If Not CommentBuffer.Trim.ToLower.IndexOf("jabref-meta:") = 0 Then
+                Exit Sub
+            End If
+
+            CommentBuffer = CommentBuffer.Remove(0, CommentBuffer.IndexOf(":") + 1).Trim
+
+            If CommentBuffer.ToLower.IndexOf("groupsversion:") = 0 Then
+                CommentBuffer = CommentBuffer.Remove(0, CommentBuffer.IndexOf(":") + 1).Trim
+                CommentBuffer = CommentBuffer.Remove(CommentBuffer.IndexOf(";"))
+                If IsNumeric(CommentBuffer) Then
+                    GroupVersion = Val(CommentBuffer)
+                End If
+            End If
+
+            If CommentBuffer.ToLower.IndexOf("groupstree:") = 0 Then
+                GroupBuffer = CommentBuffer.Remove(0, CommentBuffer.IndexOf(":") + 1).Trim
+            End If
+
+            If GroupVersion >= 0 And GroupBuffer <> "" Then
+                ExistGroup = True
+            Else
+                ExistGroup = False
+            End If
+        End Sub
 
 
         ''' <summary>

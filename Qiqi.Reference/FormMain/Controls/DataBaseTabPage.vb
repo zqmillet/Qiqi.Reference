@@ -13,9 +13,10 @@
         Public DetailTabControlHeight As Integer
 
         Dim DataBaseGridView As _FormMain.DataGridView
-        Dim StructureTreeView As TreeView
+        Dim GroupTreeView As TreeView
         Dim LiteratureTabControl As _FormMain.LiteratureTabControl
         Dim LiteratureToolStrip As _FormMain.SecondaryToolStrip
+        Dim DataBase As _BibTeX.DataBase
 
         Dim Configuration As _FormConfiguration.Configuration
 
@@ -45,6 +46,7 @@
                 .ToolTipText = BibTeXFullName
                 .GroupTreeViewWidth = 0
                 .DetailTabControlHeight = 0
+                .DataBase = New _BibTeX.DataBase(BibTeXFullName)
             End With
 
             ' Initialize primary split container 
@@ -53,11 +55,11 @@
             ' Initialize secondary split container 
             InitializeSplitContainerSecondary()
 
-            ' Initialize structure tree view
-            InitializeStuctureTreeView()
-
             ' Initialize database grid view
             InitializeDataBaseGridView()
+
+            ' Initialize structure tree view
+            InitializeGroupTreeView()
 
             ' Initialize literature tab control
             InitializeLiteratureTabControl()
@@ -151,15 +153,17 @@
             RaiseEvent SplitterMoved(sender, e)
         End Sub
 
-        Private Sub InitializeStuctureTreeView()
+        Private Sub InitializeGroupTreeView()
             ' Create a new tree view
-            StructureTreeView = New TreeView
+            GroupTreeView = New TreeView
 
-            With StructureTreeView
+            With GroupTreeView
                 .Dock = DockStyle.Fill
             End With
 
-            SplitContainerPrimary.Panel1.Controls.Add(StructureTreeView)
+            SplitContainerPrimary.Panel1.Controls.Add(GroupTreeView)
+
+
         End Sub
 
         Public Function DataBaseLoading(ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
