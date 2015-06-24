@@ -173,9 +173,7 @@
         Public Function DataBaseLoading(ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
             Loaded = True
             If DataBaseGridView.DataBaseLoading(ErrorMessage) Then
-                If DataBaseGridView.DataBase.ExistGroup Then
-                    GroupTreeView.Loading(DataBaseGridView.DataBase.GroupVersion, DataBaseGridView.DataBase.GroupBuffer)
-                End If
+                GroupTreeView.Loading(DataBaseGridView.DataBase)
                 Return True
             Else
                 Return False
