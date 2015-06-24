@@ -148,22 +148,18 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>
-    <Parameter>876</Parameter>
+    <Parameter>776</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWidth</Control>
-    <Parameter>1456</Parameter>
+    <Parameter>1296</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWindowState</Control>
     <Parameter>2</Parameter>
   </FormMainViewConfiguration>
   <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
-    <Selected>True</Selected>
-  </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
+    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
   <OpenFileHistoryList>
