@@ -13,10 +13,10 @@
         Public DetailTabControlHeight As Integer
 
         Dim DataBaseGridView As _FormMain.DataGridView
-        Dim GroupTreeView As TreeView
+        Dim GroupTreeView As _FormMain.GroupTreeView
         Dim LiteratureTabControl As _FormMain.LiteratureTabControl
         Dim LiteratureToolStrip As _FormMain.SecondaryToolStrip
-        Dim DataBase As _BibTeX.DataBase
+        ' Public DataBase As _BibTeX.DataBase
 
         Dim Configuration As _FormConfiguration.Configuration
 
@@ -46,7 +46,7 @@
                 .ToolTipText = BibTeXFullName
                 .GroupTreeViewWidth = 0
                 .DetailTabControlHeight = 0
-                .DataBase = New _BibTeX.DataBase(BibTeXFullName)
+                ' .DataBase = New _BibTeX.DataBase(BibTeXFullName)
             End With
 
             ' Initialize primary split container 
@@ -75,6 +75,12 @@
 
         Private Sub InitializeLiteratureToolStrip()
 
+        End Sub
+
+        Public Sub LoadGroupTreeView()
+            With GroupTreeView
+                .BorderStyle = Windows.Forms.BorderStyle.None
+            End With
         End Sub
 
         Private Sub InitializeSplitContainerPrimary()
@@ -155,20 +161,25 @@
 
         Private Sub InitializeGroupTreeView()
             ' Create a new tree view
-            GroupTreeView = New TreeView
+            GroupTreeView = New _FormMain.GroupTreeView
 
             With GroupTreeView
                 .Dock = DockStyle.Fill
             End With
 
             SplitContainerPrimary.Panel1.Controls.Add(GroupTreeView)
-
-
         End Sub
 
         Public Function DataBaseLoading(ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
             Loaded = True
-            Return DataBaseGridView.DataBaseLoading(ErrorMessage)
+            If DataBaseGridView.DataBaseLoading(ErrorMessage) Then
+                If DataBaseGridView.DataBase.ExistGroup Then
+                    GroupTreeView.Loading(DataBaseGridView.DataBase.GroupVersion, DataBaseGridView.DataBase.GroupBuffer)
+                End If
+                Return True
+            Else
+                Return False
+            End If
         End Function
 
         Private Sub InitializeDataBaseGridView()

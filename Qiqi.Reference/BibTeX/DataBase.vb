@@ -24,9 +24,9 @@ Namespace _BibTeX
 
         Public Event ProgressUpdate(ByVal Progress As Double)
 
-        Private ExistGroup As Boolean
-        Private GroupBuffer As String
-        Private GroupVersion As Integer
+        Public ExistGroup As Boolean
+        Public GroupBuffer As String
+        Public GroupVersion As Integer
 
 
         ''' <summary>

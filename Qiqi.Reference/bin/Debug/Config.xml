@@ -11,14 +11,6 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="FormMainViewConfiguration">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="Control" type="xs:string" minOccurs="0" />
-                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="DataBaseGridViewColunmConfiguration">
             <xs:complexType>
               <xs:sequence>
@@ -26,6 +18,14 @@
                 <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
                 <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
                 <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="FormMainViewConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -60,38 +60,6 @@
   <LiteratureDetailDisplayConfiguration>
     <LiteratureDisplayBuffer>Book{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
   </LiteratureDetailDisplayConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowGroupTreeView</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowStatusStrip</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowToolStrip</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>GroupTreeWidth</Control>
-    <Parameter>152</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>DetailTabControlHeight</Control>
-    <Parameter>269</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainHeight</Control>
-    <Parameter>776</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainWidth</Control>
-    <Parameter>1296</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainWindowState</Control>
-    <Parameter>2</Parameter>
-  </FormMainViewConfiguration>
   <DataBaseGridViewColunmConfiguration>
     <Display>True</Display>
     <Property_x0020_Name>EntryType</Property_x0020_Name>
@@ -158,16 +126,47 @@
     <Display_x0020_Name>Abstract</Display_x0020_Name>
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowGroupTreeView</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowStatusStrip</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowToolStrip</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>GroupTreeWidth</Control>
+    <Parameter>144</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>DetailTabControlHeight</Control>
+    <Parameter>221</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainHeight</Control>
+    <Parameter>876</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainWidth</Control>
+    <Parameter>1456</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainWindowState</Control>
+    <Parameter>2</Parameter>
+  </FormMainViewConfiguration>
   <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
     <Selected>True</Selected>
   </CurrentOpenFileList>
   <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileName>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
     <Selected>False</Selected>
   </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>C:\Users\Qiqi\Documents\GitHub\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\SPChar.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
 </NewDataSet>

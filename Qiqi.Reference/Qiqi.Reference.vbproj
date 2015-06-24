@@ -96,6 +96,9 @@
     <Compile Include="FormConfiguration\LiteratureDetialDisplay\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormMain\Controls\GroupTreeView.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormMain\Controls\LiteratureTabControl\MultiLineTextBox.vb">
       <SubType>Component</SubType>
     </Compile>

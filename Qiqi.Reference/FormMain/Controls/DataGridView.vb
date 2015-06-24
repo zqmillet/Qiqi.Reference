@@ -12,7 +12,7 @@
 
         Public Event ColumnDisplayChanged(ByVal sender As Object)
 
-        Dim DataBase As _BibTeX.DataBase
+        Public DataBase As _BibTeX.DataBase
 
         ''' <summary>
         ''' Constructor

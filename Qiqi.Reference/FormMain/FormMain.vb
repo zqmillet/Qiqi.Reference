@@ -232,6 +232,12 @@
                        "Error message is """ & ErrorMessage.GetErrorMessage & """" & vbCr & vbCr & _
                        "Click OK to continue.", _
                        MsgBoxStyle.OkOnly, "Load Error")
+                'Else
+                '    If Not TabPage.DataBase.ExistGroup Then
+                '        Exit Sub
+                '    End If
+
+                '    TabPage.LoadGroupTreeView()
             End If
         Next
     End Sub
