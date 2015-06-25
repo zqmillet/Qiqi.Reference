@@ -30,6 +30,7 @@
             Dim GroupTitle As String = ""
             Dim GroupType As String = ""
             Dim GroupHierarchicalContext As String = ""
+            Dim BibTeXKey As String = ""
 
             Dim LastTreeViewNodeList As New ArrayList
 
@@ -60,8 +61,12 @@
                                 MsgBox(GroupAnalysisError.Idle)
                                 Exit Sub
                             Case Else
-                                GroupLevel &= c
+                                GroupType = ""
+                                GroupLevel = ""
+                                GroupTitle = ""
+                                GroupHierarchicalContext = ""
                                 AnalysisStatus = GroupAnalysisStatus.ReadGroupLevel
+                                GroupLevel &= c
                         End Select
                     Case GroupAnalysisStatus.ReadGroupLevel
                         Select Case c
@@ -140,10 +145,6 @@
                                 Dim Node As New _FormMain.GroupTreeNode("Root", 0)
                                 Me.Nodes.Add(Node)
                                 LastTreeViewNodeList.Add(Node)
-                                GroupType = ""
-                                GroupLevel = ""
-                                GroupTitle = ""
-                                GroupHierarchicalContext = ""
                                 AnalysisStatus = GroupAnalysisStatus.Idle
                             Case Else
                                 MsgBox(GroupAnalysisError.ReadRootNode)
@@ -201,6 +202,10 @@
 
                                     CType(LastTreeViewNodeList.Item(Val(GroupLevel) - 1), _FormMain.GroupTreeNode).Nodes.Add(Node)
 
+                                    GroupHierarchicalContext = ""
+                                    GroupLevel = ""
+                                    GroupTitle = ""
+                                    GroupType = ""
                                     AnalysisStatus = GroupAnalysisStatus.EndGroupProperty
                                 Else
                                     MsgBox(GroupAnalysisError.ReadHierarchicalContext)
@@ -219,22 +224,73 @@
                     Case GroupAnalysisStatus.EndGroupProperty
                         Select Case c
                             Case " "
+                                ' Do nothing
                             Case vbCr
+                                ' Do nothing
                             Case Chr(10)
+                                ' Do nothing
                             Case ":"
+                                MsgBox(GroupAnalysisError.EndGroupProperty)
+                                Exit Sub
                             Case "\"
+                                MsgBox(GroupAnalysisError.EndGroupProperty)
+                                Exit Sub
                             Case ";"
+                                GroupType = ""
+                                GroupLevel = ""
+                                GroupTitle = ""
+                                GroupHierarchicalContext = ""
+                                AnalysisStatus = GroupAnalysisStatus.ReadGroupLevel
                             Case Else
+                                AnalysisStatus = GroupAnalysisStatus.ReadBibTeXKey
+                                BibTeXKey &= c
                         End Select
                     Case GroupAnalysisStatus.ReadBibTeXKey
                         Select Case c
                             Case " "
+                                MsgBox(GroupAnalysisError.ReadBibTeXKey)
+                                Exit Sub
                             Case vbCr
+                                MsgBox(GroupAnalysisError.ReadBibTeXKey)
+                                Exit Sub
                             Case Chr(10)
-                            Case ":"
+                                MsgBox(GroupAnalysisError.ReadBibTeXKey)
+                                Exit Sub
                             Case "\"
+                                If Not NextIsSemicolon(GroupBuffer, Index) Then
+                                    MsgBox(GroupAnalysisError.ReadBibTeXKey)
+                                    Exit Sub
+                                End If
+
+                                Index += 1
+                                CType(LastTreeViewNodeList.Item(Val(GroupLevel)), _FormMain.GroupTreeNode).BibTeXKeyList.Add(BibTeXKey)
+                                BibTeXKey = ""
+                                AnalysisStatus = GroupAnalysisStatus.EndBibTeXKey
                             Case ";"
+                                MsgBox(GroupAnalysisError.ReadBibTeXKey)
+                                Exit Sub
                             Case Else
+                                BibTeXKey &= c
+                        End Select
+                    Case GroupAnalysisStatus.EndBibTeXKey
+                        Select Case c
+                            Case " "
+                                ' Don othing
+                            Case vbCr
+                                ' Don othing
+                            Case Chr(10)
+                                ' Don othing
+                            Case ":"
+                                MsgBox(GroupAnalysisError.EndBibTeXKey)
+                                Exit Sub
+                            Case "\"
+                                MsgBox(GroupAnalysisError.EndBibTeXKey)
+                                Exit Sub
+                            Case ";"
+                                AnalysisStatus = GroupAnalysisStatus.Idle
+                            Case Else
+                                BibTeXKey &= c
+                                AnalysisStatus = GroupAnalysisStatus.ReadBibTeXKey
                         End Select
                 End Select
 
@@ -246,12 +302,20 @@
                 Return False
             End If
 
-            If GroupBuffer(Index + 1) = ";" Then
-                Return True
-            Else
-                Return False
-            End If
+            For i As Integer = Index + 1 To GroupBuffer.Length - 1
+                Select Case GroupBuffer(i)
+                    Case vbCr
+                        ' Do nothing
+                    Case Chr(10)
+                        ' Do nothing
+                    Case ";"
+                        Return True
+                    Case Else
+                        Return False
+                End Select
+            Next
 
+            Return False
         End Function
 
     End Class
@@ -271,6 +335,7 @@
         EndGroupProperty
         ReadRootNode
         ReadBibTeXKey
+        EndBibTeXKey
     End Enum
 
     Public Module GroupAnalysisError
@@ -282,6 +347,7 @@
         Public Const EndGroupProperty As String = "End group property error."
         Public Const ReadRootNode As String = "Read root node error."
         Public Const ReadBibTeXKey As String = "Read BibTeXKey error."
+        Public Const EndBibTeXKey As String = "End BibTeXKey error."
     End Module
 
     Public Class GroupTreeNode
