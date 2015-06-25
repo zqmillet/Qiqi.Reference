@@ -137,7 +137,7 @@
                                     Exit Sub
                                 End If
 
-                                Dim Node As New _FormMain.GroupTreeNode(GroupTitle, 0)
+                                Dim Node As New _FormMain.GroupTreeNode("Root", 0)
                                 Me.Nodes.Add(Node)
                                 LastTreeViewNodeList.Add(Node)
                                 GroupType = ""
@@ -187,6 +187,19 @@
                             Case "\"
                                 If NextIsSemicolon(GroupBuffer, Index) Then
                                     Index += 1
+                                    Dim Node As New _FormMain.GroupTreeNode(GroupTitle, GroupHierarchicalContext)
+                                    If Val(GroupLevel) <= 0 Then
+                                        MsgBox(GroupAnalysisError.ReadHierarchicalContext)
+                                        Exit Sub
+                                    End If
+
+                                    If Val(GroupLevel) > LastTreeViewNodeList.Count - 1 Then
+                                        LastTreeViewNodeList.Add(Node)
+                                    Else
+                                        LastTreeViewNodeList.Item(Val(GroupLevel)) = Node
+                                    End If
+
+                                    CType(LastTreeViewNodeList.Item(Val(GroupLevel) - 1), _FormMain.GroupTreeNode).Nodes.Add(Node)
 
                                     AnalysisStatus = GroupAnalysisStatus.EndGroupProperty
                                 Else
@@ -202,6 +215,16 @@
                                     MsgBox(GroupAnalysisError.ReadHierarchicalContext)
                                     Exit Sub
                                 End If
+                        End Select
+                    Case GroupAnalysisStatus.EndGroupProperty
+                        Select Case c
+                            Case " "
+                            Case vbCr
+                            Case Chr(10)
+                            Case ":"
+                            Case "\"
+                            Case ";"
+                            Case Else
                         End Select
                     Case GroupAnalysisStatus.ReadBibTeXKey
                         Select Case c
