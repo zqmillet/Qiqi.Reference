@@ -7,6 +7,7 @@
 
         Public Sub New()
             Me.ShowRootLines = False
+            Me.ItemHeight = 18
         End Sub
 
         Public Sub Loading(ByVal DataBase As _BibTeX.DataBase)
@@ -164,7 +165,6 @@
                                 GroupTitle &= c
                             Case "\"
                                 If NextIsSemicolon(GroupBuffer, Index) Then
-                                    Index += 1
                                     AnalysisStatus = GroupAnalysisStatus.ReadHierarchicalContext
                                 Else
                                     GroupTitle &= c
@@ -187,7 +187,6 @@
                                 Exit Sub
                             Case "\"
                                 If NextIsSemicolon(GroupBuffer, Index) Then
-                                    Index += 1
                                     Dim Node As New _FormMain.GroupTreeNode(GroupTitle, GroupHierarchicalContext)
                                     If Val(GroupLevel) <= 0 Then
                                         MsgBox(GroupAnalysisError.ReadHierarchicalContext)
@@ -262,7 +261,6 @@
                                     Exit Sub
                                 End If
 
-                                Index += 1
                                 CType(LastTreeViewNodeList.Item(Val(GroupLevel)), _FormMain.GroupTreeNode).BibTeXKeyList.Add(BibTeXKey)
                                 BibTeXKey = ""
                                 AnalysisStatus = GroupAnalysisStatus.EndBibTeXKey
@@ -293,11 +291,10 @@
                                 AnalysisStatus = GroupAnalysisStatus.ReadBibTeXKey
                         End Select
                 End Select
-
             Next
         End Sub
 
-        Private Function NextIsSemicolon(ByVal GroupBuffer As String, ByVal Index As Integer) As Boolean
+        Private Function NextIsSemicolon(ByVal GroupBuffer As String, ByRef Index As Integer) As Boolean
             If Index = GroupBuffer.Length - 1 Then
                 Return False
             End If
@@ -309,6 +306,7 @@
                     Case Chr(10)
                         ' Do nothing
                     Case ";"
+                        Index = i
                         Return True
                     Case Else
                         Return False
