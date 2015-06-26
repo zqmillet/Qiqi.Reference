@@ -140,11 +140,11 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>GroupTreeWidth</Control>
-    <Parameter>234</Parameter>
+    <Parameter>190</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>DetailTabControlHeight</Control>
-    <Parameter>207</Parameter>
+    <Parameter>249</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>

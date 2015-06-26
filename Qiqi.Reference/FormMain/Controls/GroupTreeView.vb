@@ -18,7 +18,6 @@
                     Else
                         ShowGroupVersion3(DataBase.GroupBuffer)
                     End If
-
                 Case Else
 
             End Select
@@ -33,6 +32,7 @@
             Dim GroupHierarchicalContext As String = ""
             Dim BibTeXKey As String = ""
 
+            Dim CurrentLevel As Integer = 0
             Dim LastTreeViewNodeList As New ArrayList
 
             For Index As Integer = 0 To GroupBuffer.Length - 1
@@ -200,7 +200,7 @@
                                     End If
 
                                     CType(LastTreeViewNodeList.Item(Val(GroupLevel) - 1), _FormMain.GroupTreeNode).Nodes.Add(Node)
-
+                                    CurrentLevel = Val(GroupLevel)
                                     GroupHierarchicalContext = ""
                                     GroupLevel = ""
                                     GroupTitle = ""
@@ -235,10 +235,10 @@
                                 MsgBox(GroupAnalysisError.EndGroupProperty)
                                 Exit Sub
                             Case ";"
-                                GroupType = ""
-                                GroupLevel = ""
-                                GroupTitle = ""
-                                GroupHierarchicalContext = ""
+                                'GroupType = ""
+                                'GroupLevel = ""
+                                'GroupTitle = ""
+                                'GroupHierarchicalContext = ""
                                 AnalysisStatus = GroupAnalysisStatus.ReadGroupLevel
                             Case Else
                                 AnalysisStatus = GroupAnalysisStatus.ReadBibTeXKey
@@ -261,7 +261,7 @@
                                     Exit Sub
                                 End If
 
-                                CType(LastTreeViewNodeList.Item(Val(GroupLevel)), _FormMain.GroupTreeNode).BibTeXKeyList.Add(BibTeXKey)
+                                CType(LastTreeViewNodeList.Item(CurrentLevel), _FormMain.GroupTreeNode).BibTeXKeyList.Add(BibTeXKey)
                                 BibTeXKey = ""
                                 AnalysisStatus = GroupAnalysisStatus.EndBibTeXKey
                             Case ";"
@@ -361,5 +361,15 @@
                 .HierarchicalContext = HierarchicalContext
             End With
         End Sub
+
+        Public Function ExistBibTeXKey(ByVal BibTeXKey As String) As Boolean
+            For Each Key As String In Me.BibTeXKeyList
+                If BibTeXKey.ToLower.Trim = Key.ToLower.Trim Then
+                    Return True
+                End If
+            Next
+
+            Return False
+        End Function
     End Class
 End Namespace

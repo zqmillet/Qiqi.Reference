@@ -504,5 +504,4 @@
         ViewConfigurationSave()
     End Sub
 
-
 End Class

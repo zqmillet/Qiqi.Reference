@@ -168,7 +168,27 @@
             End With
 
             SplitContainerPrimary.Panel1.Controls.Add(GroupTreeView)
+            AddHandler GroupTreeView.AfterSelect, AddressOf GroupTreeView_AfterSelect
         End Sub
+
+        Private Sub GroupTreeView_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs)
+            If GroupTreeView.SelectedNode Is Nothing Then
+                Exit Sub
+            End If
+
+            If GroupTreeView.SelectedNode.Parent Is Nothing Then
+                For Each Row As DataGridViewRow In DataBaseGridView.Rows
+                    Row.Visible = True
+                Next
+                Exit Sub
+            End If
+
+            For Each Row As DataGridViewRow In DataBaseGridView.Rows
+                Row.Visible = CType(GroupTreeView.SelectedNode, _FormMain.GroupTreeNode).ExistBibTeXKey(CType(Row.Tag, _BibTeX.Literature).ID)
+            Next
+           
+        End Sub
+
 
         Public Function DataBaseLoading(ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
             Loaded = True
