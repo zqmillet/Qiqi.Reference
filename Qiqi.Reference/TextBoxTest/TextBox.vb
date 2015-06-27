@@ -1,6 +1,6 @@
 ﻿Namespace _Test
     Public Class TextBox
-        Inherits System.Windows.Forms.RichTextBox
+        Inherits System.Windows.Forms.TextBox
 
         Public Sub New()
             With Me
@@ -10,6 +10,7 @@
                 .WordWrap = True
                 .BorderStyle = Windows.Forms.BorderStyle.None
                 .ScrollBars = RichTextBoxScrollBars.Vertical
+
             End With
 
             Dim Reader As New IO.StreamReader(Application.StartupPath & "\TestDataBase\SPChar.bib")
