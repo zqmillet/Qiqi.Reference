@@ -9,6 +9,11 @@ Namespace _BibTeX
         Public Const ReadBuffer As String = "Read buffer error."
     End Module
 
+    Public Enum DataBaseType
+        BibTeX
+
+    End Enum
+
     ''' <summary>
     ''' Class DataBase represents a BibTeX database 
     ''' </summary>
@@ -331,5 +336,3 @@ Namespace _BibTeX
         End Function
     End Class
 End Namespace
-
-
