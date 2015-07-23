@@ -78,6 +78,8 @@
   <ItemGroup>
     <Compile Include="BibTeX\ErrorMessage.vb" />
     <Compile Include="Const\TableName.vb" />
+    <Compile Include="DataBase\DataBase.vb" />
+    <Compile Include="DataBase\Literature.vb" />
     <Compile Include="FormConfiguration\CommonClass\Configuration.vb" />
     <Compile Include="FormConfiguration\CommonClass\DisableCheckBoxCell.vb" />
     <Compile Include="FormConfiguration\CommonClass\TextBox.vb">
@@ -169,13 +171,14 @@
     <Compile Include="FormMain\Controls\DataBaseTabPage.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TextBoxTest\FormTest.Designer.vb">
+    <Compile Include="Property.vb" />
+    <Compile Include="Test\FormTest.Designer.vb">
       <DependentUpon>FormTest.vb</DependentUpon>
     </Compile>
-    <Compile Include="TextBoxTest\FormTest.vb">
+    <Compile Include="Test\FormTest.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TextBoxTest\TextBox.vb">
+    <Compile Include="Test\TextBox.vb">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -189,7 +192,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TextBoxTest\FormTest.resx">
+    <EmbeddedResource Include="Test\FormTest.resx">
       <DependentUpon>FormTest.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
