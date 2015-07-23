@@ -79,6 +79,8 @@
     <Compile Include="BibTeX\ErrorMessage.vb" />
     <Compile Include="Const\TableName.vb" />
     <Compile Include="DataBase\DataBase.vb" />
+    <Compile Include="DataBase\CompileResult.vb" />
+    <Compile Include="DataBase\Group.vb" />
     <Compile Include="DataBase\Literature.vb" />
     <Compile Include="FormConfiguration\CommonClass\Configuration.vb" />
     <Compile Include="FormConfiguration\CommonClass\DisableCheckBoxCell.vb" />
@@ -171,7 +173,7 @@
     <Compile Include="FormMain\Controls\DataBaseTabPage.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Property.vb" />
+    <Compile Include="DataBase\Information.vb" />
     <Compile Include="Test\FormTest.Designer.vb">
       <DependentUpon>FormTest.vb</DependentUpon>
     </Compile>

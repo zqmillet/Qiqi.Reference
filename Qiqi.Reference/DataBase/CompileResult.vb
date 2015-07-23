@@ -1,17 +1,15 @@
 ﻿Namespace Qiqi
-    Public Class ErrorMessage
+    Public Class CompileResult
         Public LineNumber As Integer
-        Private Message As String
+        Private ErrorMessage As String
         Private ExistError As Boolean
 
         Public Sub New()
             With Me
                 .ExistError = False
                 .LineNumber = 0
-                .Message = ""
+                .ErrorMessage = ""
             End With
         End Sub
     End Class
 End Namespace
-
-
