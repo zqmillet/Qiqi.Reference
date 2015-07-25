@@ -33,12 +33,23 @@
         End Sub
 
         Public Sub Load()
-            GetDataBaseType()
+            Select Case GetDataBaseType()
+                Case Qiqi.DataBaseType.BibTeX
+                    Qiqi.Compiler.BibTeX.Compile(Me)
+                Case Qiqi.DataBaseType.ErrorType
+                    Exit Sub
+                Case Qiqi.DataBaseType.Unknown
+
+                Case Else
+                    Exit Sub
+            End Select
         End Sub
 
 
         ''' <summary>
-        ''' 
+        ''' This function can get the type of the database according to the extension.
+        ''' If the FullFileName is not currect, the type is ErrorType
+        ''' If the FullFileName has no extension, the type is Unknown
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>

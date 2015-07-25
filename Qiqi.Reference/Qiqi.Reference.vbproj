@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="BibTeX\ErrorMessage.vb" />
     <Compile Include="Const\TableName.vb" />
+    <Compile Include="DataBase\Compiler\BibTeX.vb" />
     <Compile Include="DataBase\DataBase.vb" />
     <Compile Include="DataBase\CompileResult.vb" />
     <Compile Include="DataBase\Group.vb" />
