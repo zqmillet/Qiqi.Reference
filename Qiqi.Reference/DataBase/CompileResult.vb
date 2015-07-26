@@ -1,8 +1,8 @@
 ﻿Namespace Qiqi
     Public Class CompileResult
         Public LineNumber As Integer
-        Private ErrorMessage As String
-        Private ExistError As Boolean
+        Public ErrorMessage As String
+        Public ExistError As Boolean
 
         Public Sub New()
             With Me
