@@ -36,8 +36,11 @@
                                 Case "@"
                                     AnalysisState = BibTeXAnalysisState.ReadType
                                 Case " "
+                                    ' Do nothing
                                 Case vbCr
+                                    ' Do nothing
                                 Case vbLf
+                                    ' Do nothing
                                 Case Else
                                     Return False
                             End Select
