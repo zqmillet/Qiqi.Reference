@@ -62,6 +62,14 @@ Qiqi.Reference
  </summary>
 	<param name="sender"></param>
 	<remarks></remarks>
+</member><member name="M:Qiqi.Reference.Qiqi.DataBase.GetDataBaseType">
+	<summary>
+ This function can get the type of the database according to the extension.
+ If the FullFileName is not currect, the type is ErrorType
+ If the FullFileName has no extension, the type is Unknown
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(System.String,System.Data.DataTable)">
 	<summary>
  Constructor
