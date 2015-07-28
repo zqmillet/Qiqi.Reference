@@ -1,10 +1,5 @@
 ﻿Namespace Qiqi
     Namespace Compiler
-        Public Module BibTeXError
-            Public Const FileNotExist As String = "The file does not exist."
-
-        End Module
-
         Public Enum BibTeXAnalysisState
             Idle
             ReadType
@@ -14,15 +9,16 @@
         End Enum
 
         Public Module BibTeXErrorMessage
-            Public Const 
+            Public Const FileNotExist As String = "File do not Exist!"
+            Public Const SyntaxError As String = "Syntax Error!"
 
         End Module
 
         Public Class BibTeX
-            Public Shared Function Compile(ByRef DataBase As Qiqi.DataBase) As Boolean
+            Public Shared Sub Compile(ByRef DataBase As Qiqi.DataBase)
                 If Not My.Computer.FileSystem.FileExists(DataBase.FullFileName) Then
-                    DataBase.CompileResult.ErrorMessage = Qiqi.Compiler.BibTeXError.FileNotExist
-                    Return False
+                    DataBase.SetErrorMessage(BibTeXErrorMessage.FileNotExist)
+                    Exit Sub
                 End If
 
                 Dim Reader As New IO.StreamReader(DataBase.FullFileName, System.Text.Encoding.Default)
@@ -30,9 +26,15 @@
                 Dim AnalysisState As Qiqi.Compiler.BibTeXAnalysisState = Qiqi.Compiler.BibTeXAnalysisState.Idle
 
 
+                DataBase.CompileResult.LineNumber = 1
 
                 For Index As Integer = 0 To DataBaseBuffer.Length - 1
                     Dim c As Char = DataBaseBuffer(Index)
+
+                    If c = vbCr Then
+                        DataBase.CompileResult.LineNumber += 1
+                    End If
+
                     Select Case AnalysisState
                         Case BibTeXAnalysisState.Idle
                             Select Case c
@@ -47,17 +49,23 @@
                                 Case vbLf
                                     ' Do nothing
                                 Case Else
-
-                                    Return False
+                                    DataBase.SetErrorMessage(BibTeXErrorMessage.SyntaxError)
+                                    Exit Sub
                             End Select
                         Case BibTeXAnalysisState.ReadType
+                            Select Case c
+                                Case "%"
+                                Case "@"
+
+
+                            End Select
                         Case BibTeXAnalysisState.ReadBibTeXKey
                         Case BibTeXAnalysisState.ReadBuffer
                         Case BibTeXAnalysisState.ReadComment
                     End Select
                 Next
                 Reader.Close()
-            End Function
+            End Sub
         End Class
     End Namespace
 End Namespace

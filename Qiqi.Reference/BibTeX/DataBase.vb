@@ -48,6 +48,8 @@ Namespace _BibTeX
             End With
         End Sub
 
+
+
         ''' <summary>
         ''' Read the BibTeX File, load the information into the paper list
         ''' </summary>

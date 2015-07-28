@@ -23,6 +23,23 @@
             End With
         End Sub
 
+        Public Sub SetErrorMessage(ByVal ErrorMessage As String)
+            With Me.CompileResult
+                .ErrorMessage = ErrorMessage
+                .ExistError = True
+            End With
+
+            ' Debug
+            MsgBox("Error Message = " & Me.CompileResult.ErrorMessage & vbCrLf & "Line Number = " & Me.CompileResult.LineNumber)
+        End Sub
+
+        Public Sub ClearErrorMessage()
+            With Me.CompileResult
+                .ErrorMessage = ""
+                .ExistError = False
+            End With
+        End Sub
+
         Public Sub New(ByVal FullFileName As String)
             With Me
                 .LiteratureList = New ArrayList
