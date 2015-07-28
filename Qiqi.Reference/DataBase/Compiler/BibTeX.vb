@@ -62,11 +62,7 @@
                                     LiteratureType = ""
 
                                     AnalysisState = BibTeXAnalysisState.ReadType
-                                Case " "
-                                    ' Do nothing
-                                Case vbCr
-                                    ' Do nothing
-                                Case vbLf
+                                Case " ", vbCr, vbLf
                                     ' Do nothing
                                 Case Else
                                     DataBase.SetErrorMessage(BibTeXErrorMessage.IdleSyntaxError)
@@ -77,22 +73,7 @@
                             ' % @ { } vbCr vbLf ,
                             ' If c = "{", it means that the type has been read.
                             Select Case c
-                                Case "%"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.TypeSyntaxError)
-                                    Exit Sub
-                                Case "@"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.TypeSyntaxError)
-                                    Exit Sub
-                                Case ","
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.TypeSyntaxError)
-                                    Exit Sub
-                                Case "}"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.TypeSyntaxError)
-                                    Exit Sub
-                                Case vbCr
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.TypeSyntaxError)
-                                    Exit Sub
-                                Case vbLf
+                                Case "%", "@", ",", "}", vbCr, vbLf
                                     DataBase.SetErrorMessage(BibTeXErrorMessage.TypeSyntaxError)
                                     Exit Sub
                                 Case "{"
@@ -106,22 +87,7 @@
                             ' % @ { } vbCr vbLf ,
                             ' If c = ",", it means that the type has been read.
                             Select Case c
-                                Case "%"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.BibTeXKeySyntaxError)
-                                    Exit Sub
-                                Case "@"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.BibTeXKeySyntaxError)
-                                    Exit Sub
-                                Case "{"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.BibTeXKeySyntaxError)
-                                    Exit Sub
-                                Case "}"
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.BibTeXKeySyntaxError)
-                                    Exit Sub
-                                Case vbCr
-                                    DataBase.SetErrorMessage(BibTeXErrorMessage.BibTeXKeySyntaxError)
-                                    Exit Sub
-                                Case vbLf
+                                Case "%", "@", "{", "}", vbCr, vbLf
                                     DataBase.SetErrorMessage(BibTeXErrorMessage.BibTeXKeySyntaxError)
                                     Exit Sub
                                 Case ","
