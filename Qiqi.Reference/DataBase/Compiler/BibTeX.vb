@@ -13,6 +13,11 @@
             ReadComment
         End Enum
 
+        Public Module BibTeXErrorMessage
+            Public Const 
+
+        End Module
+
         Public Class BibTeX
             Public Shared Function Compile(ByRef DataBase As Qiqi.DataBase) As Boolean
                 If Not My.Computer.FileSystem.FileExists(DataBase.FullFileName) Then
@@ -42,6 +47,7 @@
                                 Case vbLf
                                     ' Do nothing
                                 Case Else
+
                                     Return False
                             End Select
                         Case BibTeXAnalysisState.ReadType
