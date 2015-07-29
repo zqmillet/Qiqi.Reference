@@ -108,6 +108,13 @@
                             If BraketNumber = 0 Then
                                 LiteratureBuffer = LiteratureBuffer.Trim
                                 AnalysisState = BibTeXAnalysisState.Idle
+
+                                Dim Literature As New Literature
+                                Literature.ID = LiteratureID
+                                Literature.Type = LiteratureType
+                                Literature.InformationList = GetLiteratureInformation(LiteratureBuffer)
+
+                                DataBase.LiteratureList.Add(Literature)
                             End If
                         Case BibTeXAnalysisState.ReadComment
                             Select Case c
@@ -120,6 +127,12 @@
                 Next
                 Reader.Close()
             End Sub
+
+            Private Shared Function GetLiteratureInformation(ByVal LiteratureBuffer As String) As ArrayList
+                Dim LiteratureInformation As New ArrayList
+
+                Return LiteratureInformation
+            End Function
         End Class
     End Namespace
 End Namespace
