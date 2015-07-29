@@ -6,6 +6,7 @@
             ReadBibTeXKey
             ReadBuffer
             ReadComment
+            ReadAtComment
         End Enum
 
         Public Module BibTeXErrorMessage
@@ -78,7 +79,12 @@
                                     Exit Sub
                                 Case "{"
                                     BraketNumber = 1
-                                    AnalysisState = BibTeXAnalysisState.ReadBibTeXKey
+
+                                    If LiteratureType.Trim.ToLower = "comment" Then
+                                        AnalysisState = BibTeXAnalysisState.ReadAtComment
+                                    Else
+                                        AnalysisState = BibTeXAnalysisState.ReadBibTeXKey
+                                    End If
                                 Case Else
                                     LiteratureType &= c
                             End Select
@@ -99,8 +105,12 @@
                             Select Case c
                                 Case "{"
                                     BraketNumber += 1
+                                    LiteratureBuffer &= c
                                 Case "}"
                                     BraketNumber -= 1
+                                    If Not BraketNumber = 0 Then
+                                        LiteratureBuffer &= c
+                                    End If
                                 Case Else
                                     LiteratureBuffer &= c
                             End Select
@@ -112,9 +122,13 @@
                                 Dim Literature As New Literature
                                 Literature.ID = LiteratureID
                                 Literature.Type = LiteratureType
-                                Literature.InformationList = GetLiteratureInformation(LiteratureBuffer)
+                                Literature.InformationList = GetLiteratureInformation(LiteratureBuffer, DataBase.CompileResult)
 
-                                DataBase.LiteratureList.Add(Literature)
+                                If DataBase.CompileResult.ExistError Then
+                                    Exit Sub
+                                Else
+                                    DataBase.LiteratureList.Add(Literature)
+                                End If
                             End If
                         Case BibTeXAnalysisState.ReadComment
                             Select Case c
@@ -123,12 +137,29 @@
                                 Case Else
                                     ' Do nithing
                             End Select
+                        Case BibTeXAnalysisState.ReadAtComment
+                            Select Case c
+                                Case "{"
+                                    BraketNumber += 1
+                                    LiteratureBuffer &= c
+                                Case "}"
+                                    BraketNumber -= 1
+                                    If Not BraketNumber = 0 Then
+                                        LiteratureBuffer &= c
+                                    End If
+                                Case Else
+                                    LiteratureBuffer &= c
+                            End Select
+
+                            If BraketNumber = 0 Then
+                                AnalysisState = BibTeXAnalysisState.Idle
+                            End If
                     End Select
                 Next
                 Reader.Close()
             End Sub
 
-            Private Shared Function GetLiteratureInformation(ByVal LiteratureBuffer As String) As ArrayList
+            Private Shared Function GetLiteratureInformation(ByVal LiteratureBuffer As String, ByRef CompileResult As Qiqi.CompileResult) As ArrayList
                 Dim LiteratureInformation As New ArrayList
 
                 Return LiteratureInformation
