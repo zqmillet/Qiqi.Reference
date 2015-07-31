@@ -122,9 +122,8 @@
                                 Dim Literature As New Literature
                                 Literature.ID = LiteratureID
                                 Literature.Type = LiteratureType
-                                GetLiteratureInformation(LiteratureBuffer, Literature, DataBase.CompileResult)
-
-
+                                Literature.InformationList = GetLiteratureInformation(LiteratureBuffer, DataBase.CompileResult)
+                                ' GetLiteratureInformation(LiteratureBuffer, Literature, DataBase.CompileResult)
 
                                 If DataBase.CompileResult.ExistError Then
                                     Exit Sub
@@ -162,11 +161,11 @@
             End Sub
 
             Private Shared Function GetLiteratureInformation(ByVal LiteratureBuffer As String, _
-                                                             ByRef Literature As Qiqi.Literature, _
-                                                             ByRef CompileResult As Qiqi.CompileResult) As Boolean
+                                                             ByRef CompileResult As Qiqi.CompileResult) As ArrayList
+                Dim InformationList As New ArrayList
 
 
-                Return True
+                Return InformationList
             End Function
         End Class
     End Namespace
