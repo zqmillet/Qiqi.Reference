@@ -163,6 +163,15 @@
             Private Shared Function GetLiteratureInformation(ByVal LiteratureBuffer As String, _
                                                              ByRef CompileResult As Qiqi.CompileResult) As ArrayList
                 Dim InformationList As New ArrayList
+                Dim AnalysisState As Qiqi.Compiler.BibTeXAnalysisState = Qiqi.Compiler.BibTeXAnalysisState.Idle
+
+                For Index As Integer = 0 To LiteratureBuffer.Length - 1
+                    Dim c As Char = LiteratureBuffer(Index)
+                    Select Case AnalysisState
+                        Case BibTeXAnalysisState.Idle
+
+                    End Select
+                Next
 
 
                 Return InformationList
