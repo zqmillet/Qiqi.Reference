@@ -11,5 +11,22 @@
                 .ErrorMessage = ""
             End With
         End Sub
+
+        Public Sub SetErrorMessage(ByVal ErrorMessage As String)
+            With Me
+                .ErrorMessage = ErrorMessage
+                .ExistError = True
+            End With
+
+            ' Debug
+            MsgBox("Error Message = " & Me.ErrorMessage & vbCrLf & "Line Number = " & Me.LineNumber)
+        End Sub
+
+        Public Sub ClearErrorMessage()
+            With Me
+                .ErrorMessage = ""
+                .ExistError = False
+            End With
+        End Sub
     End Class
 End Namespace

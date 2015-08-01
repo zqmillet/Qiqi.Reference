@@ -24,20 +24,11 @@
         End Sub
 
         Public Sub SetErrorMessage(ByVal ErrorMessage As String)
-            With Me.CompileResult
-                .ErrorMessage = ErrorMessage
-                .ExistError = True
-            End With
-
-            ' Debug
-            MsgBox("Error Message = " & Me.CompileResult.ErrorMessage & vbCrLf & "Line Number = " & Me.CompileResult.LineNumber)
+            Me.CompileResult.SetErrorMessage(ErrorMessage)
         End Sub
 
         Public Sub ClearErrorMessage()
-            With Me.CompileResult
-                .ErrorMessage = ""
-                .ExistError = False
-            End With
+            Me.CompileResult.ClearErrorMessage()
         End Sub
 
         Public Sub New(ByVal FullFileName As String)
