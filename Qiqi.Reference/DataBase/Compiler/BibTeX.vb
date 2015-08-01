@@ -7,6 +7,9 @@
             ReadBuffer
             ReadComment
             ReadAtComment
+
+            ReadPropertyName
+            ReadPropertyValue
         End Enum
 
         Public Module BibTeXErrorMessage
@@ -15,6 +18,7 @@
             Public Const TypeSyntaxError As String = "Type Syntax Error!"
             Public Const BibTeXKeySyntaxError As String = "BibTeXKey Syntax Error!"
 
+            Public Const PropertyNameSyntaxError As String = "Property Name Syntax Error!"
         End Module
 
         Public Class BibTeX
@@ -165,11 +169,30 @@
                 Dim InformationList As New ArrayList
                 Dim AnalysisState As Qiqi.Compiler.BibTeXAnalysisState = Qiqi.Compiler.BibTeXAnalysisState.Idle
 
+                Dim PropertyName As String = ""
+                Dim PropertyValue As String = ""
+
                 For Index As Integer = 0 To LiteratureBuffer.Length - 1
                     Dim c As Char = LiteratureBuffer(Index)
                     Select Case AnalysisState
                         Case BibTeXAnalysisState.Idle
+                            Select Case c
+                                Case " ", vbCr, vbLf
+                                    ' Do nothing
+                                Case "%", "{", "}", "?", ";", "(", ")", "[", "]", "-", "=", "+", ",", ".", "<", ">", "@", "!", "#"
+                                    ' If there is illegal character, exit sub
+                                    CompileResult.SetErrorMessage(BibTeXErrorMessage.PropertyNameSyntaxError)
+                                    Return InformationList
+                                Case Else
+                                    ' Begin to read the property name
+                                    PropertyName = c
+                                    AnalysisState = BibTeXAnalysisState.ReadPropertyName
+                            End Select
+                        Case BibTeXAnalysisState.ReadPropertyName
+                            Select Case c
 
+                            End Select
+                        Case BibTeXAnalysisState.ReadPropertyValue
                     End Select
                 Next
 
