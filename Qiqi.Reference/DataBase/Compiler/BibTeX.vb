@@ -190,7 +190,10 @@
                             End Select
                         Case BibTeXAnalysisState.ReadPropertyName
                             Select Case c
-
+                                Case "="
+                                    AnalysisState = BibTeXAnalysisState.ReadPropertyValue
+                                Case Else
+                                    PropertyName &= c
                             End Select
                         Case BibTeXAnalysisState.ReadPropertyValue
                     End Select
