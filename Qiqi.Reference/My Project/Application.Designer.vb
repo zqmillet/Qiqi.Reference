@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Qiqi.Reference.FormTest
+            Me.MainForm = Global.Qiqi.Reference.FormMain
         End Sub
     End Class
 End Namespace

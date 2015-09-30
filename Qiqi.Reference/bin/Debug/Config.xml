@@ -4,21 +4,6 @@
     <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="CurrentOpenFileList">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="FileName" type="xs:string" minOccurs="0" />
-                <xs:element name="Selected" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="OpenFileHistoryList">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="DataBaseGridViewColunmConfiguration">
             <xs:complexType>
               <xs:sequence>
@@ -44,17 +29,25 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
+          <xs:element name="CurrentOpenFileList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileName" type="xs:string" minOccurs="0" />
+                <xs:element name="Selected" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="OpenFileHistoryList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
         </xs:choice>
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <CurrentOpenFileList>
-    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileName>
-    <Selected>True</Selected>
-  </CurrentOpenFileList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
-  </OpenFileHistoryList>
   <DataBaseGridViewColunmConfiguration>
     <Display>True</Display>
     <Property_x0020_Name>EntryType</Property_x0020_Name>
@@ -165,4 +158,14 @@
     <Control>FormMainWindowState</Control>
     <Parameter>2</Parameter>
   </FormMainViewConfiguration>
+  <CurrentOpenFileList>
+    <FileName>D:\iDocument\Document\My Paper\1st\Revise&amp;Resubmit\LaTeX\References.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
+  </OpenFileHistoryList>
 </NewDataSet>
