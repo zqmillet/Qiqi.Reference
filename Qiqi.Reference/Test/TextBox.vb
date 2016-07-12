@@ -1,6 +1,6 @@
 ﻿Namespace _Test
-    Public Class TextBox
-        Inherits System.Windows.Forms.TextBox
+    Public Class QiqiTextBox
+        Inherits System.Windows.Forms.RichTextBox
 
         Public Sub New()
             With Me
@@ -15,6 +15,7 @@
 
             Dim Reader As New IO.StreamReader(Application.StartupPath & "\TestDataBase\SPChar.bib")
             Me.Text = Reader.ReadToEnd
+            Me.Font = New Font("Consolas", 10)
             Reader.Close()
         End Sub
 
