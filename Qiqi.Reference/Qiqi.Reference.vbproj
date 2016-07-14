@@ -56,10 +56,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SyntaxHighlighter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\SyntaxHighlighter.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -109,6 +105,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormMain\Controls\GroupTreeView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain\Controls\LiteratureTabControl\Class1.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormMain\Controls\LiteratureTabControl\MultiLineTextBox.vb">
