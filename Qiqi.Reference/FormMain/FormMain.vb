@@ -253,6 +253,8 @@
         If FormConfiguration.ShowDialog() = Windows.Forms.DialogResult.OK Then
             Configuration.Reload()
             DataBaseTabPagesRefresh()
+        Else
+            Configuration.Load(FormConfiguration.BackupConfigurationPath)
         End If
 
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages

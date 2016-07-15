@@ -9,6 +9,8 @@
     Dim ButtonOK As Button
     Dim ButtonCancel As Button
 
+    Public BackupConfigurationPath As String
+
     Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
 
         ' Initialize component
@@ -22,6 +24,7 @@
             .FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle
             .Icon = Resource.Icon.FormConfiguration
             .Text = "Preferences"
+            .BackupConfigurationPath = Application.StartupPath & "\Config.bkp"
         End With
 
         ' Initialize tree view
@@ -29,6 +32,14 @@
 
         ' Initialize buttons
         InitializeButton()
+
+        ' Backup the configuration
+        BackupConfiguration()
+    End Sub
+
+    Private Sub BackupConfiguration()
+        Dim Configuration As _FormConfiguration.Configuration = Me.Configuration
+        Configuration.SaveAs(BackupConfigurationPath)
     End Sub
 
     Private Sub InitializeButton()

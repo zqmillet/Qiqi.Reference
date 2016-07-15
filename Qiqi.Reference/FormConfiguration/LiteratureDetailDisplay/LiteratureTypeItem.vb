@@ -15,7 +15,7 @@
             Dim ButtonDelete As ToolStripButton
             Dim ButtonMoveUp As ToolStripButton
             Dim ButtonMoveDown As ToolStripButton
-            Dim ButtonSave As ToolStripButton
+            'Dim ButtonSave As ToolStripButton
             Dim ComboBoxInherit As ToolStripComboBox
 
             Dim InheritList As ArrayList
@@ -42,10 +42,10 @@
                     .InheritList = InheritList
                 End With
 
-                ReInitializeTabPageItems()
+                ReInitializeTabPageItems(ComboBoxInherit.Text)
             End Sub
 
-            Public Sub ReInitializeTabPageItems()
+            Public Sub ReInitializeTabPageItems(ByVal ComboBoxText As String)
                 If Not ComboBoxInherit Is Nothing Then
                     ComboBoxInherit.Items.Clear()
                     For Each LiteratureBuffer As String In InheritList
@@ -55,6 +55,10 @@
                         End If
                     Next
                 End If
+
+                RemoveHandler ComboBoxInherit.SelectedIndexChanged, AddressOf ComboBoxInherit_SelectedIndexChanged
+                ComboBoxInherit.Text = ComboBoxText
+                AddHandler ComboBoxInherit.SelectedIndexChanged, AddressOf ComboBoxInherit_SelectedIndexChanged
 
                 With FlowLayoutPanel
                     .Controls.Clear()
@@ -172,20 +176,23 @@
                         TabPageItemCount += 1
                     End If
                 Next
+
                 If TabPageItemCount = 0 Then
-                    ButtonSave.Enabled = False
+                    ' ButtonSave.Enabled = False
                     Exit Sub
                 End If
 
-                ButtonSave.Enabled = True
+                ' ButtonSave.Enabled = True
                 For Each Control As Object In FlowLayoutPanel.Controls
                     If TypeOf (Control) Is _FormConfiguration.LiteratureDetailDisplay.TabPageItem Then
                         If Not CType(Control, _FormConfiguration.LiteratureDetailDisplay.TabPageItem).Completed Then
-                            ButtonSave.Enabled = False
+                            ' ButtonSave.Enabled = False
                             Exit Sub
                         End If
                     End If
                 Next
+
+                RaiseEvent SaveCode(GenerateCode)
             End Sub
 
             Private Sub FlowLayoutPanel_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -266,23 +273,23 @@
                 ToolStrip.Items.Add(New ToolStripSeparator)
 
                 ' Add "Save" Button
-                ButtonSave = New ToolStripButton
-                With ButtonSave
-                    .Name = "ButtonSave"
-                    .ToolTipText = "Save"
-                    .Image = Resource.Icon.ToolStripButtonSave
-                    .Visible = True
-                    .Enabled = False
-                    AddHandler .Click, AddressOf ToolStripButton_Click
-                End With
-                ToolStrip.Items.Add(ButtonSave)
-                ToolStrip.Items.Add(New ToolStripSeparator)
+                'ButtonSave = New ToolStripButton
+                'With ButtonSave
+                '    .Name = "ButtonSave"
+                '    .ToolTipText = "Save"
+                '    .Image = Resource.Icon.ToolStripButtonSave
+                '    .Visible = True
+                '    .Enabled = False
+                '    AddHandler .Click, AddressOf ToolStripButton_Click
+                'End With
+                'ToolStrip.Items.Add(ButtonSave)
+                'ToolStrip.Items.Add(New ToolStripSeparator)
 
                 ToolStrip.Items.Add(New ToolStripLabel("Inherit"))
                 ComboBoxInherit = New ToolStripComboBox
                 With ComboBoxInherit
                     .Name = "ComboBoxInherit"
-                    .Size = New Size(105, 14)
+                    .Size = New Size(150, 14)
                     .FlatStyle = FlatStyle.Standard
                     .DropDownStyle = ComboBoxStyle.DropDownList
 
@@ -305,8 +312,8 @@
                         Dim LiteratureDisplayConfiguration As New _FormConfiguration.LiteratureDetailDisplay.Configuration(Buffer)
                         If .Text = LiteratureDisplayConfiguration.LiteratureType Then
                             Me.Configuration = LiteratureDisplayConfiguration
-                            ReInitializeTabPageItems()
-
+                            ReInitializeTabPageItems(ComboBoxInherit.Text)
+                            RaiseEvent SaveCode(GenerateCode)
                             Exit Sub
                         End If
                     Next
@@ -324,8 +331,8 @@
                         ButtonMoveUp_Click()
                     Case "ButtonMoveDown"
                         ButtonMoveDown_Click()
-                    Case "ButtonSave"
-                        ButtonSave_Click()
+                        'Case "ButtonSave"
+                        '    ButtonSave_Click()
                 End Select
             End Sub
 
@@ -377,12 +384,14 @@
                         FlowLayoutPanel.Controls.Remove(Control)
                     Next
                     ButtonDelete.Enabled = False
-                    ButtonSave.Enabled = False
+                    ' ButtonSave.Enabled = False
                     ButtonMoveDown.Enabled = False
                     ButtonMoveUp.Enabled = False
                     TabPageItem_CheckedChanged()
                     TabPageItem_ContentChanged(Nothing)
                 End If
+
+                RaiseEvent SaveCode(GenerateCode)
             End Sub
 
             Private Sub ButtonMoveUp_Click()
@@ -403,6 +412,8 @@
                 Next
 
                 TabPageItem_CheckedChanged()
+
+                RaiseEvent SaveCode(GenerateCode)
             End Sub
 
             Private Sub ButtonMoveDown_Click()
@@ -423,11 +434,13 @@
                 Next
 
                 TabPageItem_CheckedChanged()
-            End Sub
 
-            Private Sub ButtonSave_Click()
                 RaiseEvent SaveCode(GenerateCode)
             End Sub
+
+            'Private Sub ButtonSave_Click()
+            '    RaiseEvent SaveCode(GenerateCode)
+            'End Sub
 
             Private Sub TextBoxTabPageLabel_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
                 ButtonNew.Enabled = Not TextBoxTabPageLabel.IsEmpty
