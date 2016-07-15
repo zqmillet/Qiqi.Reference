@@ -71,6 +71,17 @@
                     End With
                     .Columns.Add(IsRequiredColumn)
 
+                    Dim SyntaxHighlightColumn As New DataGridViewCheckBoxColumn
+                    With SyntaxHighlightColumn
+                        .HeaderText = "Syntax Highlight"
+                        .Name = "SyntaxHighLightColumn"
+                        .Width = 110
+                        .Frozen = True
+                        .SortMode = DataGridViewColumnSortMode.NotSortable
+                        .Resizable = False
+                    End With
+                    .Columns.Add(SyntaxHighlightColumn)
+
                     .ColumnHeadersHeight = 25
                     .ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
                     .RowTemplate.Height = 20
@@ -324,8 +335,6 @@
             Private Sub Me_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
                 Me.ClearSelection()
             End Sub
-
-
         End Class
     End Namespace
 End Namespace

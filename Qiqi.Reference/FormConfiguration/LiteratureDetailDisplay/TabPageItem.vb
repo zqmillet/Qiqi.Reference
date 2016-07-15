@@ -61,6 +61,8 @@
                                         .Cells(ColumnHeader.Name).Value = CType(TabPageConfiguration.Properties.Item(Index), PropertyConfiguration).DisplayLabel
                                     Case "IsRequiredColumn".ToLower
                                         .Cells(ColumnHeader.Name).Value = CType(TabPageConfiguration.Properties.Item(Index), PropertyConfiguration).IsRequired
+                                    Case "SyntaxHighlightColumn".ToLower
+                                        .Cells(ColumnHeader.Name).Value = CType(TabPageConfiguration.Properties.Item(Index), PropertyConfiguration).SyntaxHighlight
                                 End Select
                             Next
                         End With
@@ -141,7 +143,8 @@
                     Code &= DataGridView.Rows(i).Cells("DisplayNameColumn").Value & ","
                     Code &= CType(DataGridView.Rows(i).Cells("DisplayLabelColumn"), DataGridViewCheckBoxCell).EditedFormattedValue & ","
                     Code &= DataGridView.Rows(i).Cells("HeightColumn").Value & ","
-                    Code &= CType(DataGridView.Rows(i).Cells("IsRequiredColumn"), DataGridViewCheckBoxCell).EditedFormattedValue
+                    Code &= CType(DataGridView.Rows(i).Cells("IsRequiredColumn"), DataGridViewCheckBoxCell).EditedFormattedValue & ","
+                    Code &= CType(DataGridView.Rows(i).Cells("SyntaxHighlightColumn"), DataGridViewCheckBoxCell).EditedFormattedValue
                     Code &= "},"
                 Next
 

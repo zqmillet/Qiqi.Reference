@@ -94,14 +94,14 @@
     <Compile Include="FormConfiguration\DataBaseColumnDisplay\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\LiteratureDetialDisplay\Configuration.vb" />
-    <Compile Include="FormConfiguration\LiteratureDetialDisplay\DataGridView.vb">
+    <Compile Include="FormConfiguration\LiteratureDetailDisplay\Configuration.vb" />
+    <Compile Include="FormConfiguration\LiteratureDetailDisplay\DataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\LiteratureDetialDisplay\LiteratureTypeItem.vb">
+    <Compile Include="FormConfiguration\LiteratureDetailDisplay\LiteratureTypeItem.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\LiteratureDetialDisplay\MainPanel.vb">
+    <Compile Include="FormConfiguration\LiteratureDetailDisplay\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormMain\Controls\GroupTreeView.vb">
@@ -126,7 +126,7 @@
     <Compile Include="FormMain\Controls\ListView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\LiteratureDetialDisplay\TabPageItem.vb">
+    <Compile Include="FormConfiguration\LiteratureDetailDisplay\TabPageItem.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormMain\Controls\MenuStrip.vb">

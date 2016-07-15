@@ -171,6 +171,8 @@
                                             PropertyConfiguration.DisplayLabel = PropertyValue
                                         Case 2
                                             PropertyConfiguration.Height = Val(PropertyValue)
+                                        Case 3
+                                            PropertyConfiguration.IsRequired = PropertyValue
                                     End Select
                                     Index += 1
                                     PropertyValue = ""
@@ -179,11 +181,7 @@
                                     Return False
                                 Case "}"
                                     ' Add this property
-                                    If PropertyValue.Trim = "" Then
-                                        PropertyConfiguration.IsRequired = False
-                                    Else
-                                        PropertyConfiguration.IsRequired = PropertyValue
-                                    End If
+                                    PropertyConfiguration.SyntaxHighlight = PropertyValue
                                     State = LexicalAnalysisStatus.WaitPropertyComma
                                 Case Else
                                     PropertyValue &= c
@@ -241,6 +239,7 @@
             Public DisplayName As String
             Public DisplayLabel As Boolean
             Public IsRequired As Boolean
+            Public SyntaxHighlight As Boolean
 
             Public Sub New(ByVal PropertyName As String)
                 With Me
@@ -249,6 +248,7 @@
                     .DisplayName = ""
                     .DisplayLabel = False
                     .IsRequired = False
+                    .SyntaxHighlight = False
                 End With
             End Sub
         End Class

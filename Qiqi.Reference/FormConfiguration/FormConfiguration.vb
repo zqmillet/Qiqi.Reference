@@ -16,7 +16,7 @@
 
         With Me
             ' .ControlBox = False
-            .MinimumSize = New Size(775, 500)
+            .MinimumSize = New Size(900, 500)
             .MaximizeBox = False
             .Configuration = Configuration
             .FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle

@@ -4,13 +4,6 @@
     <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="LiteratureDetailDisplayConfiguration">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="LiteratureDisplayBuffer" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="DataBaseGridViewColunmConfiguration">
             <xs:complexType>
               <xs:sequence>
@@ -18,6 +11,13 @@
                 <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
                 <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
                 <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="LiteratureDetailDisplayConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="LiteratureDisplayBuffer" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -48,18 +48,6 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>Default{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
-  </LiteratureDetailDisplayConfiguration>
-  <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>Article{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,False},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
-  </LiteratureDetailDisplayConfiguration>
-  <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>InProceedings{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
-  </LiteratureDetailDisplayConfiguration>
-  <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>Book{Required Fields{Author{Author,True,1,True},Title{Title,True,1,True},Journal{Journal,True,1,True},Year{Year,True,1,True},BibTeXKey{BibTeXKey,False,0,True}},Optional Fields{Volumn{Volumn,True,1,False},Number{Number,True,1,False},Pages{Pages,True,1,False},Month{Month,True,1,False},Note{Note,False,1,False}},General{Crossref{Crossref,True,1,False},Keywords{Keywords,True,1,False},File{File,True,1,False},Doi{Doi,True,1,False},Url{Url,True,1,False},Comment{Comment,True,1,False},Owner{Owner,True,1,False},Timestamp{Timestamp,False,1,False}},Abstract{Abstract{Abstract,True,1,False}},Review{Review{Review,True,1,False}},Source Code{SourceCode{Source Code,False,1,False}}}</LiteratureDisplayBuffer>
-  </LiteratureDetailDisplayConfiguration>
   <DataBaseGridViewColunmConfiguration>
     <Display>True</Display>
     <Property_x0020_Name>EntryType</Property_x0020_Name>
@@ -126,6 +114,18 @@
     <Display_x0020_Name>Abstract</Display_x0020_Name>
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>Default{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,False,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,True,True}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>Article{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,False,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,False,True}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>InProceedings{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,False,True}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
+  <LiteratureDetailDisplayConfiguration>
+    <LiteratureDisplayBuffer>Book{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,False,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,False,True}}}</LiteratureDisplayBuffer>
+  </LiteratureDetailDisplayConfiguration>
   <CurrentOpenFileList>
     <FileName>D:\iCloud\iPaper\特殊字符.bib</FileName>
     <Selected>False</Selected>
@@ -150,22 +150,22 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>GroupTreeWidth</Control>
-    <Parameter>178</Parameter>
+    <Parameter>0</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>DetailTabControlHeight</Control>
-    <Parameter>295</Parameter>
+    <Parameter>0</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>
-    <Parameter>876</Parameter>
+    <Parameter>28</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWidth</Control>
-    <Parameter>1456</Parameter>
+    <Parameter>160</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWindowState</Control>
-    <Parameter>2</Parameter>
+    <Parameter>1</Parameter>
   </FormMainViewConfiguration>
 </NewDataSet>
