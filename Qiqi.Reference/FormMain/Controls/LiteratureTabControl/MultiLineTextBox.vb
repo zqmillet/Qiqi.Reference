@@ -3,10 +3,10 @@
         Public Class MultiLineTextBox
             Inherits System.Windows.Forms.Panel
 
-            Public TextBox As DerivedRichTextBox
+            Public TextBox As _FormMain._LiteratureTabControl.RichTextBox
 
             Public Sub New()
-                TextBox = New DerivedRichTextBox
+                TextBox = New RichTextBox
 
                 With TextBox
                     .Text = ""
@@ -28,7 +28,7 @@
             End Sub
 
             Public Sub New(ByVal Text As String)
-                TextBox = New DerivedRichTextBox
+                TextBox = New RichTextBox
 
                 With TextBox
                     .Text = Text

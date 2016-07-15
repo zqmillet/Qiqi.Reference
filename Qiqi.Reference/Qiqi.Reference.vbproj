@@ -107,7 +107,7 @@
     <Compile Include="FormMain\Controls\GroupTreeView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormMain\Controls\LiteratureTabControl\Class1.vb">
+    <Compile Include="FormMain\Controls\LiteratureTabControl\RichTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormMain\Controls\LiteratureTabControl\MultiLineTextBox.vb">
@@ -127,9 +127,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormConfiguration\LiteratureDetialDisplay\TabPageItem.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FormMain\Controls\LiteratureTabControl\SourceCodeTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormMain\Controls\MenuStrip.vb">

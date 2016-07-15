@@ -165,6 +165,52 @@ Qiqi.Reference
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="T:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.EditMessages">
+ <summary>
+ Messages
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.WndProc(System.Windows.Forms.Message@)">
+ <summary>
+ This function is used to disable the zoom function
+ </summary>
+ <param name="m"></param>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.#ctor">
+ <summary>
+ Construction function
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.#ctor(System.String)">
+ <summary>
+ Construction function with parameter
+ </summary>
+ <param name="Text"></param>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.InitializeStyle">
+ <summary>
+ This sub is used to initialize the style of the RichTextBox
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.SelectText(System.Int32,System.Int32)">
+ <summary>
+ This sub 
+ </summary>
+ <param name="BeginIndex"></param>
+ <param name="EndIndex"></param>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.GetFirstVisibleLine">
+ <summary>
+ This function is used to get the number of the first visible line of the RichTextBox
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.OnTextChanged(System.EventArgs)">
+ <summary>
+ Overrides the event TextChanged
+ </summary>
+ <param name="e"></param>
+</member>
 <member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(System.String,System.Data.DataTable)">
  <summary>
  Constructor

@@ -128,7 +128,7 @@
                 Case "BibTeXKey"
                     Return New _FormMain._LiteratureTabControl.SingleLineTextBox(LiteratureProperty.Value)
                 Case "SourceCode", "Abstract", "Review"
-                    Return New _FormMain._LiteratureTabControl.SourceCodeTextBox(LiteratureProperty.Value)
+                    Return New _FormMain._LiteratureTabControl.MultiLineTextBox(LiteratureProperty.Value)
                 Case Else
                     Return New _FormMain._LiteratureTabControl.MultiLineTextBox(LiteratureProperty.Value)
             End Select
