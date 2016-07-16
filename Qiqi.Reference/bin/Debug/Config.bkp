@@ -4,11 +4,20 @@
     <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="FormMainViewConfiguration">
+          <xs:element name="DataBaseGridViewColunmConfiguration">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="Control" type="xs:string" minOccurs="0" />
-                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
+                <xs:element name="Display" type="xs:string" minOccurs="0" />
+                <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="LiteratureDetailDisplayConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="LiteratureDisplayBuffer" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -27,20 +36,11 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="DataBaseGridViewColunmConfiguration">
+          <xs:element name="FormMainViewConfiguration">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="Display" type="xs:string" minOccurs="0" />
-                <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
-                <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
-                <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="LiteratureDetailDisplayConfiguration">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="LiteratureDisplayBuffer" type="xs:string" minOccurs="0" />
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -48,48 +48,6 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowGroupTreeView</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowStatusStrip</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowToolStrip</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>GroupTreeWidth</Control>
-    <Parameter>178</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>DetailTabControlHeight</Control>
-    <Parameter>295</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainHeight</Control>
-    <Parameter>876</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainWidth</Control>
-    <Parameter>1456</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainWindowState</Control>
-    <Parameter>2</Parameter>
-  </FormMainViewConfiguration>
-  <CurrentOpenFileList>
-    <FileName>D:\iCloud\iPaper\特殊字符.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
-  </OpenFileHistoryList>
   <DataBaseGridViewColunmConfiguration>
     <Display>True</Display>
     <Property_x0020_Name>EntryType</Property_x0020_Name>
@@ -157,15 +115,57 @@
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
   <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>Default{Required Fields{Author{Author,True,1,True,True},Title{Title,True,1,True,False},Journal{Journal,True,1,True,True},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,True,0,True,False},5{234,True,234,False,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,False,True}},24323{234{234,True,234,False,False},234{234,True,324,False,False},324{324,True,4,False,False}}}</LiteratureDisplayBuffer>
+    <LiteratureDisplayBuffer>Default{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,True,0,False,True}}}</LiteratureDisplayBuffer>
   </LiteratureDetailDisplayConfiguration>
   <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>Article{Required Fields{Author{Author,True,1,True,True},Title{Title,True,1,True,False},Journal{Journal,True,1,True,True},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,False,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,False,True}}}</LiteratureDisplayBuffer>
+    <LiteratureDisplayBuffer>Article{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,True,1,False,True}}}</LiteratureDisplayBuffer>
   </LiteratureDetailDisplayConfiguration>
   <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>InProceedings{Required Fields{Author{Author,True,1,True,True},Title{Title,True,1,True,False},Journal{Journal,True,1,True,True},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,False,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,False,True}}}</LiteratureDisplayBuffer>
+    <LiteratureDisplayBuffer>InProceedings{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,True,1,False,True}}}</LiteratureDisplayBuffer>
   </LiteratureDetailDisplayConfiguration>
   <LiteratureDetailDisplayConfiguration>
-    <LiteratureDisplayBuffer>Book{Required Fields{Author{Author,True,1,True,True},Title{Title,True,1,True,True},Journal{Journal,True,1,True,True},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,False,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,1,True,True}}}</LiteratureDisplayBuffer>
+    <LiteratureDisplayBuffer>Book{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,1,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Optional Fields{Volumn{Volumn,True,1,False,False},Number{Number,True,1,False,False},Pages{Pages,True,1,False,False},Month{Month,True,1,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,1,False,False},Url{Url,True,1,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,1,False,False},Timestamp{Timestamp,False,1,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,True,1,False,True}}}</LiteratureDisplayBuffer>
   </LiteratureDetailDisplayConfiguration>
+  <CurrentOpenFileList>
+    <FileName>D:\iCloud\iPaper\特殊字符.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
+  </OpenFileHistoryList>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowGroupTreeView</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowStatusStrip</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowToolStrip</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>GroupTreeWidth</Control>
+    <Parameter>178</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>DetailTabControlHeight</Control>
+    <Parameter>295</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainHeight</Control>
+    <Parameter>876</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainWidth</Control>
+    <Parameter>1456</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainWindowState</Control>
+    <Parameter>2</Parameter>
+  </FormMainViewConfiguration>
 </NewDataSet>

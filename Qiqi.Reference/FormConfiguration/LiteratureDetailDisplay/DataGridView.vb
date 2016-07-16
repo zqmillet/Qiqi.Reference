@@ -252,7 +252,7 @@
                 Completed = True
                 For i As Integer = 0 To Me.Rows.Count - 2
                     ExistErrorInRow = False
-                    For j As Integer = 0 To Me.Rows(i).Cells.Count - 3
+                    For j As Integer = 0 To Me.Rows(i).Cells.Count - 4
                         If Me.Rows(i).Cells(j).Value Is Nothing Then
                             ExistErrorInRow = True
                             Me.Rows(i).DefaultCellStyle.BackColor = Color.Yellow

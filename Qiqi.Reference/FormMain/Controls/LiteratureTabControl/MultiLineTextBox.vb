@@ -1,9 +1,26 @@
-﻿Namespace _FormMain
+﻿Imports System.ComponentModel
+
+Namespace _FormMain
     Namespace _LiteratureTabControl
         Public Class MultiLineTextBox
             Inherits System.Windows.Forms.Panel
+            Implements INotifyPropertyChanged
 
             Public TextBox As _FormMain._LiteratureTabControl.RichTextBox
+            ' Private SyntaxHighlightValue As Boolean = False
+
+            Public Event PropertyChanged As PropertyChangedEventHandler _
+                Implements INotifyPropertyChanged.PropertyChanged
+
+            Public Property SyntaxHighlight() As String
+                Get
+                    Return Me.TextBox.SyntaxHighLight
+                End Get
+
+                Set(ByVal Value As String)
+                    Me.TextBox.SyntaxHighLight = Value
+                End Set
+            End Property
 
             Public Sub New()
                 TextBox = New RichTextBox

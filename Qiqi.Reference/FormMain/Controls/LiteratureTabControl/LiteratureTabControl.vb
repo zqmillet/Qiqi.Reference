@@ -80,7 +80,8 @@
                             End With
 
                             .Controls.Add(Label, 0, Index)
-                            .Controls.Add(GenerateControl(Literature.GetProperty(PropertyConfiguration.PropertyName)), 1, Index)
+                            ' .Controls.Add(GenerateControl(Literature.GetProperty(PropertyConfiguration.PropertyName)), 1, Index)
+                            .Controls.Add(GenerateControl(PropertyConfiguration), 1, Index)
                         Next
                     Else
                         MsgBox(ErrorMessage, MsgBoxStyle.OkOnly, "Error")
@@ -123,6 +124,21 @@
             Next
         End Sub
 
+        Private Function GenerateControl(ByVal PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration) As Object
+            Dim Control As Control
+            If PropertyConfiguration.Height = 0 Then
+                Control = New _FormMain._LiteratureTabControl.SingleLineTextBox()
+            Else
+                Control = New _FormMain._LiteratureTabControl.MultiLineTextBox()
+            End If
+
+            If PropertyConfiguration.SyntaxHighlight Then
+                CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).SyntaxHighlight = True
+            End If
+
+            Return Control
+        End Function
+
         Private Function GenerateControl(ByVal LiteratureProperty As _BibTeX.LiteratureProperty) As Object
             Select Case LiteratureProperty.Name
                 Case "BibTeXKey"
@@ -133,7 +149,6 @@
                     Return New _FormMain._LiteratureTabControl.MultiLineTextBox(LiteratureProperty.Value)
             End Select
         End Function
-
 
         Private Function GetLiteratureDetailDisplayConfiguration(ByVal LiteratureType As String) As _FormConfiguration.LiteratureDetailDisplay.Configuration
             Dim DefaultLiteratureDetailDisplayConfiguration As New _FormConfiguration.LiteratureDetailDisplay.Configuration
