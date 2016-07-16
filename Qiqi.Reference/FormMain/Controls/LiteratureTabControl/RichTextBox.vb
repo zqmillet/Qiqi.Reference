@@ -114,10 +114,44 @@ Namespace _FormMain
             Protected Overrides Sub OnTextChanged(ByVal e As System.EventArgs)
                 If SyntaxHighLight Then
                     TextSyntaxHighLight()
+                Else
+                    TextFontUpdate()
                 End If
             End Sub
 
-            Private Sub TextSyntaxHighLight()
+            Public Sub TextFontUpdate()
+                If Me.Text.Trim = "" Then
+                    Exit Sub
+                End If
+
+                Dim SelectionAt As Integer = Me.SelectionStart
+                Dim FirstLineIndex As Integer = GetFirstVisibleLine()
+
+                Dim NormalFont As New Font(Me.TextFont.FontFamily, Me.FontSize)
+
+                LockWindowUpdate(Me.Handle.ToInt32)
+
+                Me.SelectionStart = 0
+                Me.SelectionLength = Me.TextLength
+                Me.SelectionFont = NormalFont
+                Me.SelectionColor = Color.Black
+
+                ' Restore the selectionstart
+                Me.SelectionStart = Me.Find(Me.Lines(FirstLineIndex), RichTextBoxFinds.NoHighlight)
+                Me.ScrollToCaret()
+
+                Me.SelectionStart = SelectionAt
+                Me.SelectionLength = 0
+
+                ' Unlock the update
+                LockWindowUpdate(0)
+            End Sub
+
+            Public Sub TextSyntaxHighLight()
+                If Me.Text.Trim = "" Then
+                    Exit Sub
+                End If
+
                 Dim SelectionAt As Integer = Me.SelectionStart
                 Dim FirstLineIndex As Integer = GetFirstVisibleLine()
 
@@ -195,6 +229,10 @@ Namespace _FormMain
                     Dim Delta As Integer = Me.Text.Substring(EndIndex + 1).IndexOf("}") + 1
                     EndIndex = Delta + EndIndex
                     If Delta < 0 Or Me.Text.Substring(EndIndex + 1).Trim.Length = 0 Then
+                        Return False
+                    End If
+
+                    If StartIndex < 0 Or EndIndex < 0 Then
                         Return False
                     End If
                 Loop While Not BraceMatching(Me.Text.Substring(StartIndex, EndIndex - StartIndex + 1))

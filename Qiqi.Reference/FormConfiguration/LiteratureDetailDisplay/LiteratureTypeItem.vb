@@ -34,6 +34,41 @@
                 InitializeTabPageItems()
             End Sub
 
+            Private Sub InitializeTabPageItems()
+                FlowLayoutPanel = New FlowLayoutPanel
+
+                With FlowLayoutPanel
+                    .Controls.Clear()
+                    .FlowDirection = FlowDirection.TopDown
+                    .WrapContents = False
+                    .AutoScroll = True
+                    .HorizontalScroll.Visible = False
+                    .Margin = New Padding(0)
+
+                    For Each TabPageConfiguration As _FormConfiguration.LiteratureDetailDisplay.TabPageConfiguration In Configuration.TabPages
+                        Dim TabPageItem As New TabPageItem(TabPageConfiguration)
+
+                        With TabPageItem
+                            .Size = New Size(FlowLayoutPanel.ClientSize.Width - 20, .Size.Height)
+                            ' .Anchor = AnchorStyles.Left Or AnchorStyles.Right
+                            AddHandler .CheckedChanged, AddressOf TabPageItem_CheckedChanged
+                            AddHandler .ContentChanged, AddressOf TabPageItem_ContentChanged
+                        End With
+                        .Controls.Add(TabPageItem)
+                    Next
+
+                    ' .BorderStyle = Windows.Forms.BorderStyle.FixedSingle
+                    .Location = New Point(0, ToolStrip.Height)
+                    .Size = New Size(Me.Width, Me.Height - ToolStrip.Height)
+                    .Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+                    AddHandler .Resize, AddressOf FlowLayoutPanel_Resize
+                End With
+
+                Me.Controls.Add(FlowLayoutPanel)
+                ' Set enable of ButtonSave
+                TabPageItem_ContentChanged(Nothing)
+            End Sub
+
             Public Sub ReInitializeTabPageItems(ByVal Buffer As String, ByVal InheritList As ArrayList)
                 With Me
                     .Configuration = New _FormConfiguration.LiteratureDetailDisplay.Configuration(Buffer)
@@ -68,41 +103,6 @@
                     .HorizontalScroll.Visible = False
                     .Margin = New Padding(0)
 
-                    For Each TabPageConfiguration As _FormConfiguration.LiteratureDetailDisplay.TabPageConfiguration In Configuration.TabPages
-                        Dim TabPageItem As New TabPageItem(TabPageConfiguration)
-
-                        With TabPageItem
-                            .Size = New Size(FlowLayoutPanel.ClientSize.Width - 20, .Size.Height)
-                            ' .Anchor = AnchorStyles.Left Or AnchorStyles.Right
-                            AddHandler .CheckedChanged, AddressOf TabPageItem_CheckedChanged
-                            AddHandler .ContentChanged, AddressOf TabPageItem_ContentChanged
-                        End With
-                        .Controls.Add(TabPageItem)
-                    Next
-
-                    ' .BorderStyle = Windows.Forms.BorderStyle.FixedSingle
-                    .Location = New Point(0, ToolStrip.Height + 4)
-                    .Size = New Size(Me.Width, Me.Height - ToolStrip.Height - 4)
-                    .Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-                    AddHandler .Resize, AddressOf FlowLayoutPanel_Resize
-                End With
-
-                Me.Controls.Add(FlowLayoutPanel)
-                ' Set enable of ButtonSave
-                TabPageItem_ContentChanged(Nothing)
-            End Sub
-
-            Private Sub InitializeTabPageItems()
-                FlowLayoutPanel = New FlowLayoutPanel
-
-                With FlowLayoutPanel
-                    .FlowDirection = FlowDirection.TopDown
-                    .WrapContents = False
-                    .AutoScroll = True
-                    .HorizontalScroll.Visible = False
-
-
-                    .Margin = New Padding(0)
                     For Each TabPageConfiguration As _FormConfiguration.LiteratureDetailDisplay.TabPageConfiguration In Configuration.TabPages
                         Dim TabPageItem As New TabPageItem(TabPageConfiguration)
 

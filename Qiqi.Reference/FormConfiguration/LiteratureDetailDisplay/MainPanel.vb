@@ -234,13 +234,6 @@
                 ButtonDelete.Enabled = Not ListView.SelectedItems(0).Text = "Default"
                 SelectedItemBuffer = ListView.SelectedItems(0).Tag
 
-                For Each Control As Object In Me.Controls
-                    If TypeOf Control Is _FormConfiguration.LiteratureDetailDisplay.LiteratureTypeItem Then
-                        CType(Control, _FormConfiguration.LiteratureDetailDisplay.LiteratureTypeItem).ReInitializeTabPageItems(SelectedItemBuffer, InheritList)
-                        Exit Sub
-                    End If
-                Next
-
                 Dim LiteratureTypeItem As New _FormConfiguration.LiteratureDetailDisplay.LiteratureTypeItem(SelectedItemBuffer, InheritList)
 
                 With LiteratureTypeItem
@@ -250,6 +243,18 @@
                 End With
 
                 Me.Controls.Add(LiteratureTypeItem)
+
+                For Each Control As Object In Me.Controls
+                    If Control Is LiteratureTypeItem Then
+                        Continue For
+                    End If
+
+                    If TypeOf Control Is _FormConfiguration.LiteratureDetailDisplay.LiteratureTypeItem Then
+                        'CType(Control, _FormConfiguration.LiteratureDetailDisplay.LiteratureTypeItem).ReInitializeTabPageItems(SelectedItemBuffer, InheritList)
+                        'Exit Sub
+                        Me.Controls.Remove(Control)
+                    End If
+                Next
             End Sub
 
 

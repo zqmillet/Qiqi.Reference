@@ -56,7 +56,9 @@
                         ' 1*1
                         .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100))
                         .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100))
-                        .Controls.Add(GenerateControl(Literature.GetProperty(CType(TabPageConfiguration.Properties.Item(0), _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration).PropertyName)))
+                        ' .Controls.Add(GenerateControl(Literature.GetProperty(CType(TabPageConfiguration.Properties.Item(0), _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration).PropertyName)))
+                        Dim PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration = TabPageConfiguration.Properties(0)
+                        .Controls.Add(GenerateControl(PropertyConfiguration, .RowCount))
                     ElseIf .ColumnCount = 2 And .RowCount > 0 Then
                         ' n*2
                         .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, AbsoluteColumnWidth))
@@ -81,17 +83,16 @@
 
                             .Controls.Add(Label, 0, Index)
                             ' .Controls.Add(GenerateControl(Literature.GetProperty(PropertyConfiguration.PropertyName)), 1, Index)
-                            .Controls.Add(GenerateControl(PropertyConfiguration), 1, Index)
+                            .Controls.Add(GenerateControl(PropertyConfiguration, .RowCount), 1, Index)
                         Next
                     Else
                         MsgBox(ErrorMessage, MsgBoxStyle.OkOnly, "Error")
                         Exit Sub
                     End If
 
+                    If .RowCount = 1 Then
 
-                    For Each PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration In TabPageConfiguration.Properties
-
-                    Next
+                    End If
                 End With
 
 
@@ -124,7 +125,7 @@
             Next
         End Sub
 
-        Private Function GenerateControl(ByVal PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration) As Object
+        Private Function GenerateControl(ByVal PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration, ByVal RouCount As Integer) As Object
             Dim Control As Control
             If PropertyConfiguration.Height = 0 Then
                 Control = New _FormMain._LiteratureTabControl.SingleLineTextBox()
@@ -132,9 +133,12 @@
                 Control = New _FormMain._LiteratureTabControl.MultiLineTextBox()
             End If
 
-            If PropertyConfiguration.SyntaxHighlight Then
-                CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).SyntaxHighlight = True
+            If RowCount = 1 Then
+                Control = New _FormMain._LiteratureTabControl.MultiLineTextBox()
             End If
+
+            CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).SyntaxHighlight = PropertyConfiguration.SyntaxHighlight
+            CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).Text = Literature.GetProperty(PropertyConfiguration.PropertyName).Value
 
             Return Control
         End Function
