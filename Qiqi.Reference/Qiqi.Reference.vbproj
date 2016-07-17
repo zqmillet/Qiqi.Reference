@@ -94,6 +94,9 @@
     <Compile Include="FormConfiguration\DataBaseColumnDisplay\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormConfiguration\FontConfiguration\MainPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormConfiguration\LiteratureDetailDisplay\Configuration.vb" />
     <Compile Include="FormConfiguration\LiteratureDetailDisplay\DataGridView.vb">
       <SubType>Component</SubType>

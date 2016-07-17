@@ -115,6 +115,14 @@
         End With
         TreeView.Nodes.Add(LiteratureDetailDisplay)
 
+        Dim FontConfiguration As New TreeNode
+        With FontConfiguration
+            .Text = "Font Configuration"
+            .Name = "FontConfiguration"
+            .Tag = New _FormConfiguration.FontConfiguration.MainPanel(Configuration)
+        End With
+        TreeView.Nodes.Add(FontConfiguration)
+
         Me.Controls.Add(TreeView)
 
         For Each TreeNode As TreeNode In TreeView.Nodes
