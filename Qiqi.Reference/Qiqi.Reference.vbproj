@@ -60,6 +60,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -92,6 +93,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormConfiguration\DataBaseColumnDisplay\MainPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\FontConfiguration\FontFamilyComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\FontConfiguration\FontSizeComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormConfiguration\FontConfiguration\MainPanel.vb">
