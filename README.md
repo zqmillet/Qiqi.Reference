@@ -25,15 +25,22 @@ I'm using the reference management software which is called `JabRef`. It is a wo
 
 So, `Qiqi Reference` learns a lot from `JabRef`, and it will be more perfect.
 
+## Usage
+
+- Install [Framework 4.6.1],
+- Run `.\Qiqi.Reference\bin\Debug\Qiqi.Reference.exe`.
+
 ## Built with
-- Visual Basic .NET
-- Visual Studio Community 2015
+- Visual Basic .NET,
+- Visual Studio Community 2015.
 
 ## License
 This project is licensed under the MIT License. See the [License.md](License.md) file for details.
 
 ## To Do
-- Font configuration
+- Font configuration.
 
 ## Acknowledgments
 I would like to thank the anonymous referees for their helpful comments and suggestions.
+
+[Framework 4.6.1]:https://www.microsoft.com/en-us/download/details.aspx?id=49981
