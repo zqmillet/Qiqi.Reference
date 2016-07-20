@@ -5,6 +5,10 @@
 
             Public Sub New()
                 Me.DropDownStyle = ComboBoxStyle.DropDownList
+                Me.Dock = DockStyle.Fill
+                Me.Margin = New Padding(0)
+                Me.FlatStyle = FlatStyle.Popup
+
                 For Each FontFamily As FontFamily In System.Drawing.FontFamily.Families
                     Me.Items.Add(FontFamily.Name)
                 Next
@@ -12,6 +16,9 @@
 
             Public Sub New(ByVal FontList As ArrayList)
                 Me.DropDownStyle = ComboBoxStyle.DropDownList
+                Me.Dock = DockStyle.Fill
+                Me.Margin = New Padding(0)
+                Me.FlatStyle = FlatStyle.Popup
 
                 If FontList Is Nothing Then
                     Exit Sub

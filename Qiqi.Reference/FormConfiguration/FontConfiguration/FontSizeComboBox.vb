@@ -7,6 +7,7 @@
 
             Private Sub New()
                 Me.DropDownStyle = ComboBoxStyle.DropDown
+                Me.Dock = DockStyle.Fill
                 For Each FontSize As Integer In FontSizeList
                     Me.Items.Add(FontSize)
                 Next
