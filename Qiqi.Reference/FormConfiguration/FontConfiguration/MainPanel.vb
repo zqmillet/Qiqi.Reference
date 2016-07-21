@@ -13,23 +13,16 @@
             Const FirstColumnWidth As Integer = 80
             Const SecondColumnWidth As Integer = TableLayoutPanelWidth - FirstColumnWidth
             Const RowHeight As Integer = 22
-            Dim GroupFontFamilyComboBox As ComboBox
-            Dim GroupFontFamilyLabel As Label
 
-            Dim GroupFontSizeComboBox As ComboBox
-            Dim GroupFontSizeLabel As Label
+            Dim GroupFontFamilyComboBox As FontFamilyComboBox
+            Dim GroupFontSizeComboBox As FontSizeComboBox
+            Dim ListFontFamilyComboBox As FontFamilyComboBox
+            Dim ListFontSizeComboBox As FontSizeComboBox
+            Dim DetailFontFamilyComboBox As FontFamilyComboBox
+            Dim DetailFontSizeComboBox As FontSizeComboBox
+            Dim HighlightFontFamilyComboBox As FontFamilyComboBox
+            Dim HighlightFontSizeComboBox As FontSizeComboBox
 
-            Dim ListFontFamilyComboBox As ComboBox
-            Dim ListFontFamilyLabel As Label
-
-            Dim ListFontSizeComboBox As ComboBox
-            Dim ListFontSizeLabel As Label
-
-            Dim DetailFontFamilyComboBox As ComboBox
-            Dim DetailFontFamilyLabel As Label
-
-            Dim DetailFontSizeComboBox As ComboBox
-            Dim DetailFontSizeLabel As Label
 
             Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
                 With Me
@@ -45,25 +38,49 @@
                 TableLayoutPanel = New TableLayoutPanel
                 With TableLayoutPanel
                     .Dock = DockStyle.None
-                    .CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
+                    ' .CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
                     .Location = New Point(0, 0)
-                    .Size = New Size(TableLayoutPanelWidth, Me.ClientSize.Height - 4)
-                    .ColumnCount = 2
-                    .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, FirstColumnWidth))
-                    .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, SecondColumnWidth))
-                    .RowCount = 2
-                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, RowHeight))
+                    .Size = New Size(TableLayoutPanelWidth, Me.ClientSize.Height - 2)
+                    .Anchor = AnchorStyles.Left Or AnchorStyles.Top Or AnchorStyles.Bottom
+                    .ColumnCount = 1
+                    .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, TableLayoutPanelWidth))
+                    .RowCount = 5
+                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
+                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
+                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
+                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
+                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
 
                 End With
 
-                GroupFontFamilyLabel = New Label
-                GroupFontFamilyLabel.Text = "Font Family"
-                GroupFontFamilyLabel.Margin = New Padding(0, 4, 0, 0)
-                TableLayoutPanel.Controls.Add(GroupFontFamilyLabel, 0, 0)
-                GroupFontFamilyComboBox = New FontFamilyComboBox(FontFamilyList)
-                TableLayoutPanel.Controls.Add(GroupFontFamilyComboBox, 1, 0)
+                GroupFontFamilyComboBox = New FontFamilyComboBox(TableLayoutPanelWidth)
+                GroupFontSizeComboBox = New FontSizeComboBox(TableLayoutPanelWidth)
+                ListFontFamilyComboBox = New FontFamilyComboBox(TableLayoutPanelWidth)
+                ListFontSizeComboBox = New FontSizeComboBox(TableLayoutPanelWidth)
+                DetailFontFamilyComboBox = New FontFamilyComboBox(TableLayoutPanelWidth)
+                DetailFontSizeComboBox = New FontSizeComboBox(TableLayoutPanelWidth)
+                HighlightFontFamilyComboBox = New FontFamilyComboBox(TableLayoutPanelWidth)
+                HighlightFontSizeComboBox = New FontSizeComboBox(TableLayoutPanelWidth)
 
+                Dim ControlList As New ArrayList
+                ControlList.Add(New FormSeparator("Group Font Configuration", TableLayoutPanelWidth))
+                ControlList.Add(GroupFontFamilyComboBox)
+                ControlList.Add(GroupFontSizeComboBox)
+                ControlList.Add(New FormSeparator("List Font Configuration", TableLayoutPanelWidth))
+                ControlList.Add(ListFontFamilyComboBox)
+                ControlList.Add(ListFontSizeComboBox)
+                ControlList.Add(New FormSeparator("Detail Font Configuration", TableLayoutPanelWidth))
+                ControlList.Add(DetailFontFamilyComboBox)
+                ControlList.Add(DetailFontSizeComboBox)
+                ControlList.Add(New FormSeparator("Syntax Hightlight Font Configuration", TableLayoutPanelWidth))
+                ControlList.Add(HighlightFontFamilyComboBox)
+                ControlList.Add(HighlightFontSizeComboBox)
 
+                Dim Index As Integer = 0
+                For Each Control As Control In ControlList
+                    TableLayoutPanel.Controls.Add(Control, 0, Index)
+                    Index += 1
+                Next
 
                 Me.Controls.Add(TableLayoutPanel)
             End Sub

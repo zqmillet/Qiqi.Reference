@@ -101,6 +101,9 @@
     <Compile Include="FormConfiguration\FontConfiguration\FontSizeComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormConfiguration\FontConfiguration\FormSeparator.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormConfiguration\FontConfiguration\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>

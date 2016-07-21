@@ -21,11 +21,11 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="CurrentOpenFileList">
+          <xs:element name="FormMainViewConfiguration">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="FileName" type="xs:string" minOccurs="0" />
-                <xs:element name="Selected" type="xs:string" minOccurs="0" />
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -36,11 +36,11 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="FormMainViewConfiguration">
+          <xs:element name="CurrentOpenFileList">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="Control" type="xs:string" minOccurs="0" />
-                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
+                <xs:element name="FileName" type="xs:string" minOccurs="0" />
+                <xs:element name="Selected" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -126,20 +126,6 @@
     <Display_x0020_Name>Abstract</Display_x0020_Name>
     <Column_x0020_Width>200</Column_x0020_Width>
   </DataBaseGridViewColunmConfiguration>
-  <CurrentOpenFileList>
-    <FileName>D:\iCloud\iPaper\特殊字符.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
-  <CurrentOpenFileList>
-    <FileName>D:\iDocument\Document\Papers\4th\References.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
-  </OpenFileHistoryList>
-  <OpenFileHistoryList>
-    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
-  </OpenFileHistoryList>
   <FormMainViewConfiguration>
     <Control>MenuViewShowGroupTreeView</Control>
     <Parameter>True</Parameter>
@@ -162,14 +148,28 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>
-    <Parameter>776</Parameter>
+    <Parameter>876</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWidth</Control>
-    <Parameter>1296</Parameter>
+    <Parameter>1456</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWindowState</Control>
     <Parameter>2</Parameter>
   </FormMainViewConfiguration>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
+  </OpenFileHistoryList>
+  <OpenFileHistoryList>
+    <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Quote.bib</FileFullName>
+  </OpenFileHistoryList>
+  <CurrentOpenFileList>
+    <FileName>D:\iCloud\iPaper\特殊字符.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iDocument\Document\Papers\4th\References.bib</FileName>
+    <Selected>True</Selected>
+  </CurrentOpenFileList>
 </NewDataSet>
