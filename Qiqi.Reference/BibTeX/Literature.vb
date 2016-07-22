@@ -225,6 +225,7 @@
                                 Value &= c
                             Case "{"
                                 BracketNumber += 1
+                                Value &= c
                             Case "}"
                                 BracketNumber -= 1
                                 If BracketNumber = 0 Then
@@ -236,6 +237,7 @@
 
                                     State = LexicalAnalysisStatus.EndReadValue
                                 End If
+                                Value &= c
                             Case """"
                                 Value &= c
                             Case vbCr
