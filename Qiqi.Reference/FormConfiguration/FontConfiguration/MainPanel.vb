@@ -24,6 +24,8 @@
             Dim HighlightFontSizeComboBox As FontSizeComboBox
 
 
+
+
             Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
                 With Me
                     .Modified = False
@@ -75,6 +77,9 @@
                 ControlList.Add(New FormSeparator("Syntax Hightlight Font Configuration", TableLayoutPanelWidth))
                 ControlList.Add(HighlightFontFamilyComboBox)
                 ControlList.Add(HighlightFontSizeComboBox)
+                ControlList.Add(New FormSeparator("Syntax Hightlight Color Configuration", TableLayoutPanelWidth))
+                ControlList.Add(New ColorComboBox("Type", TableLayoutPanelWidth))
+
 
                 Dim Index As Integer = 0
                 For Each Control As Control In ControlList

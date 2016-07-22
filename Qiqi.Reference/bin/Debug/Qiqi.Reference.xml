@@ -165,6 +165,23 @@ Qiqi.Reference
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="P:Qiqi.Reference.ColorPicker.SelectedItem">
+ <summary>
+ Gets or sets the currently selected item.
+ </summary>
+</member>
+<member name="P:Qiqi.Reference.ColorPicker.SelectedText">
+ <summary>
+ Gets the text of the selected item, or sets the selection to
+ the item with the specified text.
+ </summary>
+</member>
+<member name="P:Qiqi.Reference.ColorPicker.SelectedValue">
+ <summary>
+ Gets the value of the selected item, or sets the selection to
+ the item with the specified value.
+ </summary>
+</member>
 <member name="T:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.EditMessages">
  <summary>
  Messages
