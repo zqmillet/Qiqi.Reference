@@ -38,7 +38,7 @@ So, `Qiqi Reference` learns a lot from `JabRef`, and it will be more perfect.
 This project is licensed under the MIT License. See the [License.md](License.md) file for details.
 
 ## To Do
-- Font configuration.
+- The preview of font configuration.
 
 ## Acknowledgments
 I would like to thank the anonymous referees for their helpful comments and suggestions.
