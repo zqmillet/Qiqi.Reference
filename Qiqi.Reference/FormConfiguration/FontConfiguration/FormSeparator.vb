@@ -19,6 +19,7 @@
 
                 With Label
                     .Text = Text
+                    ' .Font = New Font(Label.Font, FontStyle.Bold)
                     .AutoSize = True
                     .Margin = New Padding(0)
                     .Location = New Point(0, 4)
@@ -31,6 +32,11 @@
                     .Controls.Add(Line)
                     .Margin = New Padding(0, 0, 0, 4)
                 End With
+            End Sub
+
+            Public Sub New(ByVal Text As String, ByVal Width As Integer, ByVal TopMarigin As Integer)
+                Me.New(Text, Width)
+                Me.Margin = New Padding(0, TopMarigin, 0, 4)
             End Sub
 
         End Class

@@ -9,14 +9,41 @@
             Public Const HeadLabelWidth As Integer = 75
             Public Const TailLabelWidth As Integer = 20
 
+            Public Event SelectedChanged()
+
+            Public Property SelectedText As String
+                Get
+                    If ComboBox.SelectedItem Is Nothing Then
+                        Return ""
+                    Else
+                        Return ComboBox.SelectedItem.ToString
+                    End If
+                End Get
+                Set(ByVal Value As String)
+                    Dim Index As Integer = 0
+                    For Each Item As Object In ComboBox.Items
+                        If Item.ToString = Value Then
+                            ComboBox.SelectedIndex = Index
+                            Exit Property
+                        End If
+                        Index += 1
+                    Next
+                End Set
+            End Property
+
             Public Sub New(ByVal Width As Integer)
                 With ComboBox
                     .DropDownStyle = ComboBoxStyle.DropDownList
+                    .DrawMode = DrawMode.OwnerDrawFixed
+                    .BackColor = System.Drawing.SystemColors.Control
                     .Margin = New Padding(0)
+                    .Padding = New Padding(0)
                     .FlatStyle = FlatStyle.System
                     .Location = New Point(HeadLabelWidth, 0)
                     .Size = New Size(Width - HeadLabelWidth - TailLabelWidth, Me.Height)
                     .Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
+                    AddHandler .DrawItem, AddressOf ComboBox_DrawItem
+                    AddHandler .SelectedIndexChanged, AddressOf ComboBox_SelectedIndexChanged
                 End With
 
                 With HeadLabel
@@ -32,7 +59,7 @@
                 End With
 
                 With Me
-                    .Height = 20
+                    .Height = 22
                     .Width = Width
                     .Margin = New Padding(0, 0, 0, 4)
                     .Controls.Add(HeadLabel)
@@ -41,6 +68,32 @@
                 End With
 
                 FillComboBox()
+            End Sub
+
+            Public Sub ComboBox_SelectedIndexChanged()
+                Me.SelectedText = ComboBox.SelectedItem
+                RaiseEvent SelectedChanged()
+            End Sub
+
+            Public Overridable Sub ComboBox_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+                If (e.Index >= 0) Then
+                    e.DrawBackground()
+
+                    Dim Brush As Brush
+                    If ((e.State And DrawItemState.Selected) _
+                        <> DrawItemState.None) Then
+                        Brush = SystemBrushes.HighlightText
+                    Else
+                        Brush = SystemBrushes.WindowText
+                    End If
+
+                    e.Graphics.DrawString(ComboBox.Items(e.Index), Font, Brush, e.Bounds.X + 3, e.Bounds.Y + 1)
+                    ' Draw the focus Rectangle if appropriate
+                    If ((e.State And DrawItemState.NoFocusRect) _
+                        = DrawItemState.None) Then
+                        e.DrawFocusRectangle()
+                    End If
+                End If
             End Sub
 
             Public Overridable Sub FillComboBox()

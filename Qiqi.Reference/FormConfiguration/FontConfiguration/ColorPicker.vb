@@ -1,148 +1,173 @@
-﻿Public Class ColorPicker
-    Inherits ComboBox
+﻿Namespace _FormConfiguration
+    Namespace FontConfiguration
 
-    ' Data for each color in the list
+        Public Class ColorPicker
+            Inherits ComboBox
 
-    Public Sub New()
-        MyBase.New
-        DropDownStyle = ComboBoxStyle.DropDownList
-        DrawMode = DrawMode.OwnerDrawFixed
-        AddHandler Me.DrawItem, AddressOf Me_DrawItem
-    End Sub
+            ' Data for each color in the list
+            Private _ButtonArea As New Rectangle
 
-    ' Populate control with standard colors
-    Public Sub AddStandardColors()
-        Items.Clear()
-        Items.Add(New ColorInfo("Black"))
-        Items.Add(New ColorInfo("Blue"))
-        Items.Add(New ColorInfo("Lime"))
-        Items.Add(New ColorInfo("Cyan"))
-        Items.Add(New ColorInfo("Red"))
-        Items.Add(New ColorInfo("Fuchsia"))
-        Items.Add(New ColorInfo("Yellow"))
-        Items.Add(New ColorInfo("White"))
-        Items.Add(New ColorInfo("Navy"))
-        Items.Add(New ColorInfo("Green"))
-        Items.Add(New ColorInfo("Teal"))
-        Items.Add(New ColorInfo("Maroon"))
-        Items.Add(New ColorInfo("Purple"))
-        Items.Add(New ColorInfo("Olive"))
-        Items.Add(New ColorInfo("Gray"))
-    End Sub
+            Public Sub New()
+                MyBase.New
+                Me.DropDownStyle = ComboBoxStyle.DropDownList
+                Me.DrawMode = Windows.Forms.DrawMode.OwnerDrawFixed
+                Me.BackColor = System.Drawing.SystemColors.Control
+                ' Cache the button's modified ClientRectangle (see Note)
 
-    ' Draw list item
-    Protected Sub Me_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-        If (e.Index >= 0) Then
-            ' Get this color
-            Dim color As ColorInfo = Items(e.Index)
-            ' Fill background
-            e.DrawBackground()
-            ' Draw color box
-            Dim rect As Rectangle = New Rectangle
-            rect.X = (e.Bounds.X + 1)
-            rect.Y = (e.Bounds.Y + 1)
-            rect.Width = 30
-            rect.Height = (e.Bounds.Height - 1)
-            e.Graphics.FillRectangle(New SolidBrush(color.Color), rect)
-            ' e.Graphics.DrawRectangle(SystemPens.WindowText, rect)
-            ' Write color name
-            Dim brush As Brush
-            If ((e.State And DrawItemState.Selected) _
+                'Me.ForeColor = System.Drawing.SystemColors.AppWorkspace
+                With _ButtonArea
+                    .X = Me.ClientRectangle.X - 1
+                    .Y = Me.ClientRectangle.Y - 1
+                    .Width = Me.Width + 2
+                    .Height = Me.Height + 2
+                End With
+
+                AddHandler Me.DrawItem, AddressOf Me_DrawItem
+            End Sub
+
+
+            ' Populate control with standard colors
+            Public Sub AddStandardColors()
+                Items.Clear()
+                Items.Add(New ColorInfo("Black"))
+                Items.Add(New ColorInfo("Blue"))
+                Items.Add(New ColorInfo("Lime"))
+                Items.Add(New ColorInfo("Cyan"))
+                Items.Add(New ColorInfo("Red"))
+                Items.Add(New ColorInfo("Fuchsia"))
+                Items.Add(New ColorInfo("Yellow"))
+                Items.Add(New ColorInfo("White"))
+                Items.Add(New ColorInfo("Navy"))
+                Items.Add(New ColorInfo("Green"))
+                Items.Add(New ColorInfo("Teal"))
+                Items.Add(New ColorInfo("Maroon"))
+                Items.Add(New ColorInfo("Purple"))
+                Items.Add(New ColorInfo("Olive"))
+                Items.Add(New ColorInfo("Gray"))
+            End Sub
+
+            ' Draw list item
+            Protected Sub Me_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+                If (e.Index >= 0) Then
+                    ' Get this color
+                    Dim Color As ColorInfo = Items(e.Index)
+                    ' Fill background
+                    e.DrawBackground()
+                    ' Draw color box
+                    Dim Rectangle As Rectangle = New Rectangle
+                    Rectangle.X = (e.Bounds.X + 1)
+                    Rectangle.Y = (e.Bounds.Y + 1)
+                    Rectangle.Width = 30
+                    Rectangle.Height = (e.Bounds.Height - 3)
+                    e.Graphics.FillRectangle(New SolidBrush(Color.Color), Rectangle)
+                    ' e.Graphics.DrawRectangle(SystemPens.WindowText, Rectangle)
+                    ' Write color name
+                    Dim brush As Brush
+                    If ((e.State And DrawItemState.Selected) _
                         <> DrawItemState.None) Then
-                brush = SystemBrushes.HighlightText
-            Else
-                brush = SystemBrushes.WindowText
-            End If
+                        brush = SystemBrushes.HighlightText
+                    Else
+                        brush = SystemBrushes.WindowText
+                    End If
 
-            e.Graphics.DrawString(color.Text, Font, brush, (e.Bounds.X _
-                            + (rect.X _
-                            + (rect.Width + 2))), (e.Bounds.Y _
-                            + ((e.Bounds.Height - Font.Height) _
-                            / 2)))
-            ' Draw the focus rectangle if appropriate
-            If ((e.State And DrawItemState.NoFocusRect) _
+                    e.Graphics.DrawString(Color.Text, Font, brush, (e.Bounds.X + (Rectangle.X + (Rectangle.Width + 2))),
+                                                                   (e.Bounds.Y + ((e.Bounds.Height - Font.Height) / 2)))
+                    ' Draw the focus Rectangle if appropriate
+                    If ((e.State And DrawItemState.NoFocusRect) _
                         = DrawItemState.None) Then
-                e.DrawFocusRectangle()
-            End If
-
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' Gets or sets the currently selected item.
-    ''' </summary>
-    Public Shadows Property SelectedItem As ColorInfo
-        Get
-            Return CType(MyBase.SelectedItem, ColorInfo)
-        End Get
-        Set
-            MyBase.SelectedItem = Value
-        End Set
-    End Property
-
-    ''' <summary>
-    ''' Gets the text of the selected item, or sets the selection to
-    ''' the item with the specified text.
-    ''' </summary>
-    Public Shadows Property SelectedText As String
-        Get
-            If (SelectedIndex >= 0) Then
-                Return Me.SelectedItem.Text
-            End If
-
-            Return String.Empty
-        End Get
-        Set
-            Dim i As Integer = 0
-            Do While (i < Items.Count)
-                If (CType(Items(i), ColorInfo).Text = Value) Then
-                    SelectedIndex = i
-                    Exit Do
+                        e.DrawFocusRectangle()
+                    End If
                 End If
+            End Sub
 
-                i = (i + 1)
-            Loop
+            ''' <summary>
+            ''' Gets or sets the currently selected item.
+            ''' </summary>
+            Public Shadows Property SelectedItem As Integer
+                Get
+                    If MyBase.SelectedItem Is Nothing Then
+                        Return 0
+                    Else
+                        Return CType(MyBase.SelectedItem, ColorInfo).Color.ToArgb
+                    End If
+                End Get
+                Set(ByVal Argb As Integer)
+                    Dim i As Integer = 0
+                    Do While (i < Items.Count)
+                        If (CType(Items(i), ColorInfo).Color.ToArgb = Argb) Then
+                            SelectedIndex = i
+                            Exit Property
+                        End If
+                        i += 1
+                    Loop
 
-        End Set
-    End Property
+                    SelectedIndex = 0
+                End Set
+            End Property
 
-    ''' <summary>
-    ''' Gets the value of the selected item, or sets the selection to
-    ''' the item with the specified value.
-    ''' </summary>
-    Public Shadows Property SelectedValue As Color
-        Get
-            If (SelectedIndex >= 0) Then
-                Return Me.SelectedItem.Color
-            End If
+            '''' <summary>
+            '''' Gets the text of the selected item, or sets the selection to
+            '''' the item with the specified text.
+            '''' </summary>
+            'Public Shadows Property SelectedText As String
+            '    Get
+            '        If (SelectedIndex >= 0) Then
+            '            Return Me.SelectedItem.Text
+            '        End If
 
-            Return Color.White
-        End Get
-        Set
-            Dim i As Integer = 0
-            Do While (i < Items.Count)
-                If (CType(Items(i), ColorInfo).Color = Value) Then
-                    SelectedIndex = i
-                    Exit Do
-                End If
+            '        Return String.Empty
+            '    End Get
+            '    Set
+            '        Dim i As Integer = 0
+            '        Do While (i < Items.Count)
+            '            If (CType(Items(i), ColorInfo).Text = Value) Then
+            '                SelectedIndex = i
+            '                Exit Do
+            '            End If
 
-                i = (i + 1)
-            Loop
+            '            i = (i + 1)
+            '        Loop
 
-        End Set
-    End Property
-End Class
+            '    End Set
+            'End Property
 
-Public Class ColorInfo
+            '''' <summary>
+            '''' Gets the value of the selected item, or sets the selection to
+            '''' the item with the specified value.
+            '''' </summary>
+            'Public Shadows Property SelectedValue As Color
+            '    Get
+            '        If (SelectedIndex >= 0) Then
+            '            Return Me.SelectedItem.Color
+            '        End If
 
-    Public Text As String
+            '        Return Color.White
+            '    End Get
+            '    Set
+            '        Dim i As Integer = 0
+            '        Do While (i < Items.Count)
+            '            If (CType(Items(i), ColorInfo).Color = Value) Then
+            '                SelectedIndex = i
+            '                Exit Do
+            '            End If
 
-    Public Color As Color
+            '            i = (i + 1)
+            '        Loop
 
-    Public Sub New(ByVal Text As String)
-        MyBase.New
-        Me.Text = Text
-        Me.Color = Drawing.Color.FromName(Text)
-    End Sub
-End Class
+            '    End Set
+            'End Property
+        End Class
+
+        Public Class ColorInfo
+
+            Public Text As String
+            Public Color As Color
+
+            Public Sub New(ByVal Text As String)
+                MyBase.New
+                Me.Text = Text
+                Me.Color = Drawing.Color.FromName(Text)
+            End Sub
+        End Class
+    End Namespace
+End Namespace

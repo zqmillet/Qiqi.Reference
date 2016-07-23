@@ -95,7 +95,7 @@
     <Compile Include="FormConfiguration\DataBaseColumnDisplay\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\ColorComboBox.vb">
+    <Compile Include="FormConfiguration\FontConfiguration\FontColorComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormConfiguration\FontConfiguration\ColorPicker.vb">
