@@ -4,10 +4,36 @@
 
         Public Delegate Sub DelegateShowGroup(ByVal GroupBuffer As String)
 
-
         Public Sub New()
             Me.ShowRootLines = False
             Me.ItemHeight = 18
+            AddHandler Me.NodeMouseDoubleClick, AddressOf Me_NodeMouseDoubleClick
+        End Sub
+
+        ''' <summary>
+        ''' This sub is used to stop auto expand/collapse on double-click event
+        ''' </summary>
+        ''' <param name="m"></param>
+        Protected Overrides Sub DefWndProc(ByRef m As Message)
+            If m.Msg = 515 Then
+            Else
+                MyBase.DefWndProc(m)
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' This sub is used to expand/collapse on double-click event except root node
+        ''' </summary>
+        ''' <param name="sender"></param>
+        ''' <param name="e"></param>
+        Private Sub Me_NodeMouseDoubleClick(ByVal sender As Object, ByVal e As TreeNodeMouseClickEventArgs)
+            If Not Me.SelectedNode.Parent Is Nothing Then
+                If Me.SelectedNode.IsExpanded Then
+                    Me.SelectedNode.Collapse()
+                Else
+                    Me.SelectedNode.Expand()
+                End If
+            End If
         End Sub
 
         Public Sub Loading(ByVal DataBase As _BibTeX.DataBase)
@@ -292,6 +318,8 @@
                         End Select
                 End Select
             Next
+
+            Me.ExpandAll()
         End Sub
 
         Private Function NextIsSemicolon(ByVal GroupBuffer As String, ByRef Index As Integer) As Boolean
