@@ -14,7 +14,10 @@
                 .DataTable = New DataTable
                 .Literature = New _BibTeX.Literature
             End With
-            Configuration.GetConfig(TableName.LiteratureDetailDisplayConfiguration, Me.DataTable)
+
+            If Not Configuration.GetConfig(TableName.LiteratureDetailDisplayConfiguration, Me.DataTable) Then
+                Exit Sub
+            End If
         End Sub
 
         Public Sub Load(ByVal Configuration As _FormConfiguration.Configuration)

@@ -170,6 +170,19 @@ Qiqi.Reference
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="M:Qiqi.Reference._FormMain.GroupTreeView.DefWndProc(System.Windows.Forms.Message@)">
+ <summary>
+ This sub is used to stop auto expand/collapse on double-click event
+ </summary>
+ <param name="m"></param>
+</member>
+<member name="M:Qiqi.Reference._FormMain.GroupTreeView.Me_NodeMouseDoubleClick(System.Object,System.Windows.Forms.TreeNodeMouseClickEventArgs)">
+ <summary>
+ This sub is used to expand/collapse on double-click event except root node
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
 <member name="T:Qiqi.Reference._FormMain._LiteratureTabControl.RichTextBox.EditMessages">
  <summary>
  Messages
@@ -216,7 +229,7 @@ Qiqi.Reference
  </summary>
  <param name="e"></param>
 </member>
-<member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(System.String,System.Data.DataTable)">
+<member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(System.String,Qiqi.Reference._FormConfiguration.Configuration)">
  <summary>
  Constructor
  </summary>

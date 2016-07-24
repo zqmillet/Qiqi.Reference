@@ -18,16 +18,19 @@
         ''' Constructor
         ''' </summary>
         ''' <remarks></remarks>
-        Public Sub New(ByVal BibTeXFullName As String, ByVal DataTableColumnConfiguration As DataTable)
+        Public Sub New(ByVal BibTeXFullName As String, ByVal Configuration As _FormConfiguration.Configuration)
             ' Style Configuration
             StyleConfiguration()
+
+            If Not Configuration.GetConfig(TableName.DataBaseGridViewColunmConfiguration, Me.DataTableColumnConfiguration) Then
+                Exit Sub
+            End If
 
             With Me
                 .Dock = DockStyle.Fill
                 .BibTeXFullName = BibTeXFullName
-                .DataTableColumnConfiguration = DataTableColumnConfiguration
-                .MenuStrip = New ContextMenuStrip
-            End With
+                    .MenuStrip = New ContextMenuStrip
+                End With
 
             ' If the full name of BibTeX file is wrong, exit sub
             If Not My.Computer.FileSystem.FileExists(BibTeXFullName) Then

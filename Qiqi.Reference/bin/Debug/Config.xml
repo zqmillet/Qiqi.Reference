@@ -4,16 +4,6 @@
     <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="DataBaseGridViewColunmConfiguration">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="Display" type="xs:string" minOccurs="0" />
-                <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
-                <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
-                <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="LiteratureDetailDisplayConfiguration">
             <xs:complexType>
               <xs:sequence>
@@ -30,11 +20,13 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="CurrentOpenFileList">
+          <xs:element name="DataBaseGridViewColunmConfiguration">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="FileName" type="xs:string" minOccurs="0" />
-                <xs:element name="Selected" type="xs:string" minOccurs="0" />
+                <xs:element name="Display" type="xs:string" minOccurs="0" />
+                <xs:element name="Property_x0020_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="Display_x0020_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="Column_x0020_Width" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -42,6 +34,14 @@
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="FileFullName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="CurrentOpenFileList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="FileName" type="xs:string" minOccurs="0" />
+                <xs:element name="Selected" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -57,72 +57,6 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>EntryType</Property_x0020_Name>
-    <Display_x0020_Name>Type</Display_x0020_Name>
-    <Column_x0020_Width>75</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Title</Property_x0020_Name>
-    <Display_x0020_Name>Title</Display_x0020_Name>
-    <Column_x0020_Width>337</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>False</Display>
-    <Property_x0020_Name>Url</Property_x0020_Name>
-    <Display_x0020_Name>Url</Display_x0020_Name>
-    <Column_x0020_Width>183</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Year</Property_x0020_Name>
-    <Display_x0020_Name>Year</Display_x0020_Name>
-    <Column_x0020_Width>37</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Author</Property_x0020_Name>
-    <Display_x0020_Name>Author</Display_x0020_Name>
-    <Column_x0020_Width>130</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Pages</Property_x0020_Name>
-    <Display_x0020_Name>Pages</Display_x0020_Name>
-    <Column_x0020_Width>82</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>BibTeXKey</Property_x0020_Name>
-    <Display_x0020_Name>BibTeXKey</Display_x0020_Name>
-    <Column_x0020_Width>134</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Review</Property_x0020_Name>
-    <Display_x0020_Name>Review</Display_x0020_Name>
-    <Column_x0020_Width>232</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Doi</Property_x0020_Name>
-    <Display_x0020_Name>Doi</Display_x0020_Name>
-    <Column_x0020_Width>480</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>False</Display>
-    <Property_x0020_Name>Keywords</Property_x0020_Name>
-    <Display_x0020_Name>Keywords</Display_x0020_Name>
-    <Column_x0020_Width>282</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
-  <DataBaseGridViewColunmConfiguration>
-    <Display>True</Display>
-    <Property_x0020_Name>Abstract</Property_x0020_Name>
-    <Display_x0020_Name>Abstract</Display_x0020_Name>
-    <Column_x0020_Width>200</Column_x0020_Width>
-  </DataBaseGridViewColunmConfiguration>
   <LiteratureDetailDisplayConfiguration>
     <LiteratureDisplayBuffer>Default{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,0,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Optional Fields{Volumn{Volumn,True,0,False,False},Number{Number,True,0,False,False},Pages{Pages,True,0,False,False},Month{Month,True,0,False,False},Note{Note,False,1,False,False}},General{Crossref{Crossref,True,1,False,False},Keywords{Keywords,True,1,False,False},File{File,True,1,False,False},Doi{Doi,True,0,False,False},Url{Url,True,0,False,False},Comment{Comment,True,1,False,False},Owner{Owner,True,0,False,False},Timestamp{Timestamp,False,0,False,False}},Abstract{Abstract{Abstract,True,1,False,False}},Review{Review{Review,True,1,False,False}},Source Code{SourceCode{Source Code,False,0,False,True}}}</LiteratureDisplayBuffer>
   </LiteratureDetailDisplayConfiguration>
@@ -195,10 +129,72 @@
     <Value>-16711936</Value>
     <Bold>False</Bold>
   </FontConfigurationConfiguration>
-  <CurrentOpenFileList>
-    <FileName>D:\iDocument\Document\Papers\3rd\References.bib</FileName>
-    <Selected>False</Selected>
-  </CurrentOpenFileList>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>EntryType</Property_x0020_Name>
+    <Display_x0020_Name>Type</Display_x0020_Name>
+    <Column_x0020_Width>75</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Title</Property_x0020_Name>
+    <Display_x0020_Name>Title</Display_x0020_Name>
+    <Column_x0020_Width>275</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Url</Property_x0020_Name>
+    <Display_x0020_Name>Url</Display_x0020_Name>
+    <Column_x0020_Width>183</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Year</Property_x0020_Name>
+    <Display_x0020_Name>Year</Display_x0020_Name>
+    <Column_x0020_Width>37</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Author</Property_x0020_Name>
+    <Display_x0020_Name>Author</Display_x0020_Name>
+    <Column_x0020_Width>130</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Pages</Property_x0020_Name>
+    <Display_x0020_Name>Pages</Display_x0020_Name>
+    <Column_x0020_Width>82</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>BibTeXKey</Property_x0020_Name>
+    <Display_x0020_Name>BibTeXKey</Display_x0020_Name>
+    <Column_x0020_Width>134</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Review</Property_x0020_Name>
+    <Display_x0020_Name>Review</Display_x0020_Name>
+    <Column_x0020_Width>232</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Doi</Property_x0020_Name>
+    <Display_x0020_Name>Doi</Display_x0020_Name>
+    <Column_x0020_Width>480</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>False</Display>
+    <Property_x0020_Name>Keywords</Property_x0020_Name>
+    <Display_x0020_Name>Keywords</Display_x0020_Name>
+    <Column_x0020_Width>282</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
+  <DataBaseGridViewColunmConfiguration>
+    <Display>True</Display>
+    <Property_x0020_Name>Abstract</Property_x0020_Name>
+    <Display_x0020_Name>Abstract</Display_x0020_Name>
+    <Column_x0020_Width>200</Column_x0020_Width>
+  </DataBaseGridViewColunmConfiguration>
   <OpenFileHistoryList>
     <FileFullName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\TestDataBase\Main.bib</FileFullName>
   </OpenFileHistoryList>
@@ -211,6 +207,14 @@
   <OpenFileHistoryList>
     <FileFullName>D:\iDocument\Document\Papers\4th\References.bib</FileFullName>
   </OpenFileHistoryList>
+  <CurrentOpenFileList>
+    <FileName>D:\iDocument\Document\Papers\3rd\References.bib</FileName>
+    <Selected>False</Selected>
+  </CurrentOpenFileList>
+  <CurrentOpenFileList>
+    <FileName>D:\iProject\Qiqi.Reference\Qiqi.Reference\bin\Debug\Template.bib</FileName>
+    <Selected>True</Selected>
+  </CurrentOpenFileList>
   <FormMainViewConfiguration>
     <Control>MenuViewShowGroupTreeView</Control>
     <Parameter>True</Parameter>
@@ -225,7 +229,7 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>GroupTreeWidth</Control>
-    <Parameter>180</Parameter>
+    <Parameter>0</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>DetailTabControlHeight</Control>
@@ -233,14 +237,14 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>
-    <Parameter>876</Parameter>
+    <Parameter>28</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWidth</Control>
-    <Parameter>1456</Parameter>
+    <Parameter>160</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainWindowState</Control>
-    <Parameter>2</Parameter>
+    <Parameter>1</Parameter>
   </FormMainViewConfiguration>
 </NewDataSet>

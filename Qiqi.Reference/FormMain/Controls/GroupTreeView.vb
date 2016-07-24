@@ -3,11 +3,22 @@
         Inherits System.Windows.Forms.TreeView
 
         Public Delegate Sub DelegateShowGroup(ByVal GroupBuffer As String)
+        Dim DataTable As DataTable
 
-        Public Sub New()
+        'Public Sub New()
+        '    Me.ShowRootLines = False
+        '    Me.ItemHeight = 18
+        '    AddHandler Me.NodeMouseDoubleClick, AddressOf Me_NodeMouseDoubleClick
+        'End Sub
+
+        Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
             Me.ShowRootLines = False
             Me.ItemHeight = 18
             AddHandler Me.NodeMouseDoubleClick, AddressOf Me_NodeMouseDoubleClick
+
+            If Not Configuration.GetConfig(TableName.GroupTreeViewConfiguration, Me.DataTable) Then
+                Exit Sub
+            End If
         End Sub
 
         ''' <summary>

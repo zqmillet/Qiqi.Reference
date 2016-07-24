@@ -13,6 +13,7 @@
             Const FirstColumnWidth As Integer = 80
             Const SecondColumnWidth As Integer = TableLayoutPanelWidth - FirstColumnWidth
             Const RowHeight As Integer = 22
+            Dim TamplateBibTeXPath As String = Application.StartupPath & "\Template.bib"
 
             Dim ControlList As New ArrayList
             Dim GroupFontFamilyComboBox As FontFamilyComboBox
@@ -28,6 +29,10 @@
             Dim TagNameFontColorComboBox As FontColorComboBox
             Dim TagValueFontColorComboBox As FontColorComboBox
 
+            Dim GroupTreeView As _FormMain.GroupTreeView
+            Dim DataGridView As _FormMain.DataGridView
+            Dim LiteratureTabControl As _FormMain.LiteratureTabControl
+
             Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
                 With Me
                     .Modified = False
@@ -37,6 +42,13 @@
                 InitializeFontFamilyList()
                 InitializeTableLayoutPanel()
                 InitializeControlValue()
+                InitializePreview()
+            End Sub
+
+            Private Sub InitializePreview()
+                GroupTreeView = New _FormMain.GroupTreeView(Configuration)
+                DataGridView = New _FormMain.DataGridView(TamplateBibTeXPath, Configuration)
+                LiteratureTabControl = New _FormMain.LiteratureTabControl(Configuration)
             End Sub
 
             Private Sub InitializeControlValue()

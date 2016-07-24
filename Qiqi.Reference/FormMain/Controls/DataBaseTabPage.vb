@@ -161,7 +161,7 @@
 
         Private Sub InitializeGroupTreeView()
             ' Create a new tree view
-            GroupTreeView = New _FormMain.GroupTreeView
+            GroupTreeView = New _FormMain.GroupTreeView(Configuration)
 
             With GroupTreeView
                 .Dock = DockStyle.Fill
@@ -207,7 +207,7 @@
             End If
 
             ' Create a new data grid view
-            DataBaseGridView = New _FormMain.DataGridView(BibTeXFullName, DataTableColumnConfiguration)
+            DataBaseGridView = New _FormMain.DataGridView(BibTeXFullName, Configuration)
 
             SplitContainerSecondary.Panel1.Controls.Add(DataBaseGridView)
 
