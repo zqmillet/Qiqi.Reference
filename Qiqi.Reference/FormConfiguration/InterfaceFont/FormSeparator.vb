@@ -1,5 +1,5 @@
 ﻿Namespace _FormConfiguration
-    Namespace FontConfiguration
+    Namespace InterfaceFont
         Public Class FormSeparator
             Inherits Windows.Forms.Panel
 
@@ -15,6 +15,7 @@
                     .BorderStyle = BorderStyle.Fixed3D
                     .Margin = New Padding(0, 4, 0, 4)
                     .Location = New Point(0, 10)
+                    .Anchor = AnchorStyles.Right Or AnchorStyles.Left
                 End With
 
                 With Label
@@ -31,6 +32,7 @@
                     .Controls.Add(Label)
                     .Controls.Add(Line)
                     .Margin = New Padding(0, 0, 0, 4)
+                    .Name = Text.Replace(" ", "")
                 End With
             End Sub
 

@@ -1,5 +1,5 @@
 ﻿Namespace _FormConfiguration
-    Namespace FontConfiguration
+    Namespace InterfaceFont
         Public Class FontFamilyComboBox
             Inherits FontSizeComboBox
 

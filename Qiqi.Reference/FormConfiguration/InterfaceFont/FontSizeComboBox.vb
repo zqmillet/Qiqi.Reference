@@ -1,5 +1,5 @@
 ﻿Namespace _FormConfiguration
-    Namespace FontConfiguration
+    Namespace InterfaceFont
         Public Class FontSizeComboBox
             Inherits Windows.Forms.Panel
 
@@ -10,6 +10,7 @@
             Public Const TailLabelWidth As Integer = 20
 
             Public Event SelectedChanged()
+            Public Event SubControlMouseEnter(sender As Object, e As System.EventArgs)
 
             Public Property SelectedText As String
                 Get
@@ -44,18 +45,21 @@
                     .Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
                     AddHandler .DrawItem, AddressOf ComboBox_DrawItem
                     AddHandler .SelectedIndexChanged, AddressOf ComboBox_SelectedIndexChanged
+                    AddHandler .MouseEnter, AddressOf ComboBox_MouseEnter
                 End With
 
                 With HeadLabel
                     .Text = "Font Size"
                     .AutoSize = True
                     .Location = New Point(0, 4)
+                    AddHandler .MouseEnter, AddressOf Label_MouseEnter
                 End With
 
                 With TailLabel
                     .Text = "pt"
                     .AutoSize = False
                     .Location = New Point(Width - TailLabelWidth + 4, 4)
+                    AddHandler .MouseEnter, AddressOf Label_MouseEnter
                 End With
 
                 With Me
@@ -65,9 +69,22 @@
                     .Controls.Add(HeadLabel)
                     .Controls.Add(ComboBox)
                     .Controls.Add(TailLabel)
+                    AddHandler .MouseEnter, AddressOf Me_MouseEnter
                 End With
 
                 FillComboBox()
+            End Sub
+
+            Private Sub Me_MouseEnter()
+                RaiseEvent SubControlMouseEnter(Me, Nothing)
+            End Sub
+
+            Private Sub Label_MouseEnter()
+                RaiseEvent SubControlMouseEnter(Me, Nothing)
+            End Sub
+
+            Private Sub ComboBox_MouseEnter()
+                RaiseEvent SubControlMouseEnter(Me, Nothing)
             End Sub
 
             Public Sub ComboBox_SelectedIndexChanged()

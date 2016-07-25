@@ -18,7 +18,7 @@
         ''' Constructor
         ''' </summary>
         ''' <remarks></remarks>
-        Public Sub New(ByVal BibTeXFullName As String, ByVal Configuration As _FormConfiguration.Configuration)
+        Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
             ' Style Configuration
             StyleConfiguration()
 
@@ -28,14 +28,8 @@
 
             With Me
                 .Dock = DockStyle.Fill
-                .BibTeXFullName = BibTeXFullName
-                    .MenuStrip = New ContextMenuStrip
-                End With
-
-            ' If the full name of BibTeX file is wrong, exit sub
-            If Not My.Computer.FileSystem.FileExists(BibTeXFullName) Then
-                Exit Sub
-            End If
+                .MenuStrip = New ContextMenuStrip
+            End With
 
             ' Column configuration
             ColumnConfiguration()
@@ -52,11 +46,13 @@
             RaiseEvent ProgressUpdate(Progress)
         End Sub
 
-        Public Function DataBaseLoading(ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
+        Public Function DataBaseLoading(ByVal BibTeXFullName As String, ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
             ' If there is no BibTeX file, exit sub
             If Not My.Computer.FileSystem.FileExists(BibTeXFullName) Then
                 Return False
             End If
+
+            Me.BibTeXFullName = BibTeXFullName
 
             ' Create a database of BibTeX
             DataBase = New _BibTeX.DataBase(BibTeXFullName)
@@ -97,10 +93,18 @@
                         .Cells(Column.Name).Value = Literature.GetPropertyValue(Column.Name)
                     Next
 
+                    If Not ExistColumn("ExistURL") Then
+                        Continue For
+                    End If
+
                     If Literature.ExistURL() Then
                         .Cells("ExistURL").Value = Resource.Icon.ExistURL
                     Else
                         .Cells("ExistURL").Value = Resource.Icon.NotExistURL
+                    End If
+
+                    If Not ExistColumn("ExistFile") Then
+                        Continue For
                     End If
 
                     If Literature.ExistFile() Then
@@ -184,6 +188,29 @@
             End With
         End Sub
 
+        Public Sub ResetColumn()
+            ' Config the column
+            With Me
+                .Columns.Clear()
+                .ColumnCount = 2
+                .RowHeadersVisible = False
+
+                With .Columns(0)
+                    .Visible = True
+                    .Name = "EntryType"
+                    .HeaderText = "Type"
+                    .Width = 60
+                End With
+
+                With .Columns(1)
+                    .Visible = True
+                    .Name = "Title"
+                    .HeaderText = "Title"
+                    .Width = 230
+                End With
+            End With
+        End Sub
+
         Private Sub Me_ColumnHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs)
             If e.Button = Windows.Forms.MouseButtons.Right Then
                 With MenuStrip
@@ -210,9 +237,13 @@
         End Sub
 
         Private Sub Me_RowPostPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowPostPaintEventArgs)
-            Dim Rectangle As New System.Drawing.Rectangle(e.RowBounds.Location.X, _
-                                                          e.RowBounds.Location.Y, _
-                                                          Me.RowHeadersWidth - 4, _
+            If Not Me.RowHeadersVisible Then
+                Exit Sub
+            End If
+
+            Dim Rectangle As New System.Drawing.Rectangle(e.RowBounds.Location.X,
+                                                          e.RowBounds.Location.Y,
+                                                          Me.RowHeadersWidth - 4,
                                                           e.RowBounds.Height)
             TextRenderer.DrawText(e.Graphics, _
                                   (e.RowIndex + 1).ToString, _
@@ -282,10 +313,6 @@
 
         Private Function ExistColumn(ByVal ColumnName As String) As Boolean
             For Each Column As DataGridViewColumn In Me.Columns
-                If TypeOf Column Is DataGridViewImageColumn Then
-                    Continue For
-                End If
-
                 If Column.Name.Trim.ToLower = ColumnName.Trim.ToLower Then
                     Return True
                 End If

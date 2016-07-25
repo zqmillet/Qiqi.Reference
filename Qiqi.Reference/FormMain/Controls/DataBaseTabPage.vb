@@ -186,13 +186,12 @@
             For Each Row As DataGridViewRow In DataBaseGridView.Rows
                 Row.Visible = CType(GroupTreeView.SelectedNode, _FormMain.GroupTreeNode).ExistBibTeXKey(CType(Row.Tag, _BibTeX.Literature).ID)
             Next
-           
-        End Sub
 
+        End Sub
 
         Public Function DataBaseLoading(ByRef ErrorMessage As _BibTeX.ErrorMessage) As Boolean
             Loaded = True
-            If DataBaseGridView.DataBaseLoading(ErrorMessage) Then
+            If DataBaseGridView.DataBaseLoading(BibTeXFullName, ErrorMessage) Then
                 GroupTreeView.Loading(DataBaseGridView.DataBase)
                 Return True
             Else
@@ -207,7 +206,7 @@
             End If
 
             ' Create a new data grid view
-            DataBaseGridView = New _FormMain.DataGridView(BibTeXFullName, Configuration)
+            DataBaseGridView = New _FormMain.DataGridView(Configuration)
 
             SplitContainerSecondary.Panel1.Controls.Add(DataBaseGridView)
 

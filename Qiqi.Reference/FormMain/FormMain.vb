@@ -287,7 +287,6 @@
             ProgressUpdate(Progress)
         End If
 
-
     End Sub
 
     Private Sub ProgressUpdate(ByVal Progress As Double)

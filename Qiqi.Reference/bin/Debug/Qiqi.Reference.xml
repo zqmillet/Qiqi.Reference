@@ -158,7 +158,7 @@ Qiqi.Reference
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="P:Qiqi.Reference._FormConfiguration.FontConfiguration.ColorPicker.SelectedItem">
+<member name="P:Qiqi.Reference._FormConfiguration.InterfaceFont.ColorPicker.SelectedItem">
  <summary>
  Gets or sets the currently selected item.
  </summary>
@@ -229,7 +229,7 @@ Qiqi.Reference
  </summary>
  <param name="e"></param>
 </member>
-<member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(System.String,Qiqi.Reference._FormConfiguration.Configuration)">
+<member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(Qiqi.Reference._FormConfiguration.Configuration)">
  <summary>
  Constructor
  </summary>

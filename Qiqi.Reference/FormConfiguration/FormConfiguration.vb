@@ -119,7 +119,7 @@
         With FontConfiguration
             .Text = "Font Configuration"
             .Name = "FontConfiguration"
-            .Tag = New _FormConfiguration.FontConfiguration.MainPanel(Configuration)
+            .Tag = New _FormConfiguration.InterfaceFont.MainPanel(Configuration)
         End With
         TreeView.Nodes.Add(FontConfiguration)
 

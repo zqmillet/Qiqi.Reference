@@ -6,16 +6,14 @@
             Public Sub New()
                 With Me
                     .TextBox.Multiline = False
-                    .Margin = New Padding(2)
+                    .Padding = New Padding(4)
+                    .BackColor = Color.White
                 End With
             End Sub
 
             Public Sub New(ByVal Text As String)
-                With Me
-                    .TextBox.Multiline = False
-                    .TextBox.Text = Text
-                    .Margin = New Padding(2)
-                End With
+                Me.New
+                Me.TextBox.Text = Text
             End Sub
         End Class
     End Namespace

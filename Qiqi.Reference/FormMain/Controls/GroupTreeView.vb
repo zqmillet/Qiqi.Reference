@@ -11,6 +11,8 @@
         '    AddHandler Me.NodeMouseDoubleClick, AddressOf Me_NodeMouseDoubleClick
         'End Sub
 
+        Public Unclickable As Boolean = False
+
         Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
             Me.ShowRootLines = False
             Me.ItemHeight = 18
@@ -38,6 +40,14 @@
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub Me_NodeMouseDoubleClick(ByVal sender As Object, ByVal e As TreeNodeMouseClickEventArgs)
+            If Unclickable Then
+                Exit Sub
+            End If
+
+            If Me.SelectedNode Is Nothing Then
+                Exit Sub
+            End If
+
             If Not Me.SelectedNode.Parent Is Nothing Then
                 If Me.SelectedNode.IsExpanded Then
                     Me.SelectedNode.Collapse()

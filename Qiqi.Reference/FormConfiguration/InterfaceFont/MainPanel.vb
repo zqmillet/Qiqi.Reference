@@ -1,5 +1,5 @@
 ﻿Namespace _FormConfiguration
-    Namespace FontConfiguration
+    Namespace InterfaceFont
         Public Class MainPanel
             Inherits System.Windows.Forms.Panel
 
@@ -9,10 +9,15 @@
             Dim FontFamilyList As ArrayList
 
             Dim TableLayoutPanel As TableLayoutPanel
-            Const TableLayoutPanelWidth As Integer = 250
+            Const TableLayoutPanelWidth As Integer = 240
             Const FirstColumnWidth As Integer = 80
             Const SecondColumnWidth As Integer = TableLayoutPanelWidth - FirstColumnWidth
             Const RowHeight As Integer = 22
+            Const GroupTreeViewWidth As Integer = 150
+            Const GroupTreeViewHeight As Integer = 200
+            Const MarginBetweenZones As Integer = 21
+            Const SpaceBetweenLeftAndRight As Integer = 15
+
             Dim TamplateBibTeXPath As String = Application.StartupPath & "\Template.bib"
 
             Dim ControlList As New ArrayList
@@ -29,14 +34,22 @@
             Dim TagNameFontColorComboBox As FontColorComboBox
             Dim TagValueFontColorComboBox As FontColorComboBox
 
+            Dim FormSaparator As FormSeparator
             Dim GroupTreeView As _FormMain.GroupTreeView
             Dim DataGridView As _FormMain.DataGridView
             Dim LiteratureTabControl As _FormMain.LiteratureTabControl
+
+            Dim CoverPanelList As ArrayList
+            Dim CoverPanel4GroupTreeView As TransparentPanel
+            Dim CoverPanel4DataGridView As TransparentPanel
+            Dim CoverPanel4LiteratureTabControl As TransparentPanel
+            Dim CoverPanel4AllControl As TransparentPanel
 
             Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
                 With Me
                     .Modified = False
                     .Configuration = Configuration
+                    .ClientSize = New Size(500, 500)
                 End With
 
                 InitializeFontFamilyList()
@@ -46,9 +59,105 @@
             End Sub
 
             Private Sub InitializePreview()
+                FormSaparator = New FormSeparator("Preview", Me.ClientSize.Width - TableLayoutPanelWidth - SpaceBetweenLeftAndRight)
+                With FormSaparator
+                    .Location = New Point(TableLayoutPanelWidth + SpaceBetweenLeftAndRight, 0)
+                    .Anchor = AnchorStyles.Right Or AnchorStyles.Left Or AnchorStyles.Top
+                End With
+                Me.Controls.Add(FormSaparator)
+
+                CoverPanel4AllControl = New TransparentPanel
+                With CoverPanel4AllControl
+                    .BorderStyle = BorderStyle.None
+                    .Width = Me.ClientSize.Width - TableLayoutPanelWidth
+                    .Height = Me.ClientSize.Height
+                    .Location = New Point(TableLayoutPanelWidth, 0)
+                    .HideBorder = True
+                    .Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+                End With
+                ' Me.Controls.Add(CoverPanel4AllControl)
+
+                CoverPanel4GroupTreeView = New TransparentPanel()
+                CoverPanel4DataGridView = New TransparentPanel()
+                CoverPanel4LiteratureTabControl = New TransparentPanel()
+
+                CoverPanelList = New ArrayList
+                CoverPanelList.Add(CoverPanel4GroupTreeView)
+                CoverPanelList.Add(CoverPanel4DataGridView)
+                CoverPanelList.Add(CoverPanel4LiteratureTabControl)
+
+                For Each Cover As TransparentPanel In CoverPanelList
+                    Cover.Visible = False
+                    Me.Controls.Add(Cover)
+                Next
+
                 GroupTreeView = New _FormMain.GroupTreeView(Configuration)
-                DataGridView = New _FormMain.DataGridView(TamplateBibTeXPath, Configuration)
+                With GroupTreeView
+                    .Width = GroupTreeViewWidth
+                    .Height = GroupTreeViewHeight
+                    .Location = New Point(TableLayoutPanelWidth + SpaceBetweenLeftAndRight, FormSaparator.Height + 4)
+                    .Anchor = AnchorStyles.Top Or AnchorStyles.Left
+                    .TabStop = False
+                    .Scrollable = False
+                End With
+                Me.Controls.Add(GroupTreeView)
+
+                DataGridView = New _FormMain.DataGridView(Configuration)
+                With DataGridView
+                    .Width = Me.ClientSize.Width - TableLayoutPanelWidth - SpaceBetweenLeftAndRight - GroupTreeViewWidth - 4
+                    .Height = GroupTreeViewHeight
+                    .Location = New Point(TableLayoutPanelWidth + SpaceBetweenLeftAndRight + GroupTreeViewWidth + 4, FormSaparator.Height + 4)
+                    .Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+                    .TabStop = False
+                    .ResetColumn()
+                    .ScrollBars = ScrollBars.None
+
+                    Dim ErrorMessage As New _BibTeX.ErrorMessage
+                    If Not .DataBaseLoading(TamplateBibTeXPath, ErrorMessage) Then
+                        MsgBox(ErrorMessage.GetErrorMessage)
+                    End If
+
+                    GroupTreeView.Loading(.DataBase)
+                    If Not GroupTreeView.Nodes(0).Nodes(0).Nodes(0) Is Nothing Then
+                        With GroupTreeView.Nodes(0).Nodes(0).Nodes(0)
+                            .BackColor = System.Drawing.SystemColors.Highlight
+                            .ForeColor = System.Drawing.SystemColors.HighlightText
+                        End With
+                    End If
+                End With
+                Me.Controls.Add(DataGridView)
+
                 LiteratureTabControl = New _FormMain.LiteratureTabControl(Configuration)
+                With LiteratureTabControl
+                    .Width = Me.ClientSize.Width - TableLayoutPanelWidth - SpaceBetweenLeftAndRight
+                    .Height = Me.ClientSize.Height - GroupTreeViewHeight - FormSaparator.Height - 4 - 4
+                    .Location = New Point(TableLayoutPanelWidth + SpaceBetweenLeftAndRight, GroupTreeViewHeight + 4 + FormSaparator.Height + 4)
+                    .Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
+                    .TabStop = False
+                    .ResetTabPages()
+                    .Load(DataGridView.DataBase.LiteratureList(0), False)
+                End With
+                Me.Controls.Add(LiteratureTabControl)
+
+                CoverPanel4GroupTreeView.Tag = GroupTreeView
+                CoverPanel4DataGridView.Tag = DataGridView
+                CoverPanel4LiteratureTabControl.Tag = LiteratureTabControl
+            End Sub
+
+            Protected Overrides Sub OnResize(eventargs As EventArgs)
+                ' MyBase.OnResize(eventargs)
+                If CoverPanelList Is Nothing Then
+                    Exit Sub
+                End If
+
+                For Each Cover As TransparentPanel In CoverPanelList
+                    With Cover
+                        .Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top Or AnchorStyles.Bottom
+                        .Height = .Tag.Height + 1
+                        .Width = .Tag.Width + 1
+                        .Location = New Point(.Tag.Location.X - 1, .Tag.Location.Y - 1)
+                    End With
+                Next
             End Sub
 
             Private Sub InitializeControlValue()
@@ -57,7 +166,7 @@
                 Dim Index As Integer = 0
 
                 RemoveHandlerConfigurationChanged()
-                If Configuration.GetConfig(TableName.FontConfigurationConfiguration, DataTable) Then
+                If Configuration.GetConfig(TableName.InterfaceFontConfiguration, DataTable) Then
                     For Each Row As DataRow In DataTable.Rows
                         For Each Control As Control In ControlList
                             If Control.Name = Row(0) Then
@@ -82,7 +191,7 @@
                 Dim DataTable As New DataTable
 
                 With DataTable
-                    .TableName = TableName.FontConfigurationConfiguration
+                    .TableName = TableName.InterfaceFontConfiguration
                     .Columns.Add("Name")
                     .Columns.Add("Value")
                     .Columns.Add("Bold")
@@ -170,7 +279,6 @@
                 TagValueFontColorComboBox.Name = NameOf(TagValueFontColorComboBox)
 
                 ControlList = New ArrayList
-                Dim MarginBetweenZones As Integer = 8
                 ControlList.Add(New FormSeparator("Group Font Configuration", TableLayoutPanelWidth))
                 ControlList.Add(GroupFontFamilyComboBox)
                 ControlList.Add(GroupFontSizeComboBox)
@@ -180,23 +288,62 @@
                 ControlList.Add(New FormSeparator("Detail Font Configuration", TableLayoutPanelWidth, MarginBetweenZones))
                 ControlList.Add(DetailFontFamilyComboBox)
                 ControlList.Add(DetailFontSizeComboBox)
-                ControlList.Add(New FormSeparator("Syntax Hightlight Font Configuration", TableLayoutPanelWidth, MarginBetweenZones))
+                ControlList.Add(New FormSeparator("Code Font Configuration", TableLayoutPanelWidth, MarginBetweenZones))
                 ControlList.Add(HighlightFontFamilyComboBox)
                 ControlList.Add(HighlightFontSizeComboBox)
-                ControlList.Add(New FormSeparator("Syntax Hightlight Color Configuration", TableLayoutPanelWidth, MarginBetweenZones))
+                ' ControlList.Add(New FormSeparator("Code Color Configuration", TableLayoutPanelWidth, MarginBetweenZones))
                 ControlList.Add(EntryTypeFontColorComboBox)
                 ControlList.Add(BibTeXKeyFontColorComboBox)
                 ControlList.Add(TagNameFontColorComboBox)
                 ControlList.Add(TagValueFontColorComboBox)
 
-
                 Dim Index As Integer = 0
                 For Each Control As Control In ControlList
                     TableLayoutPanel.Controls.Add(Control, 0, Index)
+
+                    If TypeOf Control Is FontFamilyComboBox Then
+                        AddHandler CType(Control, FontFamilyComboBox).SubControlMouseEnter, AddressOf InputControls_MouseEnter
+                    ElseIf TypeOf Control Is FontSizeComboBox Then
+                        AddHandler CType(Control, FontSizeComboBox).SubControlMouseEnter, AddressOf InputControls_MouseEnter
+                    ElseIf TypeOf Control Is FontColorComboBox Then
+                        AddHandler CType(Control, FontColorComboBox).SubControlMouseEnter, AddressOf InputControls_MouseEnter
+                    Else
+                        AddHandler Control.MouseEnter, AddressOf InputControls_MouseEnter
+                    End If
+
                     Index += 1
                 Next
 
                 Me.Controls.Add(TableLayoutPanel)
+            End Sub
+
+            Private Sub InputControls_MouseEnter(sender As Object, e As System.EventArgs)
+                Select Case sender.Name
+                    Case "GroupFontConfiguration", GroupFontFamilyComboBox.Name, GroupFontSizeComboBox.Name
+                        CoverPanel4GroupTreeView.Visible = True
+                        CoverPanel4DataGridView.Visible = False
+                        CoverPanel4LiteratureTabControl.Visible = False
+                    Case "ListFontConfiguration", ListFontFamilyComboBox.Name, ListFontSizeComboBox.Name
+                        CoverPanel4GroupTreeView.Visible = False
+                        CoverPanel4DataGridView.Visible = True
+                        CoverPanel4LiteratureTabControl.Visible = False
+                    Case "DetailFontConfiguration", DetailFontFamilyComboBox.Name, DetailFontSizeComboBox.Name
+                        LiteratureTabControl.SelectedIndex = 0
+                        CoverPanel4LiteratureTabControl.Refresh()
+
+                        CoverPanel4GroupTreeView.Visible = False
+                        CoverPanel4DataGridView.Visible = False
+                        CoverPanel4LiteratureTabControl.Visible = True
+                    Case "CodeFontConfiguration", HighlightFontFamilyComboBox.Name,
+                     HighlightFontSizeComboBox.Name, EntryTypeFontColorComboBox.Name,
+                     BibTeXKeyFontColorComboBox.Name, TagNameFontColorComboBox.Name,
+                     TagValueFontColorComboBox.Name
+                        LiteratureTabControl.SelectedIndex = 1
+                        CoverPanel4LiteratureTabControl.Refresh()
+                        CoverPanel4GroupTreeView.Visible = False
+                        CoverPanel4DataGridView.Visible = False
+                        CoverPanel4LiteratureTabControl.Visible = True
+                End Select
             End Sub
 
             Private Sub InitializeFontFamilyList()

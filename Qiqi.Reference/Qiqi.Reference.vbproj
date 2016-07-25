@@ -95,22 +95,25 @@
     <Compile Include="FormConfiguration\DataBaseColumnDisplay\MainPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\FontColorComboBox.vb">
+    <Compile Include="FormConfiguration\InterfaceFont\FontColorComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\ColorPicker.vb">
+    <Compile Include="FormConfiguration\InterfaceFont\ColorPicker.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\FontFamilyComboBox.vb">
+    <Compile Include="FormConfiguration\InterfaceFont\FontFamilyComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\FontSizeComboBox.vb">
+    <Compile Include="FormConfiguration\InterfaceFont\FontSizeComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\FormSeparator.vb">
+    <Compile Include="FormConfiguration\InterfaceFont\FormSeparator.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormConfiguration\FontConfiguration\MainPanel.vb">
+    <Compile Include="FormConfiguration\InterfaceFont\MainPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormConfiguration\InterfaceFont\TransparentPanel.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormConfiguration\LiteratureDetailDisplay\Configuration.vb" />

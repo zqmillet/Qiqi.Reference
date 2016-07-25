@@ -8,11 +8,14 @@
         Dim ControlMargin As Padding = New Padding(5)
         Dim Literature As _BibTeX.Literature
 
+        Private Const TabPageConfigurationString = "Default{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,0,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Source Code{SourceCode{Source Code,False,0,False,True}}}"
+
         Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
             With Me
                 .Dock = DockStyle.Fill
                 .DataTable = New DataTable
                 .Literature = New _BibTeX.Literature
+                AddHandler .GotFocus, AddressOf Me_GotFocus
             End With
 
             If Not Configuration.GetConfig(TableName.LiteratureDetailDisplayConfiguration, Me.DataTable) Then
@@ -20,11 +23,21 @@
             End If
         End Sub
 
-        Public Sub Load(ByVal Configuration As _FormConfiguration.Configuration)
-            Configuration.GetConfig(TableName.LiteratureDetailDisplayConfiguration, Me.DataTable)
+        'Public Sub Load(ByVal Configuration As _FormConfiguration.Configuration)
+        '    Configuration.GetConfig(TableName.LiteratureDetailDisplayConfiguration, Me.DataTable)
+        'End Sub
+
+        Private Sub Me_GotFocus()
+            Me.Enabled = False
+            Me.Enabled = True
         End Sub
 
-        Public Sub Load(ByVal Literature As _BibTeX.Literature)
+        Public Sub ResetTabPages()
+            Me.DataTable.Rows.Clear()
+            Me.DataTable.Rows.Add(TabPageConfigurationString)
+        End Sub
+
+        Public Sub Load(ByVal Literature As _BibTeX.Literature, Optional ByVal TabStop As Boolean = True)
             If Literature Is Nothing Then
                 Exit Sub
             End If
@@ -61,7 +74,7 @@
                         .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100))
                         ' .Controls.Add(GenerateControl(Literature.GetProperty(CType(TabPageConfiguration.Properties.Item(0), _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration).PropertyName)))
                         Dim PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration = TabPageConfiguration.Properties(0)
-                        .Controls.Add(GenerateControl(PropertyConfiguration, .RowCount))
+                        .Controls.Add(GenerateControl(PropertyConfiguration, TabStop))
                     ElseIf .ColumnCount = 2 And .RowCount > 0 Then
                         ' n*2
                         .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, AbsoluteColumnWidth))
@@ -86,23 +99,19 @@
 
                             .Controls.Add(Label, 0, Index)
                             ' .Controls.Add(GenerateControl(Literature.GetProperty(PropertyConfiguration.PropertyName)), 1, Index)
-                            .Controls.Add(GenerateControl(PropertyConfiguration, .RowCount), 1, Index)
+                            .Controls.Add(GenerateControl(PropertyConfiguration, TabStop), 1, Index)
                         Next
                     Else
                         MsgBox(ErrorMessage, MsgBoxStyle.OkOnly, "Error")
                         Exit Sub
                     End If
-
-                    If .RowCount = 1 Then
-
-                    End If
                 End With
-
 
                 If TabPageIndex <= Me.TabCount - 1 Then
                     With Me.TabPages(TabPageIndex)
                         .Controls.Add(TableLayoutPanel)
                         .Text = TabPageConfiguration.TabPageName
+                        .TabStop = TabStop
                         If .Controls.Count > 1 Then
                             .Controls.RemoveAt(0)
                         End If
@@ -128,8 +137,9 @@
             Next
         End Sub
 
-        Private Function GenerateControl(ByVal PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration, ByVal RouCount As Integer) As Object
+        Private Function GenerateControl(ByVal PropertyConfiguration As _FormConfiguration.LiteratureDetailDisplay.PropertyConfiguration, Optional ByVal TabStop As Boolean = True) As Object
             Dim Control As Control
+
             If PropertyConfiguration.Height = 0 Then
                 Control = New _FormMain._LiteratureTabControl.SingleLineTextBox()
             Else
@@ -142,6 +152,7 @@
 
             CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).SyntaxHighlight = PropertyConfiguration.SyntaxHighlight
             CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).Text = Literature.GetProperty(PropertyConfiguration.PropertyName).Value
+            CType(Control, _FormMain._LiteratureTabControl.MultiLineTextBox).TextBox.TabStop = TabStop
 
             Return Control
         End Function
