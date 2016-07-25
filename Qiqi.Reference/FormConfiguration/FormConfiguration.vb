@@ -117,8 +117,8 @@
 
         Dim FontConfiguration As New TreeNode
         With FontConfiguration
-            .Text = "Font Configuration"
-            .Name = "FontConfiguration"
+            .Text = "Interface Font"
+            .Name = "InterfaceFont"
             .Tag = New _FormConfiguration.InterfaceFont.MainPanel(Configuration)
         End With
         TreeView.Nodes.Add(FontConfiguration)

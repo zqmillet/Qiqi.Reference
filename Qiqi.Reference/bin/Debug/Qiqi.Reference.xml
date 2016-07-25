@@ -163,6 +163,11 @@ Qiqi.Reference
  Gets or sets the currently selected item.
  </summary>
 </member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel">
+ <summary>
+ This class is the panel of the interface font configuration
+ </summary>
+</member>
 <member name="M:Qiqi.Reference._FormConfiguration.LiteratureDetailDisplay.MainPanel.GetConfiguration">
  <summary>
  Get the DataTable of this panel

@@ -1,43 +1,64 @@
 ﻿Namespace _FormConfiguration
     Namespace InterfaceFont
+        ''' <summary>
+        ''' This class is the panel of the interface font configuration.
+        ''' </summary>
         Public Class MainPanel
             Inherits System.Windows.Forms.Panel
 
-            Public Modified As Boolean
+            ' All configuration of the whole software.
             Dim Configuration As _FormConfiguration.Configuration
 
-            Dim FontFamilyList As ArrayList
-
+            ' This TableLayoutPanel is used to contain all ComboBoxex of this panel.
             Dim TableLayoutPanel As TableLayoutPanel
+
+            ' The following constants are used to draw the interface of this panel.
+            ' The width of the TableLayoutPanel.
             Const TableLayoutPanelWidth As Integer = 240
-            Const FirstColumnWidth As Integer = 80
-            Const SecondColumnWidth As Integer = TableLayoutPanelWidth - FirstColumnWidth
-            Const RowHeight As Integer = 22
+            ' The width and the height of the GroupTreeView.
             Const GroupTreeViewWidth As Integer = 150
             Const GroupTreeViewHeight As Integer = 200
-            Const MarginBetweenZones As Integer = 21
+            ' This panel is separated into two parts:
+            ' - left part is used to gain the input parameters,
+            ' - right part is used to show the preview.
+            ' This constant is the distance between the left part and the right part.
             Const SpaceBetweenLeftAndRight As Integer = 15
-
+            ' The left part is separated into several input zones,
+            ' and this constant is the distance between two input zones.
+            Const MarginBetweenZones As Integer = 21
+            ' The file Template.bib is the sample which is shown in the preview interface.
+            ' This constant is the path of the file Template.bib
             Dim TamplateBibTeXPath As String = Application.StartupPath & "\Template.bib"
 
-            Dim ControlList As New ArrayList
+            ' The following ComboBoxes are used to gain the user's input data.
+            ' The following two ComboBoxes are used to gain the font famility and size of the GroupTreeView.
             Dim GroupFontFamilyComboBox As FontFamilyComboBox
             Dim GroupFontSizeComboBox As FontSizeComboBox
+            ' The following two ComboBoxes are used to gain the font famility and size of the DateGridView.
             Dim ListFontFamilyComboBox As FontFamilyComboBox
             Dim ListFontSizeComboBox As FontSizeComboBox
+            ' The following two ComboBoxes are used to gain the font famility and size of the LiteratureControlTab.
             Dim DetailFontFamilyComboBox As FontFamilyComboBox
             Dim DetailFontSizeComboBox As FontSizeComboBox
+            ' The following two ComboBoxes are used to gain the font famility and size of the BibTeX codes.
             Dim HighlightFontFamilyComboBox As FontFamilyComboBox
             Dim HighlightFontSizeComboBox As FontSizeComboBox
+            ' The following four ComboBoxes are used to gain the colors of the the BibTeX codes.
             Dim EntryTypeFontColorComboBox As FontColorComboBox
             Dim BibTeXKeyFontColorComboBox As FontColorComboBox
             Dim TagNameFontColorComboBox As FontColorComboBox
             Dim TagValueFontColorComboBox As FontColorComboBox
+            ' The ControlList is ArrayList which is used to contain the above ComboBoxes.
+            ' With this ArrayList, the above ComboBoxes can be initialize in a loop.
+            Dim ControlList As New ArrayList
 
+            ' The FormSaparator is a label of the preview.
             Dim FormSaparator As FormSeparator
+            ' The following controls consist the preview interface.
             Dim GroupTreeView As _FormMain.GroupTreeView
             Dim DataGridView As _FormMain.DataGridView
             Dim LiteratureTabControl As _FormMain.LiteratureTabControl
+
 
             Dim CoverPanelList As ArrayList
             Dim CoverPanel4GroupTreeView As TransparentPanel
@@ -47,12 +68,10 @@
 
             Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
                 With Me
-                    .Modified = False
                     .Configuration = Configuration
                     .ClientSize = New Size(500, 500)
                 End With
 
-                InitializeFontFamilyList()
                 InitializeTableLayoutPanel()
                 InitializeControlValue()
                 InitializePreview()
@@ -75,7 +94,7 @@
                     .HideBorder = True
                     .Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
                 End With
-                ' Me.Controls.Add(CoverPanel4AllControl)
+                Me.Controls.Add(CoverPanel4AllControl)
 
                 CoverPanel4GroupTreeView = New TransparentPanel()
                 CoverPanel4DataGridView = New TransparentPanel()
@@ -330,7 +349,6 @@
                     Case "DetailFontConfiguration", DetailFontFamilyComboBox.Name, DetailFontSizeComboBox.Name
                         LiteratureTabControl.SelectedIndex = 0
                         CoverPanel4LiteratureTabControl.Refresh()
-
                         CoverPanel4GroupTreeView.Visible = False
                         CoverPanel4DataGridView.Visible = False
                         CoverPanel4LiteratureTabControl.Visible = True
@@ -344,13 +362,6 @@
                         CoverPanel4DataGridView.Visible = False
                         CoverPanel4LiteratureTabControl.Visible = True
                 End Select
-            End Sub
-
-            Private Sub InitializeFontFamilyList()
-                FontFamilyList = New ArrayList
-                For Each Font As FontFamily In System.Drawing.FontFamily.Families
-                    FontFamilyList.Add(Font)
-                Next
             End Sub
 
             Private Sub AddHaddlerConfigurationChanged()
