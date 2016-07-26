@@ -1,4 +1,5 @@
-﻿Public Class FormConfiguration
+﻿
+Public Class FormConfiguration
 
     Dim Configuration As _FormConfiguration.Configuration
     Dim TreeView As TreeView
@@ -46,7 +47,7 @@
         ButtonOK = New Button
         With ButtonOK
             .Size = ButtonSize
-            .Location = New Point(Me.ClientSize.Width - 2 * ControlDistance - 2 * ButtonSize.width, _
+            .Location = New Point(Me.ClientSize.Width - 2 * ControlDistance - 2 * ButtonSize.width,
                                   Me.ClientSize.Height - ControlDistance - ButtonSize.height)
             .FlatStyle = FlatStyle.Flat
             .FlatAppearance.BorderColor = Color.FromArgb(100, 100, 100)
@@ -57,7 +58,7 @@
         ButtonCancel = New Button
         With ButtonCancel
             .Size = ButtonSize
-            .Location = New Point(Me.ClientSize.Width - ControlDistance - ButtonSize.width, _
+            .Location = New Point(Me.ClientSize.Width - ControlDistance - ButtonSize.width,
                                   Me.ClientSize.Height - ControlDistance - ButtonSize.height)
             .FlatStyle = FlatStyle.Flat
             .FlatAppearance.BorderColor = Color.FromArgb(100, 100, 100)
@@ -128,7 +129,7 @@
         For Each TreeNode As TreeNode In TreeView.Nodes
             With TreeNode.Tag
                 .Location = New Point(2 * ControlDistance + TreeViewWidth, ControlDistance)
-                .Size = New Size(Me.ClientSize.Width - 3 * ControlDistance - TreeViewWidth, _
+                .Size = New Size(Me.ClientSize.Width - 3 * ControlDistance - TreeViewWidth,
                                   Me.ClientSize.Height - 3 * ControlDistance - ButtonSize.Height)
                 .Visible = False
                 .Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top

@@ -1,12 +1,23 @@
 ﻿Namespace _FormConfiguration
     Namespace InterfaceFont
+        ''' <summary>
+        ''' This class is a label with a long tail.
+        ''' </summary>
         Public Class FormSeparator
             Inherits Windows.Forms.Panel
 
+            ' The label which is used to show the text.
             Dim Label As New Label
+            ' The line which is regarded as a long tail.
             Dim Line As New Label
 
-            Public Sub New(ByVal Text As String, ByVal Width As Integer)
+            ''' <summary>
+            ''' Constructor.
+            ''' </summary>
+            ''' <param name="Text">The text of the Label.</param>
+            ''' <param name="Width">The width of the whole Label.</param>
+            ''' <param name="TopMargin">The top margin of the Label.</param>
+            Public Sub New(ByVal Text As String, ByVal Width As Integer, Optional ByVal TopMargin As Integer = 0)
                 With Line
                     .Text = ""
                     .AutoSize = False
@@ -20,7 +31,6 @@
 
                 With Label
                     .Text = Text
-                    ' .Font = New Font(Label.Font, FontStyle.Bold)
                     .AutoSize = True
                     .Margin = New Padding(0)
                     .Location = New Point(0, 4)
@@ -31,16 +41,10 @@
                     .Height = 20
                     .Controls.Add(Label)
                     .Controls.Add(Line)
-                    .Margin = New Padding(0, 0, 0, 4)
+                    .Margin = New Padding(0, TopMargin, 0, 4)
                     .Name = Text.Replace(" ", "")
                 End With
             End Sub
-
-            Public Sub New(ByVal Text As String, ByVal Width As Integer, ByVal TopMarigin As Integer)
-                Me.New(Text, Width)
-                Me.Margin = New Padding(0, TopMarigin, 0, 4)
-            End Sub
-
         End Class
     End Namespace
 End Namespace

@@ -169,6 +169,19 @@ Qiqi.Reference
  Gets or sets the currently selected item.
  </summary>
 </member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.FormSeparator">
+ <summary>
+ This class is a label with a long tail.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FormSeparator.#ctor(System.String,System.Int32,System.Int32)">
+ <summary>
+ Constructor
+ </summary>
+ <param name="Text">The text of the Label.</param>
+ <param name="Width">The width of the whole Label.</param>
+ <param name="TopMargin">The top margin of the Label.</param>
+</member>
 <member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel">
  <summary>
  This class is the panel of the interface font configuration.
@@ -247,6 +260,18 @@ Qiqi.Reference
  Configurate the Enable attribute of a control to prevent it from being clicked is not ideal sometime,
  because if the Enable = False, the color of this control is gray.
  </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.TransparentPanel.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+ <summary>
+ We override the sub OnPaintBackground to prevent the background of this panel from being painted.
+ </summary>
+ <param name="e"></param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.TransparentPanel.OnPaint(System.Windows.Forms.PaintEventArgs)">
+ <summary>
+ We override this sub to draw a red border with 6pt width on this panel.
+ </summary>
+ <param name="e"></param>
 </member>
 <member name="M:Qiqi.Reference._FormConfiguration.LiteratureDetailDisplay.MainPanel.GetConfiguration">
  <summary>

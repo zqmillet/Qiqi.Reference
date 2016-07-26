@@ -15,7 +15,7 @@
         Public DataBase As _BibTeX.DataBase
 
         ''' <summary>
-        ''' Constructor
+        ''' Constructor.
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
