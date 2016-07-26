@@ -1,6 +1,9 @@
 ﻿Namespace _FormConfiguration
     Namespace InterfaceFont
-
+        ''' <summary>
+        ''' This class is ComboBox to help user to pick a color.
+        ''' The characteristic of this class is that it can show the color block of each dropped item,
+        ''' </summary>
         Public Class ColorPicker
             Inherits ComboBox
 
@@ -104,58 +107,6 @@
                     SelectedIndex = 0
                 End Set
             End Property
-
-            '''' <summary>
-            '''' Gets the text of the selected item, or sets the selection to
-            '''' the item with the specified text.
-            '''' </summary>
-            'Public Shadows Property SelectedText As String
-            '    Get
-            '        If (SelectedIndex >= 0) Then
-            '            Return Me.SelectedItem.Text
-            '        End If
-
-            '        Return String.Empty
-            '    End Get
-            '    Set
-            '        Dim i As Integer = 0
-            '        Do While (i < Items.Count)
-            '            If (CType(Items(i), ColorInfo).Text = Value) Then
-            '                SelectedIndex = i
-            '                Exit Do
-            '            End If
-
-            '            i = (i + 1)
-            '        Loop
-
-            '    End Set
-            'End Property
-
-            '''' <summary>
-            '''' Gets the value of the selected item, or sets the selection to
-            '''' the item with the specified value.
-            '''' </summary>
-            'Public Shadows Property SelectedValue As Color
-            '    Get
-            '        If (SelectedIndex >= 0) Then
-            '            Return Me.SelectedItem.Color
-            '        End If
-
-            '        Return Color.White
-            '    End Get
-            '    Set
-            '        Dim i As Integer = 0
-            '        Do While (i < Items.Count)
-            '            If (CType(Items(i), ColorInfo).Color = Value) Then
-            '                SelectedIndex = i
-            '                Exit Do
-            '            End If
-
-            '            i = (i + 1)
-            '        Loop
-
-            '    End Set
-            'End Property
         End Class
 
         Public Class ColorInfo

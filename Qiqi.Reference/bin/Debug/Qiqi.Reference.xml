@@ -158,6 +158,12 @@ Qiqi.Reference
  <param name="e"></param>
  <remarks></remarks>
 </member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.ColorPicker">
+ <summary>
+ This class is ComboBox to help user to pick a color.
+ The characteristic of this class is that it can show the color block of each dropped item,
+ </summary>
+</member>
 <member name="P:Qiqi.Reference._FormConfiguration.InterfaceFont.ColorPicker.SelectedItem">
  <summary>
  Gets or sets the currently selected item.
@@ -232,6 +238,14 @@ Qiqi.Reference
 <member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.RemoveHandlerConfigurationChanged">
  <summary>
  This sub is used to unbind the event SelectedChanged of all ComboBoxes from the sub ConfigurationChanged.
+ </summary>
+</member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.TransparentPanel">
+ <summary>
+ This class is a panel which is tansparent.
+ This class is used to cover the other control, which should be click by mouse.
+ Configurate the Enable attribute of a control to prevent it from being clicked is not ideal sometime,
+ because if the Enable = False, the color of this control is gray.
  </summary>
 </member>
 <member name="M:Qiqi.Reference._FormConfiguration.LiteratureDetailDisplay.MainPanel.GetConfiguration">
