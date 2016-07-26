@@ -4,6 +4,14 @@
     <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="FormMainViewConfiguration">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Control" type="xs:string" minOccurs="0" />
+                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="DataBaseGridViewColunmConfiguration">
             <xs:complexType>
               <xs:sequence>
@@ -30,14 +38,6 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="FormMainViewConfiguration">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="Control" type="xs:string" minOccurs="0" />
-                <xs:element name="Parameter" type="xs:string" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="CurrentOpenFileList">
             <xs:complexType>
               <xs:sequence>
@@ -57,6 +57,38 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowGroupTreeView</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowStatusStrip</Control>
+    <Parameter>True</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>MenuViewShowToolStrip</Control>
+    <Parameter>False</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>GroupTreeWidth</Control>
+    <Parameter>206</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>DetailTabControlHeight</Control>
+    <Parameter>318</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainHeight</Control>
+    <Parameter>876</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainWidth</Control>
+    <Parameter>1456</Parameter>
+  </FormMainViewConfiguration>
+  <FormMainViewConfiguration>
+    <Control>FormMainWindowState</Control>
+    <Parameter>2</Parameter>
+  </FormMainViewConfiguration>
   <DataBaseGridViewColunmConfiguration>
     <Display>True</Display>
     <Property_x0020_Name>EntryType</Property_x0020_Name>
@@ -137,7 +169,7 @@
   </LiteratureDetailDisplayConfiguration>
   <InterfaceFontConfiguration>
     <Name>GroupFontFamilyComboBox</Name>
-    <Value>宋体</Value>
+    <Value>仿宋</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
@@ -195,38 +227,6 @@
     <Value>-16711936</Value>
     <Bold>False</Bold>
   </InterfaceFontConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowGroupTreeView</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowStatusStrip</Control>
-    <Parameter>True</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>MenuViewShowToolStrip</Control>
-    <Parameter>False</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>GroupTreeWidth</Control>
-    <Parameter>206</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>DetailTabControlHeight</Control>
-    <Parameter>318</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainHeight</Control>
-    <Parameter>876</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainWidth</Control>
-    <Parameter>1456</Parameter>
-  </FormMainViewConfiguration>
-  <FormMainViewConfiguration>
-    <Control>FormMainWindowState</Control>
-    <Parameter>2</Parameter>
-  </FormMainViewConfiguration>
   <CurrentOpenFileList>
     <FileName>D:\iDocument\Document\Papers\3rd\References.bib</FileName>
     <Selected>False</Selected>

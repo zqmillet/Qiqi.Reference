@@ -54,30 +54,45 @@
 
             ' The FormSaparator is a label of the preview.
             Dim FormSaparator As FormSeparator
-            ' The following controls consist the preview interface.
+            ' The following three controls consist the preview interface.
             Dim GroupTreeView As _FormMain.GroupTreeView
             Dim DataGridView As _FormMain.DataGridView
             Dim LiteratureTabControl As _FormMain.LiteratureTabControl
 
-
-            Dim CoverPanelList As ArrayList
+            ' The following four panel are transparent. 
+            ' They are put over other controls, which should not be click by mouse.
+            ' They have another function:
+            ' we can draw red rectangles on them to emphasize the controls which are under them. 
             Dim CoverPanel4GroupTreeView As TransparentPanel
             Dim CoverPanel4DataGridView As TransparentPanel
             Dim CoverPanel4LiteratureTabControl As TransparentPanel
-            Dim CoverPanel4AllControl As TransparentPanel
+            Dim CoverPanel4AllControls As TransparentPanel
+            ' The CoverPanelList is ArrayList which is used to contain the above panels.
+            ' With this ArrayList, the above panels can be initialize in a loop.
+            Dim CoverPanelList As ArrayList
 
+            ''' <summary>
+            ''' This is the constructor.
+            ''' </summary>
+            ''' <param name="Configuration">All configuration of the whole software.</param>
             Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
                 With Me
                     .Configuration = Configuration
+                    ' We set the size of this panel is (500, 500) to avoid the situation that some controls' sizes are negatives.
+                    ' The real size of this panel should be assigned after this panel is constructed.
                     .ClientSize = New Size(500, 500)
                 End With
 
                 InitializeTableLayoutPanel()
-                InitializeControlValue()
+                InitializeInputComboBoxes()
                 InitializePreview()
             End Sub
 
+            ''' <summary>
+            ''' This sub is used to initialize the preview interface.
+            ''' </summary>
             Private Sub InitializePreview()
+                ' Create the label of the preview interface.
                 FormSaparator = New FormSeparator("Preview", Me.ClientSize.Width - TableLayoutPanelWidth - SpaceBetweenLeftAndRight)
                 With FormSaparator
                     .Location = New Point(TableLayoutPanelWidth + SpaceBetweenLeftAndRight, 0)
@@ -85,31 +100,39 @@
                 End With
                 Me.Controls.Add(FormSaparator)
 
-                CoverPanel4AllControl = New TransparentPanel
-                With CoverPanel4AllControl
+                ' Create the panel to cover all the controls.
+                CoverPanel4AllControls = New TransparentPanel
+                With CoverPanel4AllControls
                     .BorderStyle = BorderStyle.None
                     .Width = Me.ClientSize.Width - TableLayoutPanelWidth
                     .Height = Me.ClientSize.Height
                     .Location = New Point(TableLayoutPanelWidth, 0)
+                    ' HideBorder is a custom parameter,
+                    ' the TransparentPanel has a red border with 6pt width by default,
+                    ' if set the HideBorder parameter is True,
+                    ' this red border will be hidden.
                     .HideBorder = True
                     .Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
                 End With
-                Me.Controls.Add(CoverPanel4AllControl)
+                Me.Controls.Add(CoverPanel4AllControls)
 
+                ' Greate there panels to cover GroupTreeView, DataGridView, and LiteratureTabControl.
                 CoverPanel4GroupTreeView = New TransparentPanel()
                 CoverPanel4DataGridView = New TransparentPanel()
                 CoverPanel4LiteratureTabControl = New TransparentPanel()
-
+                ' Then put these three panels in to an ArrayList.
                 CoverPanelList = New ArrayList
                 CoverPanelList.Add(CoverPanel4GroupTreeView)
                 CoverPanelList.Add(CoverPanel4DataGridView)
                 CoverPanelList.Add(CoverPanel4LiteratureTabControl)
-
+                ' Make these three panels invisible.
+                ' At last, add them on the MainPanel.
                 For Each Cover As TransparentPanel In CoverPanelList
                     Cover.Visible = False
                     Me.Controls.Add(Cover)
                 Next
 
+                ' Create the GroupTreeView, and put it on the MainPanel.
                 GroupTreeView = New _FormMain.GroupTreeView(Configuration)
                 With GroupTreeView
                     .Width = GroupTreeViewWidth
@@ -121,6 +144,7 @@
                 End With
                 Me.Controls.Add(GroupTreeView)
 
+                ' Create the DataGridView, and put it on the MainPanel.
                 DataGridView = New _FormMain.DataGridView(Configuration)
                 With DataGridView
                     .Width = Me.ClientSize.Width - TableLayoutPanelWidth - SpaceBetweenLeftAndRight - GroupTreeViewWidth - 4
@@ -131,12 +155,15 @@
                     .ResetColumn()
                     .ScrollBars = ScrollBars.None
 
+                    ' Load the Template.bib file and show the data on the DataGridView.
                     Dim ErrorMessage As New _BibTeX.ErrorMessage
                     If Not .DataBaseLoading(TamplateBibTeXPath, ErrorMessage) Then
                         MsgBox(ErrorMessage.GetErrorMessage)
                     End If
 
+                    ' Show the group tree on the GroupTreeView.
                     GroupTreeView.Loading(.DataBase)
+                    ' Select the first node.
                     If Not GroupTreeView.Nodes(0).Nodes(0).Nodes(0) Is Nothing Then
                         With GroupTreeView.Nodes(0).Nodes(0).Nodes(0)
                             .BackColor = System.Drawing.SystemColors.Highlight
@@ -146,6 +173,7 @@
                 End With
                 Me.Controls.Add(DataGridView)
 
+                ' Create the LiteratureTabControl, and put it on the MainPanel.
                 LiteratureTabControl = New _FormMain.LiteratureTabControl(Configuration)
                 With LiteratureTabControl
                     .Width = Me.ClientSize.Width - TableLayoutPanelWidth - SpaceBetweenLeftAndRight
@@ -158,18 +186,36 @@
                 End With
                 Me.Controls.Add(LiteratureTabControl)
 
+                ' Add the GroupTreeView, DataGridView, and LiteratureTabControl into the Tags of their cover panels.
+                ' With this map, we can handle them more easily.
                 CoverPanel4GroupTreeView.Tag = GroupTreeView
                 CoverPanel4DataGridView.Tag = DataGridView
                 CoverPanel4LiteratureTabControl.Tag = LiteratureTabControl
             End Sub
 
+            ''' <summary>
+            ''' Override the sub OnResize, when MainPanel's size is changed, this sub will be called.
+            ''' Because the FormConfiguration's size is fixed, so this sub just be called twice.
+            ''' This sub is firstly called when this MainPanel is created.
+            ''' This sub is secondly called when this MainPanel's size is set.
+            ''' The Function of this sub is to adjust the sizes of three cover panels.
+            ''' At the beginning, I just set the size, location, and the anchor of each cover panels after they are created.
+            ''' At this moment, the MainPanel's size is not set, so there are some bugs.
+            ''' So, I set the size, location, and the anchor of each cover panels when the MainPanel has been initialized.
+            ''' </summary>
+            ''' <param name="eventargs"></param>
             Protected Overrides Sub OnResize(eventargs As EventArgs)
-                ' MyBase.OnResize(eventargs)
+                ' When the MainPanel is created, this sub will be called,
+                ' but at this time, the CoverPanelList has not been initialized.
+                ' So, if the CoverPanelList is nothing, exit this sub.
                 If CoverPanelList Is Nothing Then
                     Exit Sub
                 End If
 
+                ' If this sub runs here, it means that the CoverPanelList has been initialized,
+                ' and it means that the MainPanel has been initialized.
                 For Each Cover As TransparentPanel In CoverPanelList
+                    ' For each cover panel, set its location and size.
                     With Cover
                         .Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top Or AnchorStyles.Bottom
                         .Height = .Tag.Height + 1
@@ -179,13 +225,19 @@
                 Next
             End Sub
 
-            Private Sub InitializeControlValue()
-                ' Fill the ListView
+            ''' <summary>
+            ''' This sub is used to fill the input ComboBoxes in the MainPanel according to the configuration file.
+            ''' </summary>
+            Private Sub InitializeInputComboBoxes()
+                ' This data table is used to save the initial values of the ComboBoxes.
                 Dim DataTable As New DataTable
-                Dim Index As Integer = 0
 
+                ' Remove the handlers of all ComboBoxes.
+                ' So, when their values is changed, the corresponding evnets will not be triggered.
                 RemoveHandlerConfigurationChanged()
+                ' Read the initial values of ComboBoxed from the configuration.
                 If Configuration.GetConfig(TableName.InterfaceFontConfiguration, DataTable) Then
+                    ' Fill the ComboBoxes.
                     For Each Row As DataRow In DataTable.Rows
                         For Each Control As Control In ControlList
                             If Control.Name = Row(0) Then
@@ -203,9 +255,16 @@
                         Next
                     Next
                 End If
+
+                ' Re-add the handlers of all ComboBoxes.
                 AddHaddlerConfigurationChanged()
             End Sub
 
+            ''' <summary>
+            ''' This function is used to convert the values of all ComboBoxes into a DataTable,
+            ''' which is easy to be saved.
+            ''' </summary>
+            ''' <returns>The DataTable which contains the values of all ComboBoxes.</returns>
             Public Function GetConfiguration() As DataTable
                 Dim DataTable As New DataTable
 
@@ -237,30 +296,31 @@
                 Return DataTable
             End Function
 
+            ''' <summary>
+            ''' If any ComboBox's value is changed, this sub will be called.
+            ''' This sub is used to upadate the preview interface.
+            ''' </summary>
             Private Sub ConfigurationChanged()
-                'MsgBox(BibTeXKeyFontColorComboBox.Name)
-                GetConfiguration()
+                ' To be continue.
             End Sub
 
+            ''' <summary>
+            ''' This sub is used to initialize the TableLayoutPanel.
+            ''' </summary>
             Private Sub InitializeTableLayoutPanel()
+                ' Create the TableLayoutPanel.
                 TableLayoutPanel = New TableLayoutPanel
+                ' Configurate the TableLayoutPanel.
                 With TableLayoutPanel
                     .Dock = DockStyle.None
-                    ' .CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
                     .Location = New Point(0, 0)
                     .Size = New Size(TableLayoutPanelWidth, Me.ClientSize.Height - 2)
                     .Anchor = AnchorStyles.Left Or AnchorStyles.Top Or AnchorStyles.Bottom
                     .ColumnCount = 1
                     .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, TableLayoutPanelWidth))
-                    .RowCount = 5
-                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
-                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
-                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
-                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
-                    .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize))
-
                 End With
 
+                ' Create all the ComboBoxes, and intialize their names, which are used to identify themselves.
                 GroupFontFamilyComboBox = New FontFamilyComboBox(TableLayoutPanelWidth)
                 GroupFontFamilyComboBox.Name = NameOf(GroupFontFamilyComboBox)
 
@@ -297,6 +357,8 @@
                 TagValueFontColorComboBox = New FontColorComboBox("Tag Value", TableLayoutPanelWidth)
                 TagValueFontColorComboBox.Name = NameOf(TagValueFontColorComboBox)
 
+                ' Add all the ComboBoxes into an ArrayList,
+                ' so we can configurate them in a loop.
                 ControlList = New ArrayList
                 ControlList.Add(New FormSeparator("Group Font Configuration", TableLayoutPanelWidth))
                 ControlList.Add(GroupFontFamilyComboBox)
@@ -310,12 +372,15 @@
                 ControlList.Add(New FormSeparator("Code Font Configuration", TableLayoutPanelWidth, MarginBetweenZones))
                 ControlList.Add(HighlightFontFamilyComboBox)
                 ControlList.Add(HighlightFontSizeComboBox)
-                ' ControlList.Add(New FormSeparator("Code Color Configuration", TableLayoutPanelWidth, MarginBetweenZones))
                 ControlList.Add(EntryTypeFontColorComboBox)
                 ControlList.Add(BibTeXKeyFontColorComboBox)
                 ControlList.Add(TagNameFontColorComboBox)
                 ControlList.Add(TagValueFontColorComboBox)
 
+                ' For each ComboBox or Label in the ArrayList,
+                ' we add it on the TableLayoutPanel,
+                ' and bind its event SubControlMouseEnter to the sub InputControls_MouseEnter.
+                ' So, if mouse enters these controls, the sub InputControls_MouseEnter will be called.
                 Dim Index As Integer = 0
                 For Each Control As Control In ControlList
                     TableLayoutPanel.Controls.Add(Control, 0, Index)
@@ -333,9 +398,17 @@
                     Index += 1
                 Next
 
+                ' At last, we add the TableLayoutPanel on the MainPanel.
                 Me.Controls.Add(TableLayoutPanel)
             End Sub
 
+            ''' <summary>
+            ''' When mouse enters any ComboxBox or Label in the TableLayoutPanel, this sub will be called.
+            ''' This sub set the Visible attributes of cover panels to emphasize the zones of the preview interface,
+            ''' according which control the mouse enters.
+            ''' </summary>
+            ''' <param name="sender"></param>
+            ''' <param name="e"></param>
             Private Sub InputControls_MouseEnter(sender As Object, e As System.EventArgs)
                 Select Case sender.Name
                     Case "GroupFontConfiguration", GroupFontFamilyComboBox.Name, GroupFontSizeComboBox.Name
@@ -364,6 +437,9 @@
                 End Select
             End Sub
 
+            ''' <summary>
+            ''' This sub is used to bind the event SelectedChanged of all ComboBoxes to the sub ConfigurationChanged.
+            ''' </summary>
             Private Sub AddHaddlerConfigurationChanged()
                 For Each Control In ControlList
                     If TypeOf Control Is FontFamilyComboBox Then
@@ -376,6 +452,9 @@
                 Next
             End Sub
 
+            ''' <summary>
+            ''' This sub is used to unbind the event SelectedChanged of all ComboBoxes from the sub ConfigurationChanged.
+            ''' </summary>
             Private Sub RemoveHandlerConfigurationChanged()
                 For Each Control In ControlList
                     If TypeOf Control Is FontFamilyComboBox Then
@@ -387,7 +466,6 @@
                     End If
                 Next
             End Sub
-
         End Class
     End Namespace
 End Namespace

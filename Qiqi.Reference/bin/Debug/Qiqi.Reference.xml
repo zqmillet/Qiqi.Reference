@@ -165,7 +165,73 @@ Qiqi.Reference
 </member>
 <member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel">
  <summary>
- This class is the panel of the interface font configuration
+ This class is the panel of the interface font configuration.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.#ctor(Qiqi.Reference._FormConfiguration.Configuration)">
+ <summary>
+ This is the constructor.
+ </summary>
+ <param name="Configuration">All configuration of the whole software.</param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.InitializePreview">
+ <summary>
+ This sub is used to initialize the preview interface.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.OnResize(System.EventArgs)">
+ <summary>
+ Override the sub OnResize, when MainPanel's size is changed, this sub will be called.
+ Because the FormConfiguration's size is fixed, so this sub just be called twice.
+ This sub is firstly called when this MainPanel is created.
+ This sub is secondly called when this MainPanel's size is set.
+ The Function of this sub is to adjust the sizes of three cover panels.
+ At the beginning, I just set the size, location, and the anchor of each cover panels after they are created.
+ At this moment, the MainPanel's size is not set, so there are some bugs.
+ So, I set the size, location, and the anchor of each cover panels when the MainPanel has been initialized.
+ </summary>
+ <param name="eventargs"></param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.InitializeInputComboBoxes">
+ <summary>
+ This sub is used to fill the input ComboBoxes in the MainPanel according to the configuration file.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.GetConfiguration">
+ <summary>
+ This function is used to convert the values of all ComboBoxes into a DataTable,
+ which is easy to be saved.
+ </summary>
+ <returns>The DataTable which contains the values of all ComboBoxes.</returns>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.ConfigurationChanged">
+ <summary>
+ If any ComboBox's value is changed, this sub will be called.
+ This sub is used to upadate the preview interface.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.InitializeTableLayoutPanel">
+ <summary>
+ This sub is used to initialize the TableLayoutPanel.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.InputControls_MouseEnter(System.Object,System.EventArgs)">
+ <summary>
+ When mouse enters any ComboxBox or Label in the TableLayoutPanel, this sub will be called.
+ This sub set the Visible attributes of cover panels to emphasize the zones of the preview interface,
+ according which control the mouse enters.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.AddHaddlerConfigurationChanged">
+ <summary>
+ This sub is used to bind the event SelectedChanged of all ComboBoxes to the sub ConfigurationChanged.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.RemoveHandlerConfigurationChanged">
+ <summary>
+ This sub is used to unbind the event SelectedChanged of all ComboBoxes from the sub ConfigurationChanged.
  </summary>
 </member>
 <member name="M:Qiqi.Reference._FormConfiguration.LiteratureDetailDisplay.MainPanel.GetConfiguration">
