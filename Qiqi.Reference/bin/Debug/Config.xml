@@ -169,7 +169,7 @@
   </LiteratureDetailDisplayConfiguration>
   <InterfaceFontConfiguration>
     <Name>GroupFontFamilyComboBox</Name>
-    <Value>仿宋</Value>
+    <Value>宋体</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
@@ -204,7 +204,7 @@
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
     <Name>HighlightFontSizeComboBox</Name>
-    <Value>10</Value>
+    <Value>12</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
@@ -215,12 +215,12 @@
   <InterfaceFontConfiguration>
     <Name>BibTeXKeyFontColorComboBox</Name>
     <Value>-65536</Value>
-    <Bold>True</Bold>
+    <Bold>False</Bold>
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
     <Name>TagNameFontColorComboBox</Name>
     <Value>-16776961</Value>
-    <Bold>False</Bold>
+    <Bold>True</Bold>
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
     <Name>TagValueFontColorComboBox</Name>

@@ -53,7 +53,7 @@
             ''' The following event will be triggered when the selected color of ComboBox is changed,
             ''' or the checked value of the CheckBox is changed.
             ''' </summary>
-            Public Event SelectedChanged()
+            Public Event SelectedChanged(ByVal sender As Object)
 
             ''' <summary>
             ''' Constructor.
@@ -131,14 +131,14 @@
             ''' When mouse enters the panel, this sub will be called.
             ''' </summary>
             Private Sub ComboBox_SelectedIndexChanged()
-                RaiseEvent SelectedChanged()
+                RaiseEvent SelectedChanged(Me)
             End Sub
 
             ''' <summary>
             ''' When the checked value of the CheckBox is changed, this sub will be called.
             ''' </summary>
             Private Sub CheckedChanged_CheckedChanged()
-                RaiseEvent SelectedChanged()
+                RaiseEvent SelectedChanged(Me)
             End Sub
         End Class
     End Namespace

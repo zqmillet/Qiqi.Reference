@@ -158,6 +158,69 @@ Qiqi.Reference
  <param name="e"></param>
  <remarks></remarks>
 </member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox">
+ <summary>
+ This class is ComboBox with a head label.
+ It can be used to let the user select a color.
+ </summary>
+</member>
+<member name="P:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.SelectedColor">
+ <summary>
+ This property is the selected color of the ComboBox.
+ When this property is assigned, the ComboBox's selected index will be changed.
+ In this class, I used a integer to repesent a RGB color.
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.Bold">
+ <summary>
+ This property is the value of the CheckBox.
+ </summary>
+ <returns></returns>
+</member>
+<member name="E:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.SelectedChanged">
+ <summary>
+ The following event will be triggered when the selected color of ComboBox is changed,
+ or the checked value of the CheckBox is changed.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.#ctor(System.String,System.Int32)">
+ <summary>
+ Constructor.
+ </summary>
+ <param name="Text">The text of the label.</param>
+ <param name="Width">The width of the whole panel.</param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.Me_MouseEnter">
+ <summary>
+ When mouse enters the panel, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.Label_MouseEnter">
+ <summary>
+ When mouse enters the label, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.CheckBox_MouseEnter">
+ <summary>
+ When mouse enters the CheckBox, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.ComboBox_MouseEnter">
+ <summary>
+ When mouse enters the ComboBox, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.ComboBox_SelectedIndexChanged">
+ <summary>
+ When mouse enters the panel, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontColorComboBox.CheckedChanged_CheckedChanged">
+ <summary>
+ When the checked value of the CheckBox is changed, this sub will be called.
+ </summary>
+</member>
 <member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.ColorPicker">
  <summary>
  This class is ComboBox to help user to pick a color.
@@ -169,6 +232,82 @@ Qiqi.Reference
  Gets or sets the currently selected item.
  </summary>
 </member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.FontFamilyComboBox">
+ <summary>
+ This class is ComboBox with a head label.
+ It can be used to let the user select a font familty of a font.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontFamilyComboBox.#ctor(System.Int32)">
+ <summary>
+ Constructor.
+ </summary>
+ <param name="Width">The width of the whole panel.</param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontFamilyComboBox.FillComboBox">
+ <summary>
+ This sub is used to initialize the dropped items of the ComboBox.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontFamilyComboBox.ComboBox_DrawItem(System.Object,System.Windows.Forms.DrawItemEventArgs)">
+ <summary>
+ I override this sub to control the dropped items more freely.
+ With this sub, the fonts of the dropped items can be different.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox">
+ <summary>
+ This class is a ComboBox with a head label and a tail label.
+ It can be used to let the user select a number which is the size of a font.
+ </summary>
+</member>
+<member name="P:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.SelectedText">
+ <summary>
+ This property is the text of the ComboBox.
+ When this property is assigned, the ComboBox's selected index will be changed.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.#ctor(System.Int32)">
+ <summary>
+ Constructor.
+ </summary>
+ <param name="Width">The width of the whole panel.</param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.Me_MouseEnter">
+ <summary>
+ When mouse enters the panel, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.Label_MouseEnter">
+ <summary>
+ When mouse enters the two labels, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.ComboBox_MouseEnter">
+ <summary>
+ When mouse enters the ComboBox, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.ComboBox_SelectedIndexChanged">
+ <summary>
+ When the selected index of ComboBox is changed, this sub will be called.
+ </summary>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.ComboBox_DrawItem(System.Object,System.Windows.Forms.DrawItemEventArgs)">
+ <summary>
+ I override this sub to control the dropped items more freely.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FontSizeComboBox.FillComboBox">
+ <summary>
+ This sub is used to initialize the dropped items of the ComboBox.
+ </summary>
+</member>
 <member name="T:Qiqi.Reference._FormConfiguration.InterfaceFont.FormSeparator">
  <summary>
  This class is a label with a long tail.
@@ -176,7 +315,7 @@ Qiqi.Reference
 </member>
 <member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.FormSeparator.#ctor(System.String,System.Int32,System.Int32)">
  <summary>
- Constructor
+ Constructor.
  </summary>
  <param name="Text">The text of the Label.</param>
  <param name="Width">The width of the whole Label.</param>
@@ -223,7 +362,7 @@ Qiqi.Reference
  </summary>
  <returns>The DataTable which contains the values of all ComboBoxes.</returns>
 </member>
-<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.ConfigurationChanged">
+<member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.MainPanel.ConfigurationChanged(System.Object)">
  <summary>
  If any ComboBox's value is changed, this sub will be called.
  This sub is used to upadate the preview interface.
@@ -260,6 +399,15 @@ Qiqi.Reference
  Configurate the Enable attribute of a control to prevent it from being clicked is not ideal sometime,
  because if the Enable = False, the color of this control is gray.
  </summary>
+</member>
+<member name="P:Qiqi.Reference._FormConfiguration.InterfaceFont.TransparentPanel.CreateParams">
+ <summary>
+ CreateParams is a property of Control object.
+ CreateParams is used to gets the required creation parameters when the control handle is created.
+ In this class, we override the property CreateParams,
+ and set the ExStyle = ExStyle Or 0x20 to make the background is trasparent.
+ </summary>
+ <returns></returns>
 </member>
 <member name="M:Qiqi.Reference._FormConfiguration.InterfaceFont.TransparentPanel.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
  <summary>
@@ -341,7 +489,7 @@ Qiqi.Reference
 </member>
 <member name="M:Qiqi.Reference._FormMain.DataGridView.#ctor(Qiqi.Reference._FormConfiguration.Configuration)">
  <summary>
- Constructor
+ Constructor.
  </summary>
  <remarks></remarks>
 </member>

@@ -6,15 +6,13 @@ Namespace _FormMain
             Inherits Windows.Forms.RichTextBox
 
             ' Member variables
-            Public SyntaxHighLight As Boolean = False
+            Public SyntaxHighlight As Boolean = False
             Public FontSize As Integer = 10
             Public BoldFont As Boolean = False
             Public TextFont As Font = Me.Font
 
-            Public EntryTypeColor As Color = Color.Blue
-            Public BibTeXKeyColor As Color = Color.Red
-            Public TagNameColor As Color = Color.Green
-            Public TagValueColor As Color = Color.Black
+            Public HighlightColor As HighlightColor
+            Public HighlightStyle As HighlightStyle
 
             ''' <summary>
             ''' Messages
@@ -71,6 +69,8 @@ Namespace _FormMain
                 With Me
                     .BorderStyle = BorderStyle.None
                     .Dock = DockStyle.Fill
+                    .HighlightColor = New HighlightColor
+                    .HighlightStyle = New HighlightStyle
                 End With
             End Sub
 
@@ -127,7 +127,7 @@ Namespace _FormMain
                 Dim SelectionAt As Integer = Me.SelectionStart
                 Dim FirstLineIndex As Integer = GetFirstVisibleLine()
 
-                Dim NormalFont As New Font(Me.TextFont.FontFamily, Me.FontSize)
+                Dim NormalFont As Font = Me.TextFont
 
                 LockWindowUpdate(Me.Handle.ToInt32)
 
@@ -163,8 +163,8 @@ Namespace _FormMain
                 ' Lock the update
                 LockWindowUpdate(Me.Handle.ToInt32)
 
-                Dim BoldFont As New Font(Me.TextFont.FontFamily, Me.FontSize, FontStyle.Bold)
-                Dim NormalFont As New Font(Me.TextFont.FontFamily, Me.FontSize)
+                Dim NormalFont As Font = Me.TextFont
+                Dim BoldFont As New Font(Me.TextFont.FontFamily, Me.TextFont.Size, FontStyle.Bold)
 
                 Me.SelectionStart = 0
                 Me.SelectionLength = Me.TextLength
@@ -176,12 +176,15 @@ Namespace _FormMain
                 StartIndex = Me.Text.IndexOf("@") + 1
                 EndIndex = Me.Text.Substring(StartIndex).IndexOf("{")
                 SelectText(StartIndex, EndIndex)
-                Me.SelectionColor = EntryTypeColor
+                Me.SelectionColor = Color.FromArgb(HighlightColor.EntryType)
+                Me.SelectionFont = New Font(Me.SelectionFont, HighlightStyle.EntryType)
+
                 ' High light BibTeXKey
                 StartIndex = EndIndex + 2
                 EndIndex = Me.Text.Substring(StartIndex).IndexOf(",") + StartIndex - 1
                 SelectText(StartIndex, EndIndex)
-                Me.SelectionColor = BibTeXKeyColor
+                Me.SelectionColor = Color.FromArgb(HighlightColor.BibTeXKey)
+                Me.SelectionFont = New Font(Me.SelectionFont, HighlightStyle.BibTeXKey)
 
                 EndIndex += 1
                 Do  ' High light tag name
@@ -189,11 +192,13 @@ Namespace _FormMain
 
                     EndIndex = Me.Text.Substring(StartIndex).IndexOf("=") + StartIndex - 1
                     SelectText(StartIndex, EndIndex)
-                    Me.SelectionColor = TagNameColor
+                    Me.SelectionColor = Color.FromArgb(HighlightColor.TagName)
+                    Me.SelectionFont = New Font(Me.SelectionFont, HighlightStyle.TagName)
                     ' High light tag value
                     If GetBracketIndexes(StartIndex, EndIndex) Then
                         SelectText(StartIndex + 1, EndIndex - 1)
-                        Me.SelectionColor = Color.Red
+                        Me.SelectionColor = Color.FromArgb(HighlightColor.TagValue)
+                        Me.SelectionFont = New Font(Me.SelectionFont, HighlightStyle.TagValue)
                     Else
                         Exit Do
                     End If

@@ -18,7 +18,7 @@
             ''' CreateParams is a property of Control object.
             ''' CreateParams is used to gets the required creation parameters when the control handle is created.
             ''' In this class, we override the property CreateParams,
-            ''' and set the ExStyle = ExStyle Or &H20 to make the background is trasparent.
+            ''' and set the ExStyle = ExStyle Or 0x20 to make the background is trasparent.
             ''' </summary>
             ''' <returns></returns>
             Protected Overrides ReadOnly Property CreateParams() As System.Windows.Forms.CreateParams

@@ -191,6 +191,22 @@
                 CoverPanel4GroupTreeView.Tag = GroupTreeView
                 CoverPanel4DataGridView.Tag = DataGridView
                 CoverPanel4LiteratureTabControl.Tag = LiteratureTabControl
+
+                ' Initialize the fonts and colors of the preview controls.
+                GroupTreeView.Font = New Font(GroupFontFamilyComboBox.SelectedText, Val(GroupFontSizeComboBox.SelectedText))
+                DataGridView.DefaultCellStyle.Font = New Font(ListFontFamilyComboBox.SelectedText, Val(ListFontSizeComboBox.SelectedText))
+                LiteratureTabControl.DetailFont = New Font(DetailFontFamilyComboBox.SelectedText, Val(DetailFontSizeComboBox.SelectedText))
+                LiteratureTabControl.HighlightFont = New Font(HighlightFontFamilyComboBox.SelectedText, Val(HighlightFontSizeComboBox.SelectedText))
+                LiteratureTabControl.HighlightColor = New _FormMain._LiteratureTabControl.HighlightColor(
+                    EntryTypeFontColorComboBox.SelectedColor,
+                    BibTeXKeyFontColorComboBox.SelectedColor,
+                    TagNameFontColorComboBox.SelectedColor,
+                    TagValueFontColorComboBox.SelectedColor)
+                LiteratureTabControl.HighlightStyle = New _FormMain._LiteratureTabControl.HighlightStyle(
+                    EntryTypeFontColorComboBox.Bold,
+                    BibTeXKeyFontColorComboBox.Bold,
+                    TagNameFontColorComboBox.Bold,
+                    TagValueFontColorComboBox.Bold)
             End Sub
 
             ''' <summary>
@@ -260,6 +276,7 @@
                 AddHaddlerConfigurationChanged()
             End Sub
 
+
             ''' <summary>
             ''' This function is used to convert the values of all ComboBoxes into a DataTable,
             ''' which is easy to be saved.
@@ -300,8 +317,42 @@
             ''' If any ComboBox's value is changed, this sub will be called.
             ''' This sub is used to upadate the preview interface.
             ''' </summary>
-            Private Sub ConfigurationChanged()
-                ' To be continue.
+            Private Sub ConfigurationChanged(ByVal sender As Object)
+                If sender Is GroupFontFamilyComboBox Or sender Is GroupFontSizeComboBox Then
+                    GroupTreeView.Font = New Font(GroupFontFamilyComboBox.SelectedText, Val(GroupFontSizeComboBox.SelectedText))
+                    Exit Sub
+                End If
+
+                If sender Is ListFontFamilyComboBox Or sender Is ListFontSizeComboBox Then
+                    DataGridView.DefaultCellStyle.Font = New Font(ListFontFamilyComboBox.SelectedText, Val(ListFontSizeComboBox.SelectedText))
+                    Exit Sub
+                End If
+
+                If sender Is DetailFontFamilyComboBox Or sender Is DetailFontSizeComboBox Then
+                    LiteratureTabControl.DetailFont = New Font(DetailFontFamilyComboBox.SelectedText, Val(DetailFontSizeComboBox.SelectedText))
+                    Exit Sub
+                End If
+
+                If sender Is HighlightFontFamilyComboBox Or sender Is HighlightFontSizeComboBox Then
+                    LiteratureTabControl.HighlightFont = New Font(HighlightFontFamilyComboBox.SelectedText, Val(HighlightFontSizeComboBox.SelectedText))
+                    Exit Sub
+                End If
+
+                If sender Is EntryTypeFontColorComboBox Or
+                   sender Is BibTeXKeyFontColorComboBox Or
+                   sender Is TagNameFontColorComboBox Or
+                   sender Is TagValueFontColorComboBox Then
+                    LiteratureTabControl.HighlightColor = New _FormMain._LiteratureTabControl.HighlightColor(
+                        EntryTypeFontColorComboBox.SelectedColor,
+                        BibTeXKeyFontColorComboBox.SelectedColor,
+                        TagNameFontColorComboBox.SelectedColor,
+                        TagValueFontColorComboBox.SelectedColor)
+                    LiteratureTabControl.HighlightStyle = New _FormMain._LiteratureTabControl.HighlightStyle(
+                        EntryTypeFontColorComboBox.Bold,
+                        BibTeXKeyFontColorComboBox.Bold,
+                        TagNameFontColorComboBox.Bold,
+                        TagValueFontColorComboBox.Bold)
+                End If
             End Sub
 
             ''' <summary>

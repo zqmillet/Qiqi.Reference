@@ -129,6 +129,8 @@
     <Compile Include="FormMain\Controls\GroupTreeView.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormMain\Controls\LiteratureTabControl\HighlightStyle.vb" />
+    <Compile Include="FormMain\Controls\LiteratureTabControl\HighlightColor.vb" />
     <Compile Include="FormMain\Controls\LiteratureTabControl\RichTextBox.vb">
       <SubType>Component</SubType>
     </Compile>

@@ -10,6 +10,106 @@
 
         Private Const TabPageConfigurationString = "Default{Required Fields{Author{Author,True,1,True,False},Title{Title,True,1,True,False},Journal{Journal,True,1,True,False},Year{Year,True,0,True,False},BibTeXKey{BibTeXKey,True,0,True,False}},Source Code{SourceCode{Source Code,False,0,False,True}}}"
 
+        Public WriteOnly Property HighlightColor As _LiteratureTabControl.HighlightColor
+            Set(Value As _LiteratureTabControl.HighlightColor)
+                For Each TabPage As TabPage In Me.TabPages
+                    If TabPage.Controls(0) Is Nothing Then
+                        Exit Property
+                    End If
+
+                    If Not TypeOf TabPage.Controls(0) Is TableLayoutPanel Then
+                        Exit Property
+                    End If
+
+                    With CType(TabPage.Controls(0), TableLayoutPanel)
+                        For Index As Integer = 0 To .RowCount - 1
+                            With CType(.GetControlFromPosition(.ColumnCount - 1, Index), _FormMain._LiteratureTabControl.MultiLineTextBox)
+                                If .SyntaxHighlight Then
+                                    .TextBox.HighlightColor = Value
+                                    .TextBox.TextSyntaxHighLight()
+                                End If
+                            End With
+                        Next
+                    End With
+                Next
+            End Set
+        End Property
+
+        Public WriteOnly Property HighlightStyle As _LiteratureTabControl.HighlightStyle
+            Set(Value As _LiteratureTabControl.HighlightStyle)
+                For Each TabPage As TabPage In Me.TabPages
+                    If TabPage.Controls(0) Is Nothing Then
+                        Exit Property
+                    End If
+
+                    If Not TypeOf TabPage.Controls(0) Is TableLayoutPanel Then
+                        Exit Property
+                    End If
+
+                    With CType(TabPage.Controls(0), TableLayoutPanel)
+                        For Index As Integer = 0 To .RowCount - 1
+                            With CType(.GetControlFromPosition(.ColumnCount - 1, Index), _FormMain._LiteratureTabControl.MultiLineTextBox)
+                                If .SyntaxHighlight Then
+                                    .TextBox.HighlightStyle = Value
+                                    .TextBox.TextSyntaxHighLight()
+                                End If
+                            End With
+                        Next
+                    End With
+                Next
+            End Set
+        End Property
+
+        Public WriteOnly Property DetailFont As Font
+            Set(Value As Font)
+                For Each TabPage As TabPage In Me.TabPages
+                    If TabPage.Controls(0) Is Nothing Then
+                        Exit Property
+                    End If
+
+                    If Not TypeOf TabPage.Controls(0) Is TableLayoutPanel Then
+                        Exit Property
+                    End If
+
+                    With CType(TabPage.Controls(0), TableLayoutPanel)
+                        For Index As Integer = 0 To .RowCount - 1
+                            With CType(.GetControlFromPosition(.ColumnCount - 1, Index), _FormMain._LiteratureTabControl.MultiLineTextBox)
+                                If Not .SyntaxHighlight Then
+                                    .TextBox.TextFont = Value
+                                    .TextBox.TextFontUpdate()
+                                End If
+                            End With
+                        Next
+                    End With
+                Next
+            End Set
+        End Property
+
+        Public WriteOnly Property HighlightFont As Font
+            Set(Value As Font)
+                For Each TabPage As TabPage In Me.TabPages
+                    If TabPage.Controls(0) Is Nothing Then
+                        Exit Property
+                    End If
+
+                    If Not TypeOf TabPage.Controls(0) Is TableLayoutPanel Then
+                        Exit Property
+                    End If
+
+                    With CType(TabPage.Controls(0), TableLayoutPanel)
+                        For Index As Integer = 0 To .RowCount - 1
+                            With CType(.GetControlFromPosition(.ColumnCount - 1, Index), _FormMain._LiteratureTabControl.MultiLineTextBox)
+                                If .SyntaxHighlight Then
+                                    .TextBox.TextFont = Value
+                                    .TextBox.TextSyntaxHighLight()
+                                End If
+                            End With
+                        Next
+                    End With
+                Next
+            End Set
+        End Property
+
         Public Sub New(ByVal Configuration As _FormConfiguration.Configuration)
             With Me
                 .Dock = DockStyle.Fill

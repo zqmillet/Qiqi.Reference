@@ -136,9 +136,9 @@ Namespace _Test
 
             Dim i As Integer = 0
 
-            Dim Instance As Integer
+            'Dim Instance As Integer
 
-            Dim LeadingChar, TrailingChar As String
+            'Dim LeadingChar, TrailingChar As String
 
             Dim SelectionAt As Integer = Me.SelectionStart
 

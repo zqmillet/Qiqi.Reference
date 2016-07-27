@@ -18,7 +18,7 @@
             Public Const TailLabelWidth As Integer = 20
 
             ' The following event will be triggered when the text of ComboBox is changed.
-            Public Event SelectedChanged()
+            Public Event SelectedChanged(ByVal sender As Object)
             ' The following event will be triggered when the mouse enters the ComboBox, the head label, or the tail label.
             Public Event SubControlMouseEnter(sender As Object, e As System.EventArgs)
 
@@ -120,7 +120,7 @@
             ''' </summary>
             Public Sub ComboBox_SelectedIndexChanged()
                 Me.SelectedText = ComboBox.SelectedItem
-                RaiseEvent SelectedChanged()
+                RaiseEvent SelectedChanged(Me)
             End Sub
 
             ''' <summary>

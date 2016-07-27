@@ -6,12 +6,12 @@
             Public TextBox As _FormMain._LiteratureTabControl.RichTextBox
             ' Private SyntaxHighlightValue As Boolean = False
 
-            Public Property SyntaxHighlight() As String
+            Public Property SyntaxHighlight() As Boolean
                 Get
                     Return Me.TextBox.SyntaxHighLight
                 End Get
 
-                Set(ByVal Value As String)
+                Set(ByVal Value As Boolean)
                     Me.TextBox.SyntaxHighLight = Value
                 End Set
             End Property
