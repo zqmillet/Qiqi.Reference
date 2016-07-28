@@ -30,7 +30,7 @@
             Public Property SelectedText As String
                 Get
                     If ComboBox.SelectedItem Is Nothing Then
-                        Return ""
+                        Return ComboBox.Items(0).ToString
                     Else
                         Return ComboBox.SelectedItem.ToString
                     End If
@@ -153,7 +153,7 @@
             ''' This sub is used to initialize the dropped items of the ComboBox.
             ''' </summary>
             Public Overridable Sub FillComboBox()
-                For Each FontSize As Integer In {5, 5.5, 6.5, 7.5, 9, 10.5, 12, 14, 15, 16, 18, 22, 24, 26, 36, 42, 48, 54, 63, 72}
+                For Each FontSize As Double In {5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}
                     ComboBox.Items.Add(FontSize)
                 Next
             End Sub

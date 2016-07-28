@@ -493,11 +493,11 @@ Qiqi.Reference
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:Qiqi.Reference._FormMain.DataGridView.DisplayRefresh(System.Data.DataTable)">
+<member name="M:Qiqi.Reference._FormMain.DataGridView.DisplayRefresh(Qiqi.Reference._FormConfiguration.Configuration)">
  <summary>
  Refresh the columns of DataGridView according to the configuration
  </summary>
- <param name="DataTableColumnConfiguration"></param>
+ <param name="Configuration"></param>
  <remarks></remarks>
 </member>
 <member name="M:Qiqi.Reference._FormMain.DataBaseTabPage.#ctor(System.String,Qiqi.Reference._FormConfiguration.Configuration)">

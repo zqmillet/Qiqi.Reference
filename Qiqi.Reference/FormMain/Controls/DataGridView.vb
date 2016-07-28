@@ -324,16 +324,22 @@
         ''' <summary>
         ''' Refresh the columns of DataGridView according to the configuration
         ''' </summary>
-        ''' <param name="DataTableColumnConfiguration"></param>
+        ''' <param name="Configuration"></param>
         ''' <remarks></remarks>
-        Public Sub DisplayRefresh(ByVal DataTableColumnConfiguration As DataTable)
+        Public Sub DisplayRefresh(ByVal Configuration As _FormConfiguration.Configuration)
+            ' Read the DataBaseGridViewColunmConfiguration
+            Dim DataTable As New DataTable
+            If Not Configuration.GetConfig(TableName.DataBaseGridViewColunmConfiguration, DataTable) Then
+                Exit Sub
+            End If
+
             ' Update the configuration
-            Me.DataTableColumnConfiguration = DataTableColumnConfiguration
+            Me.DataTableColumnConfiguration = DataTable
 
             ' Display index of column
             Dim DisplayIndex As Integer = 2
             ' Read the configuration, if there is no corresponding columns in DataGridView, add a new column into DataGridView
-            For Each Row As DataRow In DataTableColumnConfiguration.Rows
+            For Each Row As DataRow In DataTable.Rows
                 ' If there exists this property name in configuration
                 If ExistColumn(Row("Property Name")) Then
                     ' It needn't to create a new column
@@ -374,7 +380,7 @@
                 End If
 
                 Dim ExistColumn As Boolean = False
-                For Each Row As DataRow In DataTableColumnConfiguration.Rows
+                For Each Row As DataRow In DataTable.Rows
                     If Column.Name = Row("Property Name") Then
                         ExistColumn = True
                         Exit For
@@ -389,6 +395,24 @@
             For Each Column As DataGridViewColumn In RemoveColumnList
                 Me.Columns.Remove(Column)
             Next
+
+            ' Read the InterfaceFontConfiguration.
+            If Not Configuration.GetConfig(TableName.InterfaceFontConfiguration, DataTable) Then
+                Exit Sub
+            End If
+
+            ' Set the font of the default cell style.
+            Dim FontFamily As String = ""
+            Dim FontSize As Integer = 0
+            For Each Row As DataRow In DataTable.Rows
+                Select Case Row(0)
+                    Case "ListFontFamilyComboBox"
+                        FontFamily = Row(1)
+                    Case "ListFontSizeComboBox"
+                        FontSize = Val(Row(1))
+                End Select
+            Next
+            Me.DefaultCellStyle.Font = New Font(FontFamily, FontSize)
         End Sub
     End Class
 End Namespace

@@ -71,11 +71,11 @@
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>GroupTreeWidth</Control>
-    <Parameter>206</Parameter>
+    <Parameter>200</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>DetailTabControlHeight</Control>
-    <Parameter>318</Parameter>
+    <Parameter>287</Parameter>
   </FormMainViewConfiguration>
   <FormMainViewConfiguration>
     <Control>FormMainHeight</Control>
@@ -160,7 +160,7 @@
   </LiteratureDetailDisplayConfiguration>
   <InterfaceFontConfiguration>
     <Name>GroupFontFamilyComboBox</Name>
-    <Value>宋体</Value>
+    <Value>华文楷体</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
@@ -170,7 +170,7 @@
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
     <Name>ListFontFamilyComboBox</Name>
-    <Value>宋体</Value>
+    <Value>华文隶书</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
@@ -180,7 +180,7 @@
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
     <Name>DetailFontFamilyComboBox</Name>
-    <Value>宋体</Value>
+    <Value>华文琥珀</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
@@ -195,7 +195,7 @@
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>
     <Name>HighlightFontSizeComboBox</Name>
-    <Value>12</Value>
+    <Value>10</Value>
     <Bold />
   </InterfaceFontConfiguration>
   <InterfaceFontConfiguration>

@@ -266,8 +266,11 @@
         For Each TabPage As _FormMain.DataBaseTabPage In DataBaseTabControl.TabPages
             TabPage.DataBaseGridViewRefresh(Configuration)
             TabPage.LiteratureTabControlRefresh(Configuration)
+
         Next
     End Sub
+
+
 
     Private Sub TabPage_ColumnDisplayChanged(ByVal sender As Object)
         Configuration.Reload()

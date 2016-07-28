@@ -307,17 +307,15 @@
         End Sub
 
         Public Sub DataBaseGridViewRefresh(ByVal Configuration As _FormConfiguration.Configuration)
-            Dim DataTable As New DataTable
-            If Configuration.GetConfig(TableName.DataBaseGridViewColunmConfiguration, DataTable) Then
-                DataBaseGridView.DisplayRefresh(DataTable)
-            End If
+            DataBaseGridView.DisplayRefresh(Configuration)
         End Sub
 
         Public Sub LiteratureTabControlRefresh(ByVal Configuration As _FormConfiguration.Configuration)
-            Dim DataTable As New DataTable
-            If Configuration.GetConfig(TableName.LiteratureDetailDisplayConfiguration, DataTable) Then
-                LiteratureTabControl.DisplayRefresh(DataTable)
-            End If
+            LiteratureTabControl.DisplayRefresh(Configuration)
+        End Sub
+
+        Public Sub GroupTreeViewRefresh(ByVal Configuration As _FormConfiguration.Configuration)
+
         End Sub
     End Class
 End Namespace

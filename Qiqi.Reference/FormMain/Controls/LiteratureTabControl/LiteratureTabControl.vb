@@ -285,14 +285,32 @@
             Return DefaultLiteratureDetailDisplayConfiguration
         End Function
 
-        Public Sub DisplayRefresh(ByVal DataTableColumnConfiguration As DataTable)
-            Me.DataTable = DataTableColumnConfiguration
+        Public Sub DisplayRefresh(ByVal Configuration As _FormConfiguration.Configuration)
+            Dim DataTable As New DataTable
+            If Not Configuration.GetConfig(TableName.InterfaceFontConfiguration, DataTable) Then
+                Exit Sub
+            End If
+
+            Me.DataTable = DataTable
 
             If Me.Literature.Type = "" Then
                 Exit Sub
             End If
 
             Load(Literature)
+
+            Dim FontFamily As String = ""
+            Dim FontSize As Integer = 0
+            For Each Row As DataRow In Me.DataTable.Rows
+                Select Case Row(0)
+                    Case "DetailFontFamilyComboBox"
+                        FontFamily = Row(1)
+                    Case "DetailFontSizeComboBox"
+                        FontSize = Val(Row(1))
+                End Select
+            Next
+
+            Me.DetailFont = New Font(FontFamily, FontSize)
         End Sub
 
     End Class
